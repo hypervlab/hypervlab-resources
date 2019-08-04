@@ -4,8 +4,8 @@
 # Script Revision: 1.0
 # Description: Automatically download Teamspeak 3
 
-# Clear Screen
-Clear
+# Clear Current Screen
+clear
 
 # Check Session Status
 if [[ $EUID -ne 0 ]]; then
@@ -14,4 +14,3 @@ if [[ $EUID -ne 0 ]]; then
 elif [[ $EUID -eq 0 ]]; then
    echo -e "Session Running as \e[36mROOT\e[0m"
 fi
-
