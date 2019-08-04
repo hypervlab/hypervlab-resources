@@ -66,7 +66,7 @@ sudo systemctl start teamspeak
 echo "Teamspeak Service Started"
 echo ""
 echo "Waiting for Server to Start..."
-sleep 7
+sleep 10
 
 systemctl status teamspeak
 
