@@ -69,3 +69,6 @@ echo "Waiting for Server to Start..."
 sleep 7
 
 systemctl status teamspeak
+
+# Self Cleanup
+rm -r /tmp/teamspeak_setup.sh 
