@@ -28,3 +28,6 @@ New-Item -ItemType 'Directory' -Path "$SetupDir" + "$Folder" + \ + "WinPE_Patche
 New-Item -ItemType 'Directory' -Path "$SetupDir" + "$Folder" + \ + "WinPE_ISO"
 New-Item -ItemType 'Directory' -Path "$SetupDir" + "$Folder" + \ + "WinPE_Unattend"
 
+# Download Configure-WinPEImage Script
+Invoke-WebRequest -Uri -OutFile $SetupDir" + "$Folder" 
+
