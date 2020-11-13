@@ -1,0 +1,8 @@
+.\Notes
+.\WinPE_Applications
+.\WinPE_Backgrounds
+.\WinPE_Drivers
+.\WinPE_ISO
+.\WinPE_Patches
+.\WinPE_Unattend
+Configure-WinPEImage.ps1
