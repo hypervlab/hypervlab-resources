@@ -4,28 +4,38 @@ Clear-Host
 # PowerShell Menu Title
 $host.UI.RawUI.WindowTitle = "WinPE Media Builder"
 
+# Define WinPEBuilder Root Folder
+$DriveLetter = [System.IO.DriveInfo]::GetDrives().Name
+ForEach ($Letter in $DriveLetter) {
+    If (Test-Path $("$Letter" + ":\WinPEBuilder")) {
+        $WinPEDir = $("$Letter" + ":\WinPEBuilder") 
+    }
+}
+
 do {
     [int]$WinPEMenu = 0
     while ( $WinPEMenu -lt 1 -or $WinPEMenu -gt 6 ) {
         # https://www.gregorystrike.com/2010/05/17/powershell-script-to-build-a-custom-winpe-v3-0-environment/
-        Write-Output ""
-        Write-Output "  _       __ _         ____   ______   __  ___           __ _           ____          _  __     __             "
-        Write-Output " | |     / /(_)____   / __ \ / ____/  /  |/  /___   ____/ /(_)____ _   / __ ) __  __ (_)/ /____/ /___   _____  "
-        Write-Output " | | /| / // // __ \ / /_/ // __/    / /|_/ // _ \ / __  // // __  `/  / __ | / / / // // // __  // _ \ / ___/ "
-        Write-Output " | |/ |/ // // / / // ____// /___   / /  / //  __// /_/ // // /_/ /  / /_/ // /_/ // // // /_/ //  __// /      "
-        Write-Output " |__/|__//_//_/ /_//_/    /_____/  /_/  /_/ \___/ \__,_//_/ \__,_/  /_____/ \__,_//_//_/ \__,_/ \___//_/       "
-        Write-Output ""
-        Write-Output "[1] Provision Vanilla WinPE_x86 ISO"
-        Write-Output "[2] Provision Vanilla WinPE_amd64 ISO"
-        Write-Output "[3] Provision Custom WinPE_x86 ISO"
-        Write-Output "[4] Provision Custom WinPE_amd64 ISO"
-        Write-Output "[5] Further Customisation"
-        Write-Output "[6] Close WinPE Builder"
-        Write-Output ""
+        Write-Host ""
+        Write-Host "  _       __ _         ____   ______   __  ___           __ _           ____          _  __     __             " -ForegroundColor Yellow
+        Write-Host " | |     / /(_)____   / __ \ / ____/  /  |/  /___   ____/ /(_)____ _   / __ ) __  __ (_)/ /____/ /___   _____  " -ForegroundColor Yellow
+        Write-Host " | | /| / // // __ \ / /_/ // __/    / /|_/ // _ \ / __  // // __  `/  / __ | / / / // // // __  // _ \ / ___/ " -ForegroundColor Yellow
+        Write-Host " | |/ |/ // // / / // ____// /___   / /  / //  __// /_/ // // /_/ /  / /_/ // /_/ // // // /_/ //  __// /      " -ForegroundColor Yellow
+        Write-Host " |__/|__//_//_/ /_//_/    /_____/  /_/  /_/ \___/ \__,_//_/ \__,_/  /_____/ \__,_//_//_/ \__,_/ \___//_/       " -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "[1] Provision Vanilla WinPE_x86 ISO"
+        Write-Host "[2] Provision Vanilla WinPE_amd64 ISO"
+        Write-Host "[3] Provision Custom WinPE_x86 ISO"
+        Write-Host "[4] Provision Custom WinPE_amd64 ISO"
+        Write-Host "[5] Further Customisation"
+        Write-Host "[6] Close WinPE Builder"
+        Write-Host ""
         [Int]$WinPEMenu = read-Host "Please select an option."
     }
     Switch ( $WinPEMenu ) {
         1 {
+            # Vanilla WinPE_x86 Image
+
             # Import-Modules
             Import-Module DISM
             Import-Module BitsTransfer
@@ -81,8 +91,6 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-Scripting_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-PowerShell.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-PowerShell_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WMI.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-StorageWMI.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-StorageWMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-DismCmdlets.cab"
@@ -91,26 +99,22 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-SecureBootCmdlets.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WinReCfg.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WinReCfg_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-HTA.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-HTA_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WDS-Tools.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WDS-Tools_en-gb.cab"
 
-            Write-Output ""
+            Write-Host ""
             $DriverInstall = Read-Host -Prompt "Do you require 3rd Party Drive Support [Y] or [N]" 
             If ($DriverInstall -eq "Y") {
                 # Intel Rapid Storage Driver 32x
-                Add-WindowsDriver -Path $FilePath\mount -Driver "$env:OneDrive\Information Technology\WinPE\WinPE_Drivers\Intel_RST32x" -ForceUnsigned
+                Add-WindowsDriver -Path $FilePath\mount -Driver "$WinPEDir\WinPE_Drivers\Intel_RST32x" -ForceUnsigned
 			
                 # HPE Gen9 Pxe Boot Solution 32x
                 # https://social.technet.microsoft.com/Forums/office/en-US/4e6e7937-7efa-45d7-aede-d64119cb75e4/winpe-boot-issue-proliant-gen9-server-with-winpe-1709-where-is-the-fix-kb4055537?forum=ConfigMgrCBOSD
-                Add-WindowsPackage -Path $FilePath\mount -PackagePath "$env:OneDrive\Information Technology\WinPE\WinPE_Patches\hpe_gen9_pxe_boot_solution\windows10.0-kb4056892-x86_d3aaf1048d6f314240b8c6fe27932aa52a5e6733.msu" -Verbose
+                Add-WindowsPackage -Path $FilePath\mount -PackagePath "$WinPEDir\WinPE_Patches\hpe_gen9_pxe_boot_solution\windows10.0-kb4056892-x86_d3aaf1048d6f314240b8c6fe27932aa52a5e6733.msu" -Verbose
             }
             Else {
 
-                Write-Output ""
-                Write-Output "Skipping Driver Injection..."
-                Write-Output ""
+                Write-Host ""
+                Write-Host "Skipping Driver Injection..." -ForegroundColor Cyan
+                Write-Host ""
 
             }
 
@@ -121,13 +125,10 @@ do {
             Copy-Item -Path "$WinPEDir\winpe.wim" -Destination "$WinPEDir\ISO\sources\boot.wim" -ErrorAction Stop
             $BOOTDATA = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$WinPEDir\etfsboot.com", "$WinPEDir\efisys.bin"
             & (Get-Command "$WinADKLocation\Deployment Tools\$TargetArch\Oscdimg\oscdimg.exe") @("-bootdata:$BOOTDATA", '-u1', '-udfver102', "$WinPEDir\ISO", "$WinPEDir\WinPE5_$TargetArch.iso")
-            if ( Test-Path "$Env:OneDrive\Information Technology\WinPE" ) {
-                Remove-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force -ErrorAction SilentlyContinue ; Copy-item -Path "$WinPEDir\WinPE5_$TargetArch.iso" -Destination "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force
-            }
-            Write-Output ""
-            Write-Output "ISO Image Moved to OneDrive"
         }
         2 {
+            # Vanilla WinPE_amd64 Image
+
             # Import-Modules
             Import-Module DISM
             Import-Module BitsTransfer
@@ -184,8 +185,6 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-Scripting_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-PowerShell.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-PowerShell_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WMI.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-StorageWMI.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-StorageWMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-DismCmdlets.cab"
@@ -194,26 +193,22 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-SecureBootCmdlets.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WinReCfg.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WinReCfg_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-HTA.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-HTA_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WDS-Tools.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WDS-Tools_en-gb.cab"
 
-            Write-Output ""
+            Write-Host ""
             $DriverInstall = Read-Host -Prompt "Do you require 3rd Party Drive Support [Y] or [N]"
             If ($DriverInstall -eq "Y") {            
                 # Intel Rapid Storage Driver 64x
-                Add-WindowsDriver -Path $FilePath\mount -Driver "$env:OneDrive\Information Technology\WinPE\WinPE_Drivers\Intel_RST64x" -ForceUnsigned
+                Add-WindowsDriver -Path $FilePath\mount -Driver "$WinPEDir\WinPE_Drivers\Intel_RST64x" -ForceUnsigned
 			
                 # HPE Gen9 Pxe Boot Solution 32x
                 # https://social.technet.microsoft.com/Forums/office/en-US/4e6e7937-7efa-45d7-aede-d64119cb75e4/winpe-boot-issue-proliant-gen9-server-with-winpe-1709-where-is-the-fix-kb4055537?forum=ConfigMgrCBOSD
-                Add-WindowsPackage -Path $FilePath\mount -PackagePath "$env:OneDrive\Information Technology\WinPE\WinPE_Patches\hpe_gen9_pxe_boot_solution\windows10.0-kb4056892-x64_a41a378cf9ae609152b505c40e691ca1228e28ea.msu" -Verbose
+                Add-WindowsPackage -Path $FilePath\mount -PackagePath "$WinPEDir\WinPE_Patches\hpe_gen9_pxe_boot_solution\windows10.0-kb4056892-x64_a41a378cf9ae609152b505c40e691ca1228e28ea.msu" -Verbose
             }
             Else {
 
-                Write-Output ""
-                Write-Output "Skipping Driver Injection..."
-                Write-Output ""
+                Write-Host ""
+                Write-Host "Skipping Driver Injection..." -ForegroundColor Cyan
+                Write-Host ""
 
             }
 
@@ -224,13 +219,10 @@ do {
             Copy-Item -Path "$WinPEDir\winpe.wim" -Destination "$WinPEDir\ISO\sources\boot.wim" -ErrorAction Stop
             $BOOTDATA = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$WinPEDir\etfsboot.com", "$WinPEDir\efisys.bin"
             & (Get-Command "$WinADKLocation\Deployment Tools\$TargetArch\Oscdimg\oscdimg.exe") @("-bootdata:$BOOTDATA", '-u2', '-udfver102', "$WinPEDir\ISO", "$WinPEDir\WinPE5_$TargetArch.iso")
-            if ($OneDrivePath -eq $true ) {
-                Remove-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force -ErrorAction SilentlyContinue ; Copy-item -Path "$WinPEDir\WinPE5_$TargetArch.iso" -Destination "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force
-            }
-            Write-Output ""
-            Write-Output "ISO Image Moved to OneDrive"
         }
         3 {
+            # Custom WinPE_x86 Image
+
             # Import-Modules
             Import-Module DISM
             Import-Module BitsTransfer
@@ -287,8 +279,6 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-Scripting_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-PowerShell.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-PowerShell_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WMI.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-StorageWMI.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-StorageWMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-DismCmdlets.cab"
@@ -297,19 +287,15 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-SecureBootCmdlets.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WinReCfg.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WinReCfg_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-HTA.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-HTA_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WDS-Tools.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WDS-Tools_en-gb.cab"
 
             # Configure Applications
             New-Item -ItemType Directory -Path $FilePath\mount\Applications
             Invoke-WebRequest -Uri https://download.sysinternals.com/files/SysinternalsSuite.zip -OutFile $FilePath\mount\Applications\SysinternalsSuite.zip ; Expand-Archive -Path $FilePath\mount\Applications\SysinternalsSuite.zip -DestinationPath $FilePath\mount\Applications\SysinternalsSuite ; Remove-Item -Path $FilePath\mount\Applications\SysinternalsSuite.zip
-            Expand-Archive -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\hw32_570.zip" -DestinationPath $FilePath\mount\Applications\HWInfo
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\HWiNFO32.INI" -Destination $FilePath\mount\Applications\HWInfo\HWiNFO32.ini -Force
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\CMTrace_32\CMTrace_32.exe" -Destination $FilePath\mount\Applications\CMTrace.exe
+            Expand-Archive -Path "$WinPEDir\WinPE_Applications\hw32_570.zip" -DestinationPath $FilePath\mount\Applications\HWInfo
+            Copy-Item -Path "$WinPEDir\WinPE_Applications\HWiNFO32.INI" -Destination $FilePath\mount\Applications\HWInfo\HWiNFO32.ini -Force
+            Copy-Item -Path "$WinPEDir\WinPE_Applications\CMTrace_32\CMTrace_32.exe" -Destination $FilePath\mount\Applications\CMTrace.exe
             # DeploymentResearch CMTrace in WinPE Solution: https://deploymentresearch.com/Research/Post/525/Adding-CMTrace-to-your-MDT-Lite-Touch-boot-images
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\CMTrace_32\CMtracex86.inf" -Destination $FilePath\mount\Windows\System32\CMtracex86.inf
+            Copy-Item -Path "$WinPEDir\WinPE_Applications\CMTrace_32\CMtracex86.inf" -Destination $FilePath\mount\Windows\System32\CMtracex86.inf
 
             # Configure WinPE Background
             $ACL = Get-ACL $FilePath\mount\Windows\System32\winpe.jpg
@@ -318,11 +304,11 @@ do {
             Set-Acl -Path $FilePath\mount\Windows\System32\winpe.jpg -AclObject $ACL
 
             icacls $FilePath\mount\Windows\System32\winpe.jpg /grant BUILTIN\Users:M
-            #Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Backgrounds\winpe_azureblue.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Backgrounds\winpe_slate.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
+            #Copy-Item -Path "$WinPEDir\WinPE_Backgrounds\winpe_azureblue.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
+            Copy-Item -Path "$WinPEDir\WinPE_Backgrounds\winpe_slate.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
 
             # Intel Rapid Storage Driver 32x
-            Add-WindowsDriver -Path $FilePath\mount -Driver "$env:OneDrive\Information Technology\WinPE\WinPE_Drivers\Intel_RST32x" -ForceUnsigned
+            Add-WindowsDriver -Path $FilePath\mount -Driver "$WinPEDir\WinPE_Drivers\Intel_RST32x" -ForceUnsigned
 
             # Remove CMTrace Default Log Application Prompt
             # https://miketerrill.net/2017/05/13/how-to-open-cmtrace-in-winpe-like-a-boss/
@@ -347,13 +333,10 @@ do {
             Copy-Item -Path "$WinPEDir\winpe.wim" -Destination "$WinPEDir\ISO\sources\boot.wim" -ErrorAction Stop
             $BOOTDATA = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$WinPEDir\etfsboot.com", "$WinPEDir\efisys.bin"
             & (Get-Command "$WinADKLocation\Deployment Tools\$TargetArch\Oscdimg\oscdimg.exe") @("-bootdata:$BOOTDATA", '-u1', '-udfver102', "$WinPEDir\ISO", "$WinPEDir\WinPE5_$TargetArch.iso")
-            if ($OneDrivePath -eq $true ) {
-                Remove-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force -ErrorAction SilentlyContinue ; Copy-item -Path "$WinPEDir\WinPE5_$TargetArch.iso" -Destination "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force
-            }
-            Write-Output ""
-            Write-Output "ISO Image Moved to OneDrive"
         }
         4 {
+            # Custom WinPE_amd64 Image
+
             # Import-Modules
             Import-Module DISM
             Import-Module BitsTransfer
@@ -411,8 +394,6 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-Scripting_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-PowerShell.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-PowerShell_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WMI.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-StorageWMI.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-StorageWMI_en-gb.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-DismCmdlets.cab"
@@ -421,19 +402,15 @@ do {
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-SecureBootCmdlets.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WinReCfg.cab"
             Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WinReCfg_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-HTA.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-HTA_en-gb.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\WinPE-WDS-Tools.cab"
-            Dism /Add-Package /Image:"$FilePath\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\$TargetArch\WinPE_OCs\en-gb\WinPE-WDS-Tools_en-gb.cab"
 
             # Configure Applications
             New-Item -ItemType Directory -Path $FilePath\mount\Applications
             Invoke-WebRequest -Uri https://download.sysinternals.com/files/SysinternalsSuite.zip -OutFile $FilePath\mount\Applications\SysinternalsSuite.zip ; Expand-Archive -Path $FilePath\mount\Applications\SysinternalsSuite.zip -DestinationPath $FilePath\mount\Applications\SysinternalsSuite ; Remove-Item -Path $FilePath\mount\Applications\SysinternalsSuite.zip
-            Expand-Archive -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\hw64_570.zip" -DestinationPath $FilePath\mount\Applications\HWInfo
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\HWiNFO64.INI" -Destination $FilePath\mount\Applications\HWInfo\HWiNFO32.ini -Force
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\CMTrace_64\CMTrace_64.exe" -Destination $FilePath\mount\Applications\CMTrace.exe
+            Expand-Archive -Path "$WinPEDir\WinPE_Applications\hw64_570.zip" -DestinationPath $FilePath\mount\Applications\HWInfo
+            Copy-Item -Path "$WinPEDir\WinPE_Applications\HWiNFO64.INI" -Destination $FilePath\mount\Applications\HWInfo\HWiNFO32.ini -Force
+            Copy-Item -Path "$WinPEDir\WinPE_Applications\CMTrace_64\CMTrace_64.exe" -Destination $FilePath\mount\Applications\CMTrace.exe
             # DeploymentResearch CMTrace in WinPE Solution: https://deploymentresearch.com/Research/Post/525/Adding-CMTrace-to-your-MDT-Lite-Touch-boot-images
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Applications\CMTrace_64\CMtracex64.inf" -Destination $FilePath\mount\Windows\System32\CMtracex64.inf
+            Copy-Item -Path "$WinPEDir\WinPE_Applications\CMTrace_64\CMtracex64.inf" -Destination $FilePath\mount\Windows\System32\CMtracex64.inf
 
             # Remove CMTrace Default Log Application Prompt
             # https://miketerrill.net/2017/05/13/how-to-open-cmtrace-in-winpe-like-a-boss/
@@ -458,12 +435,12 @@ do {
             Set-Acl -Path $FilePath\mount\Windows\System32\winpe.jpg -AclObject $ACL
 
             icacls $FilePath\mount\Windows\System32\winpe.jpg /grant BUILTIN\Users:M
-            #Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Backgrounds\winpe_azureblue.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
-            Copy-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE_Backgrounds\winpe_slate.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
+            #Copy-Item -Path "$WinPEDir\WinPE_Backgrounds\winpe_azureblue.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
+            Copy-Item -Path "$WinPEDir\WinPE_Backgrounds\winpe_slate.jpg" -Destination $FilePath\mount\Windows\System32\winpe.jpg
 
             # Configure WinPE Drivers
             # Intel Rapid Storage Driver 64x
-            Add-WindowsDriver -Path $FilePath\mount -Driver "$env:OneDrive\Information Technology\WinPE\WinPE_Drivers\Intel_RST64x" -ForceUnsigned
+            Add-WindowsDriver -Path $FilePath\mount -Driver "$WinPEDir\WinPE_Drivers\Intel_RST64x" -ForceUnsigned
 
             # Unmount WIM File
             Dismount-WindowsImage -Path $FilePath\mount -Save
@@ -472,34 +449,29 @@ do {
             Copy-Item -Path "$WinPEDir\winpe.wim" -Destination "$WinPEDir\ISO\sources\boot.wim" -ErrorAction Stop
             $BOOTDATA = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$WinPEDir\etfsboot.com", "$WinPEDir\efisys.bin"
             & (Get-Command "$WinADKLocation\Deployment Tools\$TargetArch\Oscdimg\oscdimg.exe") @("-bootdata:$BOOTDATA", '-u2', '-udfver102', "$WinPEDir\ISO", "$WinPEDir\WinPE5_$TargetArch.iso")
-            if ($OneDrivePath -eq $true ) {
-                Remove-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force -ErrorAction SilentlyContinue ; Copy-item -Path "$WinPEDir\WinPE5_$TargetArch.iso" -Destination "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force
-            }
-            Write-Output ""
-            Write-Output "ISO Image Moved to OneDrive"
         }
         5 {
             # WinPE Customization Menu
             do {
                 [int]$WIMEditMenu = 0
                 while ( $WIMEditMenu -lt 1 -or $WIMEditMenu -gt 9 ) {
-                    Write-Output ""
-                    Write-Output "[1] Mount WinPE Boot File"
-                    Write-Output "[2] Check Mounted WIM File"
-                    Write-Output "[3] Open Mounted WIM File "
-                    Write-Output "[4] Commit WinPE Changes"
-                    Write-Output "[5] Drop WinPE Changes"
-                    Write-Output "[6] Cleanse Mount Dir"
-                    Write-Output "[7] Generate WinPE ISO"
-                    Write-Output "[8] Return to Main Menu"
-                    Write-Output "[9] Close WinPE Builder"
-                    Write-Output ""
+                    Write-Host ""
+                    Write-Host "[1] Mount WinPE Boot File"
+                    Write-Host "[2] Check Mounted WIM File"
+                    Write-Host "[3] Open Mounted WIM File "
+                    Write-Host "[4] Commit WinPE Changes"
+                    Write-Host "[5] Drop WinPE Changes"
+                    Write-Host "[6] Cleanse Mount Dir"
+                    Write-Host "[7] Generate WinPE ISO"
+                    Write-Host "[8] Return to Main Menu"
+                    Write-Host "[9] Close WinPE Builder"
+                    Write-Host ""
                     [Int]$WIMEditMenu = read-Host "Please select an option."
                 }
                 Switch ( $WIMEditMenu ) {
                     1 {
                         # Mount WIM Image
-                        If ( $null -eq $FilePath ) {
+                        If ( $FilePath -eq $null ) {
                             $FilePath = Read-Host "Please Enter WinPE Directory"
                         }
                         Mount-WindowsImage -ImagePath "$FilePath\ISO\sources\boot.wim" -Index 1 -Path "$FilePath\mount" | Out-Null
@@ -507,35 +479,35 @@ do {
                     }
                     2 {
                         # Get WIM Information
-                        If ( $null -eq $FilePath ) {
+                        If ( $FilePath -eq $null ) {
                             $FilePath = Read-Host "Please Enter WinPE Directory"
                         }
                         Get-WindowsImage -Mounted
                     }
                     3 {
                         # Open Mount Folder in Windows Explorer
-                        If ( $null -eq $FilePath ) {
+                        If ( $FilePath -eq $null ) {
                             $FilePath = Read-Host "Please Enter WinPE Directory"
                         }
                         explorer.exe $FilePath\mount
                     }
                     4 {
                         # Save WIM Changes and Dismount
-                        If ( $null -eq $FilePath ) {
+                        If ( $FilePath -eq $null ) {
                             $FilePath = Read-Host "Please Enter WinPE Directory"
                         }
                         Dismount-WindowsImage -Path $FilePath\mount -Save
                     }
                     5 {
                         # Discard WIM Changes and Dismount
-                        If ( $null -eq $FilePath ) {
+                        If ( $FilePath -eq $null ) {
                             $FilePath = Read-Host "Please Enter WinPE Directory"
                         }
                         Dismount-WindowsImage -Path $FilePath\mount -Discard
                     }
                     6 {
                         # Clean WIm Mount Point
-                        If ( $null -eq $FilePath ) {
+                        If ( $FilePath -eq $null ) {
                             $FilePath = Read-Host "Please Enter WinPE Directory"
                         }
                         Stop-Process -ProcessName explorer
@@ -547,17 +519,17 @@ do {
                         do {
                             [int]$WinPEISOMenu = 0
                             while ( $WinPEISOMenu -lt 1 -or $WinPEISOMenu -gt 3 ) {
-                                Write-Output ""
-                                Write-Output "[1] Generate Legacy ISO"
-                                Write-Output "[2] Generate UEFI ISO"
-                                Write-Output "[3] Return to Customisation Menu"
-                                Write-Output ""
+                                Write-Host ""
+                                Write-Host "[1] Generate Legacy ISO"
+                                Write-Host "[2] Generate UEFI ISO"
+                                Write-Host "[3] Return to Customisation Menu"
+                                Write-Host ""
                                 [Int]$WinPEISOMenu = read-Host "Please select an option."
                             }
                             Switch ( $WinPEISOMenu ) {
                                 1 {
                                     # Generate Legacy ISO
-                                    If ( $null -eq $FilePath ) {
+                                    If ( $FilePath -eq $null ) {
                                         $FilePath = Read-Host "Please Enter WinPE Directory"
                                     }
                                     $TargetArch = "x86"
@@ -567,15 +539,10 @@ do {
                                     #Copy-Item -Path "$WinPEDir\winpe.wim" -Destination "$WinPEDir\ISO\sources\boot.wim" -ErrorAction Stop
                                     $BOOTDATA = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$WinPEDir\etfsboot.com", "$WinPEDir\efisys.bin"
                                     & (Get-Command "$WinADKLocation\Deployment Tools\$TargetArch\Oscdimg\oscdimg.exe") @("-bootdata:$BOOTDATA", '-u1', '-udfver102', "$WinPEDir\ISO", "$WinPEDir\WinPE5_$TargetArch.iso")
-                                    if ( Test-Path "$Env:OneDrive\Information Technology\WinPE" ) {
-                                        Remove-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force -ErrorAction SilentlyContinue ; Copy-item -Path "$WinPEDir\WinPE5_$TargetArch.iso" -Destination "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force
-                                    }
-                                    Write-Output ""
-                                    Write-Output "ISO Image Moved to OneDrive"
                                 }
                                 2 {
                                     # Generate UEFI ISO
-                                    If ( $null -eq $FilePath ) {
+                                    If ( $FilePath -eq $null ) {
                                         $FilePath = Read-Host "Please Enter WinPE Directory"
                                     }
                                     $TargetArch = "amd64"
@@ -585,11 +552,7 @@ do {
                                     #Copy-Item -Path "$WinPEDir\winpe.wim" -Destination "$WinPEDir\ISO\sources\boot.wim" -ErrorAction Stop
                                     $BOOTDATA = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$WinPEDir\etfsboot.com", "$WinPEDir\efisys.bin"
                                     & (Get-Command "$WinADKLocation\Deployment Tools\$TargetArch\Oscdimg\oscdimg.exe") @("-bootdata:$BOOTDATA", '-u2', '-udfver102', "$WinPEDir\ISO", "$WinPEDir\WinPE5_$TargetArch.iso")
-                                    if ( Test-Path "$Env:OneDrive\Information Technology\WinPE" ) {
-                                        Remove-Item -Path "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force -ErrorAction SilentlyContinue ; Copy-item -Path "$WinPEDir\WinPE5_$TargetArch.iso" -Destination "$env:OneDrive\Information Technology\WinPE\WinPE5_$TargetArch.iso" -Force
-                                    }
-                                    Write-Output ""
-                                    Write-Output "ISO Image Moved to OneDrive"
+                                    
                                 }
                             }
                         } while ( $WinPEISOMenu -ne 3 )
