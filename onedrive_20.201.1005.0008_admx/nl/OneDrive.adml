@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (c) 2016 Microsoft Corporation -->
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Groepsbeleidsinstellingen voor OneDrive</displayName>
+  <description>Verschillende instellingen voor Groepsbeleid voor de OneDrive Sync app (OneDrive. exe), met name die specifiek voor Enterprise-functionaliteit in de app.</description>
+  <resources>
+    <stringTable>
+      <!-- general -->
+      <string id="OneDriveNGSCSettingCategory">OneDrive</string>
+
+      <!-- block syncing personal OneDrive -->
+      <string id="DisablePersonalSync">Voorkomen dat gebruikers persoonlijke OneDrive-accounts synchroniseren</string>
+      <string id="DisablePersonalSync_help">Met deze instelling kunt u verhinderen dat gebruikers zich aanmelden met een Microsoft-account om hun persoonlijke OneDrive-bestanden te synchroniseren.
+
+Als u deze instelling inschakelt, wordt voorkomen dat gebruikers een synchronisatierelatie instellen voor hun persoonlijke OneDrive-account. Gebruikers die hun persoonlijke OneDrive al synchroniseren wanneer u deze instelling inschakelt, kunnen niet doorgaan met synchroniseren (en krijgen een bericht te zien dat de synchronisatie is gestopt), maar alle bestanden die met de computer zijn gesynchroniseerd, blijven op de computer staan.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers hun persoonlijke OneDrive-accounts synchroniseren.</string>
+
+      <!-- turn on GPOSetUpdateRing for app updates -->
+      <string id="GPOSetUpdateRing">Update-ring voor synchronisatie-app instellen</string>
+      <string id="GPOSetUpdateRing_help">Updates voor de OneDrive sync-app (OneDrive.exe) worden vrijgegeven aan het publiek via drie ringen-eerst aan Insiders, dan Productie, en ten slotte uitgesteld. Met deze instelling u de synchronisatie-appversie opgeven voor gebruikers in uw organisatie. Wanneer u deze instelling inschakelt en een ring selecteert, kunnen gebruikers deze niet wijzigen.
+
+Insiders-gebruikers krijgen builds waarmee ze een voorbeeld kunnen bekijken van nieuwe functies die naar OneDrive komen.
+
+Productie ring gebruikers krijgen de nieuwste functies als ze beschikbaar komen.
+
+Uitgestelde ringgebruikers krijgen nieuwe functies, bugfixes en prestatieverbeteringen als laatste. Met deze ring u updates implementeren vanaf een interne netwerklocatie en de timing van de implementatie beheren (binnen een venster van 60 dagen).
+
+Als u deze instelling uitschakelt of niet configureert, krijgen gebruikers updates van oneDrive-synchronisatie-apps wanneer ze beschikbaar zijn in de productiering. Gebruikers kunnen deelnemen aan de Office- of Windows Insiders-programma's om updates te ontvangen op de Insiders-ring.</string>
+
+      <string id="Enterprise">Uitgesteld</string>
+      <string id="Production">Productie</string>
+      <string id="Insider">Insiders</string>
+
+      <!-- set default location of the OneDrive folder -->
+      <string id="DefaultRootDir">Standaardlocatie voor de OneDrive-map instellen</string>
+      <string id="DefaultRootDir_help">Met deze instelling kunt u een specifiek pad instellen als de standaardlocatie van de map OneDrive op computers van gebruikers. Het pad bevindt zich standaard onder %userprofile%.
+
+Als u deze instelling inschakelt, is de standaardlocatie van de map OneDrive - {organization name} het pad dat u opgeeft in het bestand OneDrive.admx. Als u wilt voorkomen dat gebruikers de locatie wijzigen die u opgeeft, schakelt u de instelling Voorkomen dat gebruikers de locatie van hun OneDrive-map wijzigen in.
+
+Als u deze instelling uitschakelt of niet configureert, bevindt de standaardlocatie van de map OneDrive - {organization name} zich onder %userprofile%.</string>
+
+      <!-- disable changing the default location of the OneDrive folder -->
+      <string id="DisableCustomRoot">Voorkomen dat gebruikers de locatie van hun OneDrive-map wijzigen</string>
+      <string id="DisableCustomRoot_help">Met deze instelling kunt u verhinderen dat gebruikers de locatie van de map OneDrive - {organization name} wijzigen tijdens de installatie van de OneDrive-synchronisatie-app.
+
+Als u deze instelling inschakelt, wordt de koppeling Locatie wijzigen in OneDrive Setup verborgen. De OneDrive-map wordt gemaakt op de standaardlocatie, of op de aangepaste locatie die u hebt opgegeven, indien u de instelling Standaardlocatie voor de OneDrive-map instellen hebt ingeschakeld.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers op de koppeling Locatie wijzigen klikken om de locatie van de OneDrive-map in OneDrive Setup te wijzigen. </string>
+
+      <!-- Enable Office Integration for coauthoring and in-app sharing -->
+      <string id="EnableAllOcsiClients">Samenwerken en delen in desktop-apps van Office</string>
+      <string id="EnableAllOcsiClients_help">Met deze instelling kunnen meerdere gebruikers de desktop-apps Office 365 ProPlus, Office 2019 of Office 2016 gebruiken om tegelijkertijd een Office-bestand te bewerken dat is opgeslagen in OneDrive. Ook kunnen gebruikers bestanden delen vanuit de Office-desktopapps.
+
+Als u deze instelling inschakelt, is cocreatie en delen in de Office-desktopapps ingeschakeld. Gebruikers kunnen deze functies uitschakelen door de OneDrive Sync app-instellingen te openen, op het tabblad Office te klikken en het selectievakje ' Office-toepassingen gebruiken om Office-bestanden te synchroniseren die ik open ' uit te schakelen.
+
+Als u deze instelling uitschakelt, cocreatie en delen in de Office Desktop-apps is uitgeschakeld en het Office-tabblad is verborgen in de Sync-app. De instelling ' Office-bestandsconflicten ' wordt ook uitgeschakeld en wanneer twee versies van een bestand conflicteren, blijven beide kopieën behouden.</string>
+
+
+      <!-- Enable hold the file for handling Office conflicts -->
+      <string id="EnableHoldTheFile">Gebruikers toestaan om te kiezen hoe synchronisatieconflicten in Office-bestanden moeten worden verwerkt</string>
+      <string id="EnableHoldTheFile_help">Deze instelling geeft aan wat er gebeurt wanneer er een conflict tussen Office-bestandsversies tijdens de synchronisatie. Standaard kunnen gebruikers beslissen of ze wijzigingen willen samenvoegen of beide kopieën behouden. Gebruikers kunnen ook instellingen wijzigen in de OneDrive Sync-app om altijd beide kopieën te bewaren. (Deze optie is alleen beschikbaar voor Office 2016 of hoger. Bij eerdere versies van Office worden beide kopieën altijd bewaard.)
+
+Als u deze instelling inschakelt of deze instelling niet configureert, kunnen gebruikers beslissen of ze wijzigingen willen samenvoegen of beide kopieën behouden. Gebruikers kunnen ook selecteren in OneDrive Sync app instellingen om beide kopieën te houden.
+
+Als u deze instelling uitschakelt, worden beide kopieën van het bestand bewaard wanneer er versies van een bestand conflicteren. Gebruikers kunnen de instellingen niet wijzigen en wijzigingen samenvoegen.</string>
+
+      <!-- Enable Automatic Upload Bandwidth Limiting -->
+      <string id="AutomaticUploadBandwidthPercentage">Uploadsnelheid van de synchronisatie-app beperken tot een doorvoerpercentage</string>
+      <string id="AutomaticUploadBandwidthPercentage_help">Met deze instelling kunt u de prestaties van verschillende uploadtaken op een computer in evenwicht brengen door het percentage uploaddoorvoer van de computer op te geven die de OneDrive-synchronisatie-app (OneDrive.exe) kan gebruiken om bestanden te uploaden. Als u dit instelt als een percentage, reageert de synchronisatie-app zowel op toenames als op afnames in de doorvoer. Hoe lager u het percentage instelt, hoe trager bestanden worden geüpload. We raden een waarde van 50% of hoger aan. Met de synchronisatie-app wordt dan periodiek zonder beperking gedurende één minuut geüpload. Vervolgens wordt het uploadpercentage verlaagd naar de waarde die u hebt ingesteld. Hierdoor worden kleine bestanden snel geüpload, en wordt voorkomen dat grote uploads de uploaddoorvoer van de computer domineren.
+
+        Als u deze instelling inschakelt, wordt op computers het percentage uploaddoorvoer gebruikt dat u opgeeft tijdens het uploaden van bestanden in OneDrive. Gebruikers kunnen dit niet wijzigen.
+
+        Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers ervoor kiezen om de uploadsnelheid te beperken tot een vaste waarde (in kB/seconde), of deze waarde instellen op Automatisch aanpassen, waarna een uploaddoorvoer van 70% wordt gebruikt om te reageren op toenames en afnames in de doorvoer.
+
+        Belangrijk: als u deze instelling inschakelt of uitschakelt, en vervolgens weer instelt op Niet geconfigureerd, blijft de laatste configuratie van kracht. We raden u aan deze instelling in te schakelen, in plaats van Uploadsnelheid van de synchronisatie-app beperken tot een vaste waarde, om de uploadsnelheid te beperken. Zorg ervoor dat niet beide instellingen tegelijk zijn ingeschakeld.</string>
+      <!-- Enable Upload Bandwidth Limiting -->
+      <string id="UploadBandwidthLimit">Uploadsnelheid van de synchronisatie-app beperken tot een vast percentage</string>
+      <string id="UploadBandwidthLimit_help">Met deze instelling kunt u de maximale snelheid configureren waarmee bestanden kunnen worden geüpload met de OneDrive-synchronisatie-app (OneDrive.exe). Deze snelheid is een vaste waarde in kilobytes per seconde. Hoe lager de snelheid, hoe langzamer bestanden worden geüpload op de computer. De minimale snelheid die u kunt instellen, is 1 kB/s en de maximale snelheid is 100.000 kB/s. Bij een invoer die lager is dan 50 kB/s wordt de limiet ingesteld op 50 kB/s, zelfs als in de gebruikersinterface de ingevoerde snelheid wordt weergegeven.
+
+Als u deze instelling inschakelt, wordt op computers de maximale uploadsnelheid gebruikt die u opgeeft. Gebruikers kunnen dit niet wijzigen in de instellingen van OneDrive.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers ervoor kiezen om de uploadsnelheid te beperken tot een vaste waarde (in kB/seconde), of om deze in te stellen op Automatisch aanpassen, waardoor 70% van de uploaddoorvoer wordt gebruikt als reactie op toenames en afnames van de doorvoer.
+
+Wij raden u aan om in plaats van deze instelling te gebruiken voor het beperken van de uploadsnelheid, de instelling Uploadsnelheid van de synchronisatie-app beperken tot een percentage van de doorvoer in te schakelen, om een limiet in te stellen die wordt aangepast aan veranderende omstandigheden. Schakel niet beide instellingen tegelijkertijd in.</string>
+
+      <!-- Enable Download Bandwidth Limiting -->
+      <string id="DownloadBandwidthLimit">Downloadsnelheid van de synchronisatie-app beperken tot een vast percentage</string>
+      <string id="DownloadBandwidthLimit_help">Met deze instelling kunt u de maximale snelheid configureren waarmee bestanden kunnen worden geüpload met de OneDrive-synchronisatie-app (OneDrive.exe). Deze snelheid is een vaste waarde in kilobytes per seconde, en is alleen van toepassing op synchroniseren, en niet op het downloaden van updates. Hoe lager de snelheid, hoe langzamer bestanden worden gedownload. De minimale snelheid die kan worden ingesteld, is 1 kB/s en de maximale snelheid is 100.000 kB/s. Bij een invoer van lager dan 50 kB/s wordt de limiet ingesteld op 50 kB/s, zelfs als in de gebruikersinterface de ingevoerde snelheid wordt weergegeven.
+Als u deze instelling inschakelt, wordt op computers de maximale downloadsnelheid gebruikt die u opgeeft. Gebruikers kunnen dit niet wijzigen.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers ervoor kiezen de downloadsnelheid te beperken in de instellingen van de OneDrive-synchronisatie-app.</string>
+
+
+      <!-- prevent OneDrive sync app (OneDrive.exe) from generating network traffic (checking for updates, etc.) until the user signs in to OneDrive -->
+      <string id="PreventNetworkTrafficPreUserSignIn">Voorkomen dat met de synchronisatie-app netwerkverkeer wordt gegenereerd totdat gebruikers zich aanmelden</string>
+      <string id="PreventNetworkTrafficPreUserSignIn_help">Met deze instelling kunt u voorkomen dat met de OneDrive-synchronisatie-app (OneDrive.exe) netwerkverkeer (controleren op updates, enzovoort) wordt gegenereerd, totdat gebruikers zich aanmelden bij de synchronisatie-app, of beginnen met het synchroniseren van bestanden op de computer.
+
+Als u deze instelling inschakelt, moeten gebruikers zich aanmelden bij de OneDrive-synchronisatie-app op de computer, of ervoor kiezen om OneDrive- of SharePoint-bestanden te synchroniseren op de computer, om de synchronisatie-app automatisch te starten.
+
+Als u deze instelling uitschakelt of niet configureert, wordt de OneDrive-synchronisatie-app automatisch gestart wanneer gebruikers zich aanmelden bij Windows.
+
+Belangrijk: als u deze instelling inschakelt of uitschakelt, en vervolgens weer instelt op Niet geconfigureerd, blijft de laatste configuratie van kracht. </string>
+
+      <!-- Silent Account Config -->
+      <string id="SilentAccountConfig">Gebruikers op de achtergrond aanmelden bij de OneDrive-synchronisatie-app met hun Windows-referenties</string>
+      <string id="SilentAccountConfig_help">Met deze instelling kunt u gebruikers op de achtergrond aanmelden bij de OneDrive-synchronisatie-app (OneDrive.exe) met behulp van hun Windows-referenties.
+
+Als u deze instelling inschakelt, kunnen gebruikers die met het primaire Windows-account zijn aangemeld op de pc (het account dat is gebruikt om de pc toe te voegen aan het domein), de synchronisatie-app instellen zonder de accountreferenties in te voeren. Gebruikers krijgen nog steeds OneDrive Setup te zien, zodat ze mappen kunnen selecteren die moeten worden gesynchroniseerd, en de locatie van hun OneDrive-map kunnen wijzigen. Als een gebruiker de vorige synchronisatie-app van OneDrive voor Bedrijven (Groove.exe) gebruikt, wordt geprobeerd om met de nieuwe synchronisatie-app de synchronisatie van het OneDrive-account van de gebruiker over te nemen van de vorige client, en de synchronisatie-instellingen van de gebruiker te behouden. Deze instelling wordt vaak gebruikt in combinatie met Maximale grootte van het OneDrive-account van een gebruiker instellen die automatisch kan worden gedownload, op pc's zonder Bestanden op aanvraag hebben, en met Standaardlocatie voor de OneDrive-map instellen.
+
+Als u deze instelling uitschakelt of niet configureert, moeten gebruikers zich aanmelden met hun werk- of schoolaccount om synchronisatie in te stellen.
+
+</string>
+
+      <!-- DiskSpaceCheckThresholdMB -->
+      <string id="DiskSpaceCheckThresholdMB">De maximale grootte van het OneDrive-account van een gebruiker instellen waarmee automatisch kan worden gedownload</string>
+      <string id="DiskSpaceCheckThresholdMB_help">Deze instelling wordt gebruikt in combinatie met Gebruikers op de achtergrond aanmelden bij de OneDrive-synchronisatie-app met hun Windows-referenties. Met deze instelling kunt u gebruikers die meer dan een opgegeven hoeveelheid inhoud hebben in OneDrive, vragen om te kiezen welke mappen ze willen synchroniseren tijdens de installatie van de OneDrive-synchronisatie-app (OneDrive.exe).
+
+Als u deze instelling inschakelt, krijgen gebruikers die meer inhoud hebben dan de waarde die door u is opgegeven, tijdens OneDrive Setup standaard het dialoogvenster Mappen kiezen te zien.
+
+Als u deze instelling uitschakelt of niet configureert, worden alle bestanden geselecteerd voor synchronisatie wanneer gebruikers de synchronisatie-app configureren.</string>
+
+      <!-- Settings below control behavior of Files-On-Demand (Cloud Files) -->
+      <string id="FilesOnDemandEnabled">OneDrive Bestanden op aanvraag gebruiken</string>
+      <string id="FilesOnDemandEnabled_help">Met deze instelling kunt u bepalen of OneDrive Bestanden op aanvraag is ingeschakeld voor de tenant.
+
+Als u deze instelling inschakelt, wordt OneDrive Bestanden op aanvraag standaard ingeschakeld.
+
+Als u deze instelling uitschakelt, wordt OneDrive Bestanden op aanvraag expliciet uitgeschakeld. De instelling kan niet worden ingeschakeld door gebruikers.
+
+Als u deze instelling niet configureert, kunnen gebruikers OneDrive Bestanden op aanvraag in- of uitschakelen.</string>
+
+      <string id="DehydrateSyncedTeamSites">Gesynchroniseerde teamsitebestanden converteren naar bestanden met het kenmerk Alleen online</string>
+      <string id="DehydrateSyncedTeamSites_help">Deze instelling wordt gebruikt in combinatie met OneDrive Bestanden op aanvraag. Wanneer veel gebruikers dezelfde teamsites synchroniseren, kunt u met deze instelling bandbreedte besparen en ruimte vrijmaken op verschillende apparaten door van gesynchroniseerde teamsitebestanden alleen-onlinebestanden te maken
+
+Als u deze instelling inschakelt, worden teamsitebestanden die werden gesynchroniseerd voordat OneDrive Bestanden op aanvraag werd ingeschakeld, eenmalig naar alleen-onlinebestanden geconfigureerd.
+
+Als u deze instelling uitschakelt of niet configureert, blijven teamsitebestanden lokaal beschikbaar, tenzij gebruikers ervoor kiezen om ze alleen-online te maken.</string>
+
+    <!-- Restrict syncing with other organizations -->
+      <string id="AllowTenantList">Synchroniseren van OneDrive-accounts alleen toestaan voor specifieke organisaties</string>
+      <string id="AllowTenantList_help">Met deze instelling kunt u voorkomen dat gebruikers eenvoudig bestanden kunnen uploaden naar andere organisaties door een lijst met toegestane tenant-id's op te geven.
+
+Als u deze instelling inschakelt, zien gebruikers een foutmelding als ze proberen een account toe te voegen van een organisatie die niet is toegestaan. Als een gebruiker het account al heeft toegevoegd, stopt het synchroniseren van de bestanden.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers accounts toevoegen van elke organisatie.
+
+Als u in plaats hiervan specifieke organisaties wilt blokkeren, gebruikt u de instelling: Synchroniseren van OneDrive-accounts blokkeren voor specifieke organisaties.
+
+Deze instelling overschrijft het beleid Synchroniseren van OneDrive-accounts blokkeren voor specifieke organisaties. Schakel beide beleidsregels niet tegelijkertijd in.</string>
+
+      <string id="BlockTenantList">Synchroniseren van OneDrive-accounts blokkeren voor specifieke organisaties</string>
+      <string id="BlockTenantList_help">Met deze instelling kunt u voorkomen dat gebruikers eenvoudig bestanden kunnen uploaden naar andere organisaties door een lijst met geblokkeerde tenant-id's op te geven.
+
+Als u deze instelling inschakelt, zien gebruikers een foutmelding als ze proberen een account toe te voegen van een organisatie die is geblokkeerd. Als een gebruiker het account al heeft toegevoegd, stopt het synchroniseren van de bestanden.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers accounts toevoegen van elke organisatie.
+
+Als u een lijst met toegestane organisatie wilt opgeven, gebruikt u de instelling 'Synchroniseren van OneDrive-accounts alleen toestaan voor specifieke organisaties'.
+
+Deze instelling werkt NIET als het beleid Synchroniseren van OneDrive-accounts alleen toestaan voor specifieke organisaties is ingeschakeld. Schakel beide beleidsregels niet tegelijkertijd in.</string>
+
+    <!-- SharePoint Server 2019 settings -->
+    <string id="SharePointOnPremFrontDoorUrl">Geef de URL naar de SharePoint-server en de naam van de organisatie op</string>
+    <string id="SharePointOnPremFrontDoorUrl_help">Deze instelling u gebruikers voor het gebruik van de OneDrive Sync app (OneDrive. exe) voor het synchroniseren van bestanden in SharePoint Server 2019. De URL definieert de locatie van de SharePoint-Server en schakelt de synchronisatie-app om te verifiëren en synchronisatie in te stellen. Met de naam van de organisatie u de OneDrive-en SharePoint-mapnamen opgeven die in Verkenner worden gemaakt. De organisatienaam is optioneel. Als u deze niet opgeeft, wordt de Sync-app gebruikt het eerste segment van de URL als de naam. Bijvoorbeeld, office.sharepoint.com zou worden "Office" en de naam van de OneDrive-map zou "OneDrive-Office."
+
+Als u deze instelling inschakelt en de URL van de SharePoint-server opgeeft, kunnen gebruikers bestanden synchroniseren in SharePoint Server 2019.
+
+Als u deze instelling uitschakelt of niet configureert, of de URL van de SharePoint-Server niet opgeeft, kunnen gebruikers geen bestanden synchroniseren in SharePoint Server 2019. </string>
+
+    <string id="SharePointOnPremPrioritization">Geef de OneDrive-locatie in een hybride omgeving op</string>
+    <string id="SharePointOnPremPrioritization_help">Deze instelling bepaalt of de OneDrive Sync app (OneDrive. exe) moet worden geverifieerd op basis van SharePoint Online of SharePoint Server 2019 als de identiteit in beide id-providers bestaat. Als u deze instelling wilt gebruiken, moet u ook ' SharePoint Server-URL en organisatienaam opgeven ' inschakelen. Deze instelling is van invloed op alleen OneDrive voor Business Sync-functionaliteit. Dit heeft geen invloed op het synchroniseren van team sites in SharePoint Online of SharePoint Server 2019.
+
+Als u deze instelling inschakelt, u een van de twee opties selecteren:
+
+SharePoint Online: de synchronisatie-app ziet er als eerste in SharePoint Online voor de OneDrive van een gebruiker. Als de synchronisatie-app al is geconfigureerd met SharePoint Online voor de gebruiker, wordt geprobeerd een OneDrive voor Business-exemplaar configureren in SharePoint Server 2019 voor die gebruiker.
+
+SharePoint Server 2019: de Sync-app ziet er als eerste in SharePoint Server 2019 voor de OneDrive voor bedrijven van een gebruiker. Als de synchronisatie-app al is geconfigureerd met SharePoint Server 2019 voor de gebruiker, wordt geprobeerd een OneDrive-exemplaar in SharePoint Online voor die gebruiker te configureren.
+
+Als u deze instelling uitschakelt of niet configureert, ziet de synchronisatie-app er als eerste in SharePoint Online voor de OneDrive van de gebruiker.</string>
+    <string id="PrioritizeSPO">SharePoint Online</string>
+    <string id="PrioritizeSharePointOnPrem">SharePoint Server 2019</string>
+
+    <!-- Disable tutorial in the FRE -->
+    <string id="DisableFRETutorial">De zelfstudie uitschakelen die wordt weergegeven aan het einde van OneDrive Setup</string>
+    <string id="DisableFRETutorial_help">Met deze instelling kunt u voorkomen dat aan het einde van OneDrive Setup de zelfstudie in een browser wordt gestart.
+
+Als u deze instelling inschakelt, zien gebruikers na het voltooien van OneDrive Setup de zelfstudie niet.
+
+Als u deze instelling niet inschakelt of niet configureert, wordt de zelfstudie aan het einde van OneDrive Setup weergegeven.</string>
+
+      <!-- Block KFM -->
+      <string id="BlockKnownFolderMove">Voorkomen dat gebruikers hun bekende mappen in Windows naar OneDrive verplaatsen</string>
+      <string id="BlockKnownFolderMove_help">Met deze instelling wordt voorkomen dat gebruikers hun mappen Documenten, Afbeeldingen en Bureaublad verplaatsen naar een OneDrive voor Bedrijven-account.
+Opmerking: het verplaatsen van bekende mappen naar persoonlijke OneDrive-accounts is al geblokkeerd op pc's die lid zijn van een domein.
+
+Als u deze instelling inschakelt, wordt het venster 'Beveiliging instellen voor belangrijke mappen' niet weergegeven voor gebruikers, en is de optie 'Beveiliging starten' uitgeschakeld. Als gebruikers hun bekende mappen al hebben verplaatst, blijven de bestanden in deze mappen beschikbaar in OneDrive. Deze instelling wordt niet doorgevoerd als u 'Gebruikers vragen bekende mappen in Windows te verplaatsen naar OneDrive' of 'Bekende mappen in Windows op de achtergrond verplaatsen naar OneDrive' hebt ingeschakeld.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers ervoor kiezen om hun bekende mappen te verplaatsen.</string>
+
+    <!-- KFMOptInWithWizard -->
+    <string id="KFMOptInWithWizard">Gebruikers vragen bekende mappen in Windows te verplaatsen naar OneDrive </string>
+    <string id="KFMOptInWithWizard_help">Met deze instelling wordt het volgende venster weergegeven: 'De IT-afdeling vereist dat u belangrijke mappen beveiligt'. Hierin wordt gebruikers gevraagd om hun mappen Documenten, Afbeeldingen en Bureaublad te verplaatsen naar OneDrive. Deze functie is niet ingeschakeld voor on-premises SharePoint.
+
+Als u deze instelling inschakelt en de tenant-id opgeeft, zien gebruikers die hun OneDrive synchroniseren, dit venster wanneer ze zijn aangemeld. Als ze het venster sluiten, wordt in het activiteitencentrum een herinneringsmelding weergegeven totdat ze alle drie de bekende mappen hebben verplaatst. Als gebruikers hun bekende mappen al hebben verplaatst naar een ander OneDrive-account, wordt hun gevraagd om de mappen om te leiden naar het account voor uw organisatie (waarbij bestaande mappen niet worden verplaatst).
+
+Als u deze instelling uitschakelt of niet configureert, wordt het venster 'De IT-afdeling vereist dat u belangrijke mappen beveiligt' niet automatisch weergegeven voor gebruikers.</string>
+
+    <!-- KFMOptInNoWizard -->
+    <string id="KFMOptInNoWizard">Bekende mappen in Windows op de achtergrond verplaatsen naar OneDrive</string>
+    <string id="KFMOptInNoWizard_help">Met deze instelling kunt u bekende mappen omleiden naar OneDrive zonder tussenkomst van de gebruiker. In eerdere builds van de synchronisatie-app dan 18.171.0823.0001 worden met deze instelling alleen lege bekende mappen omgeleid naar OneDrive (of bekende mappen die al zijn omgeleid naar een ander OneDrive-account). In latere builds worden bekende mappen met inhoud ook omgeleid en wordt de inhoud verplaatst naar OneDrive. Wij raden u aan deze instelling samen te gebruiken met 'Gebruikers vragen bekende mappen in Windows te verplaatsen naar OneDrive'. Als het op de achtergrond verplaatsen van de bekende mappen niet lukt, wordt gebruikers gevraagd de fout te corrigeren en door te gaan.
+
+Als u deze instelling inschakelt en uw tenant-id opgeeft, kunt u kiezen of gebruikers een melding ontvangen nadat hun mappen zijn omgeleid.
+
+U kunt alle mappen tegelijk verplaatsen of de mappen selecteren die u wilt verplaatsen. Nadat een map is verplaatst, is dit beleid niet meer van toepassing op die map, zelfs als u het selectievakje uitschakelt voor de map. 
+
+Als u deze instelling uitschakelt of niet configureert, worden de bekende mappen van uw gebruikers niet op de achtergrond omgeleid en/of verplaatst naar OneDrive.
+
+ </string>
+    <string id="KFMOptInNoWizardToast">Ja</string>
+    <string id="KFMOptInNoWizardNoToast">Nee</string>
+
+     <!-- Block KFM Opt Out -->
+      <string id="KFMBlockOptOut">Voorkomen dat gebruikers hun bekende mappen in Windows omleiden naar de pc</string>
+      <string id="KFMBlockOptOut_help">Met deze instelling worden gebruikers gedwongen om hun mappen Documenten, Afbeeldingen en Bureaublad altijd om te leiden naar OneDrive.
+
+Als u deze instelling inschakelt, wordt de knop 'Beveiliging stoppen' uitgeschakeld in het venster 'De IT-afdeling vereist dat u belangrijke mappen beveiligt'. Gebruikers ontvangen vervolgens een foutmelding wanneer ze het synchroniseren van een bekende map willen stoppen.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers ervoor kiezen om hun bekende mappen om te leiden naar de pc. </string>
+
+    <string id="AutoMountTeamSites">Teamsitebibliotheken configureren voor automatische synchronisatie</string>
+    <string id="AutoMountTeamSites_help">Met deze instelling kunt u opgeven dat SharePoint-teamsitebibliotheken automatisch worden gesynchroniseerd wanneer gebruikers zich de volgende keer aanmelden bij de OneDrive-synchronisatie-app (OneDrive.exe). Het duurt maximaal 8 uur nadat een gebruiker zich heeft aangemeld, voordat de synchronisatie van de bibliotheek wordt gestart. Als u deze instelling wilt gebruiken, moet u OneDrive Bestanden op aanvraag inschakelen. De instelling is bovendien alleen van toepassing op gebruikers met computers waarop Windows 10 (1709) Fall Creators Update of hoger wordt uitgevoerd. Schakel deze instelling niet voor dezelfde bibliotheek in op meer dan 1000 apparaten. Voor goede synchronisatieprestaties moet u deze functie niet inschakelen voor grote sets bibliotheken (Zie https://docs.microsoft.com/en-us/onedrive/use-group-policy#AutoMountTeamSites voor de meest actuele richtlijnen). Deze functie is niet ingeschakeld voor on-premises SharePoint-sites.
+ 
+Als u deze instelling inschakelt, wordt met de OneDrive-synchronisatie-app automatisch de inhoud van de bibliotheken die u hebt opgegeven, gedownload als alleen-onlinebestanden wanneer gebruikers zich de volgende keer aanmelden. Gebruikers kunnen het synchroniseren van bibliotheken niet stoppen.
+ 
+Als u deze instelling uitschakelt, worden teamsitebibliotheken die u hebt opgegeven, niet automatisch gesynchroniseerd voor nieuwe gebruikers. Bestaande gebruikers kunnen ervoor kiezen om het synchroniseren van de bibliotheken te stoppen, maar het synchroniseren van bibliotheken wordt niet automatisch gestopt.</string>
+
+    <!-- Disable Pause On Battery Saver  -->
+    <string id="DisablePauseOnBatterySaver">Doorgaan met synchroniseren wanneer de batterijbesparingsmodus is ingeschakeld voor apparaten</string>
+    <string id="DisablePauseOnBatterySaver_help">Met deze instelling kunt u de functie voor automatisch pauzeren uitschakelen voor apparaten waarop de batterijbesparingsmodus is ingeschakeld. 
+
+Als u deze instelling inschakelt, wordt het synchroniseren voortgezet wanneer de gebruikers de batterijbesparingsmodus inschakelen. Synchroniseren wordt dan niet automatisch gepauzeerd in OneDrive.
+
+Als u deze instelling uitschakelt of niet configureert, wordt het synchroniseren automatisch gepauzeerd wanneer de batterijbesparingsmodus wordt gedetecteerd. Gebruikers ontvangen een melding over het pauzeren. Gebruikers kunnen ervoor kiezen om pauzeren uit te schakelen wanneer de batterijbesparingsmodus is gedetecteerd, door in de Windows-melding te klikken op Toch synchroniseren. Wanneer de synchronisatie is gepauzeerd, kunnen gebruikers het synchroniseren hervatten door in het systeemvak van de taakbalk op het pictogram OneDrive-cloud te klikken, en vervolgens op de waarschuwing bovenaan het Activity Center te klikken.</string>
+
+    <!-- Disable Pause On Metered Network -->
+    <string id="DisablePauseOnMeteredNetwork">Doorgaan met synchroniseren op netwerken met een datalimiet</string>
+    <string id="DisablePauseOnMeteredNetwork_help">Met deze instelling kunt u de functie voor automatisch pauzeren uitschakelen wanneer apparaten zijn verbonden met netwerken met een datalimiet.
+
+Als u deze instelling inschakelt, wordt het synchroniseren voortgezet wanneer gebruikers zich in een netwerk met een datalimiet bevinden. Synchroniseren wordt dan niet automatisch gepauzeerd in OneDrive.
+
+Als u deze instelling uitschakelt of niet configureert, wordt het synchroniseren automatisch gepauzeerd wanneer een netwerk met een datalimiet wordt gedetecteerd. Gebruikers ontvangen een melding over het pauzeren. Gebruikers kunnen ervoor kiezen om pauzeren uit te schakelen wanneer een netwerk met een datalimiet is gedetecteerd, door in de melding te klikken op Toch synchroniseren. Als de synchronisatie is gepauzeerd, kunnen gebruikers het synchroniseren hervatten door in het systeemvak van de taakbalk op het pictogram OneDrive-cloud te klikken, en vervolgens op de waarschuwing bovenaan het Activity Center te klikken.</string>
+
+    <!-- Insert multi-tenant settings here -->
+    <!-- See http://go.microsoft.com/fwlink/p/?LinkId=797547 for configuration instructions -->
+
+    <string id="LocalMassDeleteFileDeleteThreshold">Gebruikers waarschuwen wanneer ze meerdere OneDrive-bestanden verwijderen op hun lokale computer</string>
+    <string id="LocalMassDeleteFileDeleteThreshold_help">Met dit beleid wordt de drempelwaarde ingesteld voor het aantal bestanden dat een gebruiker kan verwijderen uit een lokale OneDrive-map voordat de gebruiker wordt gewaarschuwd dat de bestanden ook worden verwijderd uit de cloud.
+ 
+Als u dit beleid inschakelt, krijgen gebruikers een melding te zien als ze meer dan het opgegeven aantal bestanden uit OneDrive verwijderen op hun lokale computer. De gebruiker krijgt de optie om door te gaan met het verwijderen van de cloudbestanden of de lokale bestanden te herstellen.
+Opmerking: zelfs als u dit beleid inschakelt, ontvangen gebruikers geen meldingen als ze het selectievakje Bestanden altijd verwijderen hebben geselecteerd bij een eerdere melding, of als ze het selectievakje Mij waarschuwen wanneer veel bestanden worden verwijderd in de cloud hebben uitgeschakeld in de instellingen van de OneDrive-synchronisatie-app.
+
+Als u dit beleid uitschakelt, ontvangen gebruikers geen melding wanneer ze een groot aantal OneDrive-bestanden verwijderen op hun lokale computer.
+
+Als u dit beleid niet configureert, krijgen gebruikers een melding te zien wanneer ze in een korte periode meer dan 200 bestanden verwijderen.</string>
+
+
+    <!-- Forced local mass delete prompt -->
+    <string id="ForcedLocalMassDeleteDetection">Vereisen dat gebruikers grote verwijderbewerkingen bevestigen</string>
+    <string id="ForcedLocalMassDeleteDetection_help">Deze instelling kunt u gebruikers bevestigen dat ze verwijderen van bestanden in de cloud willen, wanneer ze een groot aantal gesynchroniseerde bestanden verwijdert.
+
+Als u deze instelling inschakelt, wordt altijd een waarschuwing weergegeven wanneer gebruikers een groot aantal gesynchroniseerde bestanden verwijdert. Als een gebruiker een verwijderbewerking binnen 7 dagen niet bevestigt, worden de bestanden niet verwijderd.
+
+Als u uitschakelen of deze instelling niet configureert, kunnen gebruikers kiezen om de waarschuwing te verbergen en bestanden in de cloud altijd verwijderen.</string>
+
+    <!-- Block B2BSync aka Cross Tenant Sync -->
+    <string id="BlockExternalSync">Voorkomen dat gebruikers bibliotheken en mappen synchroniseren die zijn gedeeld vanuit andere organisaties </string>
+    <string id="BlockExternalSync_help">Met deze instelling wordt bepaald of gebruikers in uw organisatie inhoud uit OneDrive voor Bedrijven of SharePoint kunnen synchroniseren die is gedeeld door gebruikers in een andere organisatie. Dit is een samenwerkingsfunctie met de naam B2B-synchronisatie.
+
+Als u deze instelling inschakelt, kunnen gebruikers bibliotheken of mappen uit OneDrive voor Bedrijven or SharePoint die zijn gedeeld vanuit een externe organisatie, niet synchroniseren. Als er eventueel al gedeelde bibliotheken of mappen worden gesynchroniseerd, wordt dit gestopt.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers bibliotheken of mappen uit OneDrive voor Bedrijven or SharePoint die zijn gedeeld vanuit een externe organisatie, wel synchroniseren.
+
+Zie: https://docs.microsoft.com/en-us/onedrive/b2b-sync voor meer informatie over B2B-synchronisatie</string>
+
+    <!-- Allow OneDrive to disable permission inheritance within read-only folders -->
+    <string id="PermitDisablePermissionInheritance">Toestaan dat Windows-overname van machtigingen in OneDrive wordt uitgeschakeld in mappen die zijn gesynchroniseerd als alleen-lezen</string>
+    <string id="PermitDisablePermissionInheritance_help">Deze instelling de OneDrive Sync-app alle overgenomen machtigingen in alleen-lezen mappen synchroniseren op de PC van een gebruiker verwijderen.
+
+Als u deze instelling inschakelt, kan de app OneDrive Sync machtigingen overname in alleen-lezen mappen uitschakelen om de synchronisatiesnelheid te verbeteren.
+
+Als u deze instelling uitschakelt of niet configureert, behoudt de OneDrive Sync-app machtigingen overname in alleen-lezen mappen. De synchronisatiesnelheid kan aanzienlijk trager zijn.</string>
+
+    <!-- Automatically adjust the sync app upload rate based on bandwidth availability -->
+    <string id="EnableAutomaticUploadBandwidthManagement">Automatisch bandbreedtebeheer voor uploaden voor OneDrive inschakelen</string>
+    <string id="EnableAutomaticUploadBandwidthManagement_help">Met deze instelling worden met de OneDrive-synchronisatie-app (OneDrive.exe) alleen gegevens op de achtergrond geüpload wanneer ongebruikte bandbreedte beschikbaar is. Het voorkomt dat de synchronisatie-app interfereert met andere apps die gebruikmaken van het netwerk. Deze instelling wordt mogelijk gemaakt met het Windows LEDBAT-protocol (Low Extra Delay Background Transport). Wanneer met LEDBAT een toegenomen latentie wordt gedetecteerd, geeft dit aan dat andere TCP-verbindingen bandbreedte verbruiken. Het verbruik van de synchronisatie-app wordt vervolgens teruggebracht om interferentie te voorkomen. Wanneer de netwerklatentie opnieuw afneemt en er weer bandbreedte beschikbaar is, wordt de uploadsnelheid van de synchronisatie-app verhoogt en wordt de ongebruikte bandbreedte verbruikt.
+
+Als u deze instelling inschakelt, wordt de uploadsnelheid van de synchronisatie-app ingesteld op Automatisch aanpassen. op basis van de bandbreedtebeschikbaarheid. Gebruikers kunnen dit niet wijzigen.
+
+Als u deze instelling uitschakelt of niet configureert, kunnen gebruikers ervoor kiezen om de uploadsnelheid te beperken tot een vaste waarde (in kB/seconde), of deze instellen op Automatisch aanpassen.
+
+Belangrijk
+Als u deze instelling inschakelt of uitschakelt, en vervolgens weer instelt op Niet geconfigureerd, blijft de laatste configuratie van kracht. We raden u aan om deze instelling in te schakelen, in plaats van Uploadsnelheid van de synchronisatie-app beperken tot een vaste waarde. Zorg ervoor dat niet beide instellingen tegelijk zijn ingeschakeld. Deze instelling overschrijft Uploadsnelheid van de synchronisatie-app beperken tot een doorvoerpercentage, indien beide instellingen zijn ingeschakeld op hetzelfde apparaat.</string>
+
+    <!-- MinDiskSpaceLimitInMB -->
+    <!-- configurable limit where low disk space error will occur-->
+    <string id="MinDiskSpaceLimitInMB">Downloaden van bestanden blokkeren wanneer gebruikers weinig schijfruimte hebben</string>
+    <string id="MinDiskSpaceLimitInMB_help">Met deze instelling kunt u een minimale hoeveelheid beschikbare schijfruimte opgeven en voorkomen dat met de OneDrive-synchronisatie-app (OneDrive.exe) bestanden worden gedownload wanneer gebruikers onder deze limiet komen.
+
+Gebruikers wordt gevraagd ruimte vrij te maken en ontvangen hier opties voor.</string>
+
+    <!-- WarningMinDiskSpaceLimitInMB -->
+    <!-- configurable limit where user will be notified they are approaching low disk space -->
+    <string id="WarningMinDiskSpaceLimitInMB">Gebruikers waarschuwen die weinig schijfruimte hebben</string>
+    <string id="WarningMinDiskSpaceLimitInMB_help">Met deze instelling kunt u een minimale hoeveelheid beschikbare schijfruimte opgeven en gebruikers waarschuwen wanneer met de OneDrive-synchronisatie-app (OneDrive.exe) een bestand wordt gedownload waardoor ze onder deze limiet komen.
+
+Gebruikers wordt gevraagd ruimte vrij te maken en ontvangen hier opties voor.</string>
+
+    <!-- EnableODIgnoreListFromGPO -->
+    <string id="EnableODIgnoreListFromGPO">Specifieke soorten bestanden uitsluiten van uploaden</string>
+    <string id="EnableODIgnoreListFromGPO_help">Met deze instelling u trefwoorden invoeren om te voorkomen dat de OneDrive-synchronisatie-app (OneDrive.exe) bepaalde bestanden uploadt naar OneDrive of SharePoint. U volledige namen invoeren, zoals "setup.exe" of het sterretje (*) gebruiken als jokerteken om een reeks tekens weer te geven.  
+
+Als u deze instelling inschakelt, uploadt de synchronisatie-app geen nieuwe bestanden die overeenkomen met de zoekwoorden die u hebt opgegeven. Er worden geen fouten weergegeven voor de overgeslagen bestanden en de bestanden blijven in de lokale OneDrive-map staan. De OneDrive-synchronisatie-app moet opnieuw worden gestart nadat deze instelling is ingeschakeld om de instelling van kracht te laten worden. 
+
+Als u deze instelling al dan niet configureert, uploadt de synchronisatie-app alle ondersteunde bestanden in alle gesynchroniseerde mappen.</string>
+
+    </stringTable>
+    <presentationTable>
+      <presentation id="GPOSetUpdateRing_Pres">
+        <dropdownList refId="GPOSetUpdateRing_Dropdown" noSort="true" defaultItem="0">Update-ring:</dropdownList>
+      </presentation>
+
+      <presentation id="AutomaticUploadBandwidthPercentage_Pres">
+        <text>Selecteer het maximale percentage bandbreedte dat kan worden gebruikt voor het uploaden van bestanden.</text>
+        <text>Geldige waarden liggen tussen 10 en 99.</text>
+        <decimalTextBox refId="BandwidthSpinBox" defaultValue="70" spinStep="1">Bandbreedte:</decimalTextBox>
+      </presentation>
+
+      <presentation id="UploadBandwidthLimit_Pres">
+        <text>Selecteer de maximale hoeveelheid bandbreedte die kan worden gebruikt voor het uploaden van bestanden.</text>
+        <text>Geldige waarden liggen tussen 1 en 100.000.</text>
+        <decimalTextBox refId="UploadRateValue" defaultValue="125">Bandbreedte:</decimalTextBox>
+      </presentation>
+
+      <presentation id="DownloadBandwidthLimit_Pres">
+        <text>Selecteer de maximale hoeveelheid bandbreedte die kan worden gebruikt voor het downloaden van bestanden.</text>
+        <text>Geldige waarden liggen tussen 1 en 100.000.</text>
+        <decimalTextBox refId="DownloadRateValue" defaultValue="125">Bandbreedte:</decimalTextBox>
+      </presentation>
+
+       <presentation id="DiskSpaceCheckThresholdMB_Pres">
+        <text>Geef de tenant-id en de maximale grootte van het OneDrive-account van een gebruiker op vóórdat de gebruiker wordt gevraagd de mappen te kiezen die moeten worden gesynchroniseerd. </text>
+        <text>Voer in het veld Waardenaam de tenant-id in. Voer in het veld Waarde de grootte in.</text>
+        <text>Geldige waarden liggen tussen 0 en 4.294.967.295 MB (inclusief).</text>
+        <listBox refId="DiskSpaceCheckThresholdMBList">Maximale grootte: </listBox>
+      </presentation>
+
+      <presentation id="DefaultRootDir_Pres">
+       <text>Geef de tenant-id en het standaardpad op. </text>
+        <text>Voer in het veld Waardenaam de tenant-id in. Voer in het veld Waarde het pad in.</text>
+        <listBox refId="DefaultRootDirList">Pad: </listBox>
+      </presentation>
+
+      <presentation id="DisableCustomRoot_Pres">
+        <text>Geef de tenant-id en waarde van de instelling op. </text>
+        <text>Voer in het veld Waardenaam de tenant-id in. Voer in het veld Waarde 1 in om de instelling in te schakelen of 0 om deze uit te schakelen.</text>
+        <listBox refId="DisableCustomRootList">Locatie-instelling wijzigen:</listBox>
+      </presentation>
+
+      <presentation id="AllowTenantList_Pres">
+        <text>Tenant-id opgeven</text>
+        <text>Voer in het veld Waarde de tenant-id in die u wilt toevoegen aan deze lijst.</text>
+        <text> </text>
+        <listBox refId="AllowTenantListBox">Tenant-id:</listBox>
+      </presentation>
+
+      <presentation id="BlockTenantList_Pres">
+        <text>Tenant-id opgeven</text>
+        <text>Voer in het veld Waarde de tenant-id in die u wilt toevoegen aan deze lijst.</text>
+        <text> </text>
+        <listBox refId="BlockTenantListBox">Tenant-id:</listBox>
+       </presentation>
+
+      <presentation id="SharePointOnPremFrontDoorUrl_Pres">
+        <text>Geef een URL op naar de SharePoint-server waarop het OneDrive voor Bedrijven-account van de gebruiker wordt gehost, en de naam van de organisatie.</text>
+        <textBox refId="SharePointOnPremFrontDoorUrlBox">
+          <label>URL naar SharePoint Server 2019:</label>
+        </textBox>
+        <textBox refId="SharePointOnPremTenantNameBox">
+          <label>Naam van organisatie:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="SharePointOnPremPrioritization_Pres">
+        <dropdownList refId="SharePointOnPremPrioritization_Dropdown" noSort="true" defaultItem="0">Eerst verifiëren bij:</dropdownList>
+      </presentation>
+
+      <presentation id="BlockKnownFolderMove_Pres">
+        <dropdownList refId="BlockKnownFolderMove_Dropdown" noSort="true" defaultItem="0">Als bekende mappen al zijn verplaatst naar OneDrive:</dropdownList>
+      </presentation>
+
+      <presentation id="KFMOptInWithWizard_Pres">
+        <textBox refId="KFMOptInWithWizard_TextBox">
+          <label>Tenant-id:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="KFMOptInNoWizard_Pres">
+        <textBox refId="KFMOptInNoWizard_TextBox">
+          <label>Tenant-id:</label>
+        </textBox>
+        <dropdownList refId="KFMOptInNoWizard_Dropdown" noSort="true" defaultItem="0">Melding weergeven voor gebruikers nadat mappen zijn omgeleid:</dropdownList>
+        <text>Mapopties:</text>
+        <checkBox refId="KFMOptInNoWizard_Desktop_Checkbox" defaultChecked="true">Desktop</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Documents_Checkbox" defaultChecked="true">Documenten</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Pictures_Checkbox" defaultChecked="true">Afbeeldingen</checkBox>
+      </presentation>
+      <presentation id="AutoMountTeamSites_Pres">
+        <text>Geef een bibliotheek te synchroniseren:
+
+Open een webbrowser, aanmelden bij Office 365 als een globale of een SharePoint-beheerder voor uw organisatie en Ga naar de bibliotheek te synchroniseren.
+
+Klik op de knop 'Sync' in de bibliotheek die u automatisch wilt synchroniseren en klik vervolgens op "Id bibliotheek kopiëren"
+
+Klik op "Weergeven" en voer vervolgens een beschrijvende naam voor het identificeren van de bibliotheek in het veld waarde en vervolgens de bibliotheek ID invoeren in het veld waarde.
+        </text>
+        <listBox refId="AutoMountTeamSitesListBox">Bibliotheken:</listBox>
+      </presentation>
+
+      <presentation id="MinDiskSpaceLimitInMB_Pres">
+        <text>Voer in het veld waarde van de minimale hoeveelheid schijfruimte die u wilt laten beschikbaar.</text>
+        <text>Geldige waarden liggen tussen 0 en 10.240.000 MB</text>
+        <decimalTextBox refId="minDiskSpaceMB" defaultValue="200">Minimale beschikbare schijfruimte:</decimalTextBox>
+      </presentation>
+
+      <presentation id="WarningMinDiskSpaceLimitInMB_Pres">
+        <text>Voer in het veld Waarde een hoeveelheid beschikbare schijfruimte in. Als gebruikers minder schijfruimte hebben, ontvangen ze een waarschuwing. Als u dit beleid gebruikt samen met Downloaden van bestanden blokkeren wanneer gebruikers weinig schijfruimte hebben, moet de waarde voor deze instelling groter zijn dan de waarde voor het blokkeren van downloads.</text>
+        <text>Geldige waarden liggen tussen 0 en 10.240.000 MB</text>
+        <decimalTextBox refId="warningMinDiskSpaceMB" defaultValue="500">Minimale beschikbare schijfruimte:</decimalTextBox>
+      </presentation>
+
+      <presentation id="LocalMassDeleteFileDeleteThreshold_Pres">
+        <text>Geef het maximum aantal bestanden op dat gebruikers tegelijkertijd kunnen verwijderen vóórdat ze de bewerking moeten bevestigen.</text>
+        <text>Geldige waarden liggen tussen 1 en 100.000.</text>
+        <decimalTextBox refId="LMDFileDeleteThresholdBox" defaultValue="200">Aantal bestanden:</decimalTextBox>
+      </presentation>
+
+      <presentation id="EnableODIgnoreListFromGPO_Pres">
+        <text>Als u trefwoorden wilt opgeven, selecteert u 'Weergeven' en voert u de trefwoorden in het veld Waarde in.</text>
+        <text>Voer bijvoorbeeld '*.pst' in om alle bestanden met de extensie .pst te blokkeren. Voer 'uitgave*' in om alle bestanden te blokkeren met namen die beginnen met 'uitgave'. Voer '*verkoop*' in om alle bestanden te blokkeren met 'verkoop' in de naam. Trefwoorden zijn niet hoofdlettergevoelig. Als u bijvoorbeeld 'pictogrammen.JPEG' invoert, wordt 'icons.jpeg' ook geblokkeerd. </text>
+        <text> </text>
+        <listBox refId="EnableODIgnoreListFromGPOListBox">Trefwoorden: </listBox>
+      </presentation>
+
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (c) 2016 Microsoft Corporation -->
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>OneDrive 组策略设置</displayName>
+  <description>OneDrive 同步应用 (OneDrive) 的各种组策略设置, 特别是应用中特定于企业功能的组策略设置.</description>
+  <resources>
+    <stringTable>
+      <!-- general -->
+      <string id="OneDriveNGSCSettingCategory">OneDrive</string>
+
+      <!-- block syncing personal OneDrive -->
+      <string id="DisablePersonalSync">阻止用户同步个人 OneDrive 帐户</string>
+      <string id="DisablePersonalSync_help">此设置可阻止用户使用 Microsoft 帐户登录并同步其 OneDrive 个人文件。
+
+如果启用此设置，则将阻止用户为其 OneDrive 个人帐户设置同步关系。如果启用此设置，则已同步其个人 OneDrive 的用户将无法继续同步(并将向其显示已停止同步的消息)，但已同步到计算机的任何文件都将保留在计算机上。
+
+如果禁用或不配置此设置，则用户可同步其 OneDrive 个人帐户。</string>
+
+      <!-- turn on GPOSetUpdateRing for app updates -->
+      <string id="GPOSetUpdateRing">设置同步应用更新通道</string>
+      <string id="GPOSetUpdateRing_help">OneDrive 同步应用(OneDrive.exe)更新通过 3 个通道向公众发布: 先是预览体验计划，再是生产，最后是延迟。借助此设置，可为组织内部用户指定同步应用版本。一旦启用此设置并选择通道之后，用户即无法更改。
+
+预览体验成员通道的用户将获得内部版本，并可预览将向 OneDrive 提供的新功能。
+
+生产通道中的用户将在最新功能可用时获取这些功能。
+
+延迟通道中的用户将最后获取新功能、bug 修复程序和性能改进功能。在通道中，你可部署来自内部网络位置的更新并控制部署时间安排(在 60 天的时间范围内)。
+
+如果禁用或不配置此设置，则在生产通道中提供 OneDrive 同步应用更新时，用户即会获得这些更新。用户可加入 Office 或 Windows 预览体验计划，从而在预览体验计划通道获取更新。</string>
+
+      <string id="Enterprise">已延迟</string>
+      <string id="Production">生产</string>
+      <string id="Insider">预览体验计划</string>
+
+      <!-- set default location of the OneDrive folder -->
+      <string id="DefaultRootDir">设置 OneDrive 文件夹的默认位置</string>
+      <string id="DefaultRootDir_help">此设置可用于将特定路径设置为用户计算机上 OneDrive 文件夹的默认位置。默认情况下，该路径在 %userprofile% 之下。
+
+如果启用此设置，则 OneDrive - {organization name} 文件夹的默认位置将是在 OneDrive.admx 文件中指定的路径。要阻止用户更改指定的位置，请启用“阻止用户更改其 OneDrive 文件夹的位置”设置。
+
+如果禁用或不配置此设置，则 OneDrive-{organization name} 文件夹的默认位置将在 %userprofile% 之下。</string>
+
+      <!-- disable changing the default location of the OneDrive folder -->
+      <string id="DisableCustomRoot">阻止用户更改其 OneDrive 文件夹的位置</string>
+      <string id="DisableCustomRoot_help">此设置允许你在 OneDrive 同步应用的安装过程中阻止用户更改其 OneDrive {organization name} 文件夹的位置。
+
+如果启用此设置，则在 OneDrive 设置中将隐藏 "更改位置" 链接。如果启用了 "设置 OneDrive 文件夹的默认位置" 设置，则将在默认位置或在您指定的自定义位置中创建 OneDrive 文件夹。
+
+如果禁用或未配置此设置，则用户可以单击 "更改位置" 链接以在 OneDrive 安装程序中更改其 OneDrive 文件夹的位置。</string>
+
+      <!-- Enable Office Integration for coauthoring and in-app sharing -->
+      <string id="EnableAllOcsiClients">在 Office 桌面应用中合著和共享</string>
+      <string id="EnableAllOcsiClients_help">此设置允许多个用户使用 Office 365 ProPlus、Office 2019 或 Office 2016 桌面应用来同时编辑存储在 OneDrive 中的 Office 文件。它还允许用户共享来自 Office 桌面应用程序的文件。
+
+如果启用此设置，则启用 Office 桌面应用中的合著和共享。用户可以禁用这些功能，方法是打开 OneDrive 同步应用设置，单击 Office 选项卡，然后清除 "使用 Office 应用程序同步我打开的 Office 文件" 复选框。
+
+如果禁用此设置，则禁用 Office 桌面应用中的合著和共享，并且 Office 选项卡在 sync 应用中处于隐藏状态。"Office 文件冲突" 设置也将被禁用，当两个文件版本发生冲突时，将保留两个副本。</string>
+
+
+      <!-- Enable hold the file for handling Office conflicts -->
+      <string id="EnableHoldTheFile">允许用户选择如何处理 Office 文件同步冲突</string>
+      <string id="EnableHoldTheFile_help">此设置指定在同步期间, Office 文件版本之间发生冲突时将发生什么情况. 默认情况下, 用户可以决定是否要合并更改或保留两个副本. 用户还可以更改 OneDrive 同步应用中的设置以始终保留这两个副本. (此选项仅适用于 Office 2016 或更高版本. 对于较早版本的 Office, 始终保留两个副本. 
+
+如果启用此设置或未配置此设置, 则用户可以决定是否要合并更改或保留两个副本. 用户也可以在 OneDrive 同步应用设置中选择以保留这两个副本. 
+
+如果禁用此设置, 则当文件版本发生冲突时, 将保留文件的两个副本. 用户不能更改设置并合并更改.</string>
+
+      <!-- Enable Automatic Upload Bandwidth Limiting -->
+      <string id="AutomaticUploadBandwidthPercentage">将同步应用上传速率限制为吞吐量的一定百分比</string>
+      <string id="AutomaticUploadBandwidthPercentage_help">通过指定 OneDrive 同步应用 (OneDrive) 可用于上传文件的计算机上传吞吐量的百分比, 此设置允许在计算机上平衡不同上传任务的性能. 将此值设置为百分比, 可让同步应用对吞吐量的提高和降低. 设置的百分比越低, 上载的文件越慢. 建议 50% 或更高的值. 同步应用将周期性地上传一分钟不受限制的时间, 然后减速到您设置的上传百分比. 这可快速上传小文件, 同时防止大型上传 dominating 计算机的上载吞吐量.
+
+        如果启用此设置, 则计算机将使用你在将文件上传到 OneDrive 时指定的上传吞吐量的百分比, 并且用户将无法更改它.
+
+        如果禁用或未配置此设置, 则用户可以选择将上载速率限制为固定值 (KB/秒) , 或将其设置为 "自动调整", 这将使用 70% 上传吞吐量响应提高并降低吞吐量.
+
+        重要提示: 如果启用或禁用此设置, 然后将其更改为 "未配置", 则最后一次配置将保持有效. 建议启用此设置, 而不是 "将同步应用上载速度限制为固定费率" 以限制上载速率. 不应同时启用这两种设置.</string>
+      <!-- Enable Upload Bandwidth Limiting -->
+      <string id="UploadBandwidthLimit">将同步应用上传速度限制为固定速率</string>
+      <string id="UploadBandwidthLimit_help">此设置允许你配置 OneDrive 同步应用 (OneDrive) 可上传文件的最大速度. 此速率是以千字节/秒为单位的固定值. 速率越低, 计算机上传文件的速度就越慢. 可设置的最小速率为 1 KB/秒, 最大速率为 100000 KB/s. 任何小于 50 KB/s 的输入都将把限制设置为 50 KB/s, 即使用户界面显示输入速率. 
+
+如果启用此设置, 则计算机将使用你指定的最大上载速率, 并且用户将无法在 OneDrive 设置中更改此设置. 
+
+如果禁用或未配置此设置, 则用户可以选择将上载速率限制为固定值 (KB/秒) , 或将其设置为 "自动调整", 这将使用 70% 上传吞吐量响应提高并降低吞吐量. 
+
+我们建议你不要使用此设置来限制上传速度, 而是启用 "将同步应用上载速率限制为吞吐量的百分比", 以设置可调整为更改条件的限制. 不应同时启用这两种设置.</string>
+
+      <!-- Enable Download Bandwidth Limiting -->
+      <string id="DownloadBandwidthLimit">将同步应用下载速度限制为固定速率</string>
+      <string id="DownloadBandwidthLimit_help">此设置允许你配置 OneDrive 同步应用 (OneDrive) 可下载文件的最大速度. 此速率是以千字节/秒为单位的固定值, 仅适用于同步, 不适用于下载更新. 速率越低, 下载速度较慢的文件. 可设置的最小速率为 1 KB/秒, 最大速率为 100000 KB/s. 任何小于 50 KB/s 的输入都将把限制设置为 50 KB/s, 即使用户界面显示输入速率. 
+如果启用此设置, 则计算机将使用你指定的最大下载速率, 并且用户将无法更改此设置. 
+
+如果禁用或未配置此设置, 则用户可以选择限制 OneDrive 同步应用设置中的下载频率.</string>
+
+
+      <!-- prevent OneDrive sync app (OneDrive.exe) from generating network traffic (checking for updates, etc.) until the user signs in to OneDrive -->
+      <string id="PreventNetworkTrafficPreUserSignIn">在用户登录前阻止同步应用生成网络流量</string>
+      <string id="PreventNetworkTrafficPreUserSignIn_help">此设置可在用户登录同步应用或开始向本地计算机同步文件前，阻止 OneDrive 同步应用(OneDrive.exe)产生网络流量(检查更新等)。
+
+如果启用此设置，用户必须登录计算机上的 OneDrive 同步应用，或选择在计算机上同步 OneDrive 或 SharePoint 文件，以便同步应用自动启动。
+
+如果禁用或不配置此设置，用户登录 Windows 时，OneDrive 同步应用将自动启动。
+
+重要提示: 如果启用或禁用此设置，然后将设置重新更改为“未配置”，则上次的配置将继续生效。</string>
+
+      <!-- Silent Account Config -->
+      <string id="SilentAccountConfig">让客户使用 Windows 凭据以无提示方式登录 OneDrive 同步应用</string>
+      <string id="SilentAccountConfig_help">此设置允许你使用 Windows 凭据以无提示方式登录到 OneDrive 同步应用 (OneDrive) 中的用户. 
+
+如果启用此设置, 则使用主 Windows 帐户登录到电脑的用户 (用于将电脑加入域的帐户) 可以设置同步应用, 而无需输入帐户的凭据. 用户仍将显示 OneDrive 设置, 以便他们可以选择要同步的文件夹并更改其 OneDrive 文件夹的位置. 如果用户使用的是以前的 OneDrive for Business 同步应用 (Groove) , 则新的同步应用将尝试将用户的 OneDrive 与以前的应用同步, 并保留用户的同步设置. 此设置经常与没有文件随选的 Pc 上的 "设置可自动下载的最大用户 OneDrive 的大小" 和 "设置 OneDrive 文件夹的默认位置" 一起使用. 
+
+如果禁用或未配置此设置, 则用户需要使用其工作或学校帐户登录以设置同步.
+
+</string>
+
+      <!-- DiskSpaceCheckThresholdMB -->
+      <string id="DiskSpaceCheckThresholdMB">设置可自动下载的用户 OneDrive 的最大大小</string>
+      <string id="DiskSpaceCheckThresholdMB_help">此设置与“让客户使用 Windows 凭据以无提示方式登录 OneDrive 同步应用”结合使用。使用此设置，可提示 OneDrive 中的内容超出指定量的用户在 OneDrive 同步应用(OneDrive.exe)安装期间选择要同步的文件夹。
+
+如果启用此设置，则在 OneDrive 安装期间，默认对内容超出指定值的用户显示“选择文件夹”对话框。
+
+如果禁用或不配置此设置，则当用户设置同步应用时，将选择同步所有文件。</string>
+
+      <!-- Settings below control behavior of Files-On-Demand (Cloud Files) -->
+      <string id="FilesOnDemandEnabled">使用 OneDrive 文件随选</string>
+      <string id="FilesOnDemandEnabled_help">利用此设置，可以显式控制是否为组织启用 OneDrive 文件随选。
+
+如果启用此设置，默认情况下，OneDrive 文件随选处于打开状态。
+
+如果禁用此设置，将显式禁用 OneDrive 文件随选，用户不能将其打开。
+
+如果不配置此设置，用户将可以打开或关闭 OneDrive 文件随选。</string>
+
+      <string id="DehydrateSyncedTeamSites">将已同步的团队网站文件转换为仅联机文件</string>
+      <string id="DehydrateSyncedTeamSites_help">此设置与“OneDrive 文件随选”结合使用。当多名用户同步同一团队网站时，此设置可将已同步的团队网站文件转换为仅联机文件，从而节省带宽，并跨设备释放空间。
+
+如果启用此设置，则在启用 OneDrive 文件随选之前同步的团队网站文件将转换(一次性操作)为仅联机文件。
+
+如果禁用或不配置此设置，则团队网站文件仍在本地可用，除非用户选择将其转换为仅联机。</string>
+
+    <!-- Restrict syncing with other organizations -->
+      <string id="AllowTenantList">仅允许同步特定组织的 OneDrive 帐户</string>
+      <string id="AllowTenantList_help">此设置可指定允许的租户 ID 列表，从而防止用户轻易将文件上传到其他组织。
+
+如果启用此设置，则用户试图添加属于不允许的组织的帐户时将收到错误。如果用户已添加帐户，则文件将停止同步。
+
+如果禁用或不配置此设置，则用户可以添加属于任何组织的帐户。
+
+若要改为阻止特定组织，请使用“阻止同步特定组织的 OneDrive 帐户”。
+
+此设置优先于“阻止同步特定组织的 OneDrive 帐户”。请勿同时启用这两个策略。</string>
+
+      <string id="BlockTenantList">阻止同步特定组织的 OneDrive 帐户</string>
+      <string id="BlockTenantList_help">此设置可指定阻止的租户 ID 列表，从而防止用户轻易将文件上传到其他组织。
+
+如果启用此设置，则用户试图添加属于已阻止组织的帐户时将收到错误。如果用户已添加帐户，则文件将停止同步。
+
+如果禁用或不配置此设置，则用户可以添加属于任何组织的帐户。
+
+若要改为指定允许的组织列表，请使用“仅允许同步特定组织的 OneDrive 帐户”。
+
+如果启用了“仅允许同步特定组织的 OneDrive 帐户”，则此设置将无效。请勿同时启用这两个策略。</string>
+
+    <!-- SharePoint Server 2019 settings -->
+    <string id="SharePointOnPremFrontDoorUrl">指定 SharePoint Server URL 和组织名称</string>
+    <string id="SharePointOnPremFrontDoorUrl_help">此设置允许用户使用 OneDrive 同步应用 (OneDrive) 同步 SharePoint Server 2019 中的文件. URL 定义 SharePoint 服务器的位置, 并启用同步应用以进行身份验证和设置同步. 组织名称用于指定将在文件资源管理器中创建的 OneDrive 和 SharePoint 文件夹名称. 组织名称是可选的. 如果不提供, 同步应用将使用 URL 的第一段作为名称. 例如, office.sharepoint.com 将变为 "Office", OneDrive 文件夹名称将为 "OneDrive-Office". 
+
+如果启用此设置并提供 SharePoint Server URL, 则用户将能够在 SharePoint Server 2019 中同步文件. 
+
+如果禁用或未配置此设置, 或未提供 SharePoint Server URL, 则用户将无法在 SharePoint Server 2019 中同步文件. </string>
+
+    <string id="SharePointOnPremPrioritization">在混合环境中指定 OneDrive 位置</string>
+    <string id="SharePointOnPremPrioritization_help">此设置定义如果身份在两个身份提供程序中都存在, 则 OneDrive 同步应用 (OneDrive) 是否应根据 SharePoint Online 或 SharePoint Server 2019 进行身份验证. 若要使用此设置, 您还必须启用 "指定 SharePoint Server URL 和组织名称". 此设置仅影响 OneDrive for business 同步功能. 它不影响 SharePoint Online 或 SharePoint Server 2019 中的同步团队网站. 
+
+如果启用此设置, 则可选择以下两个选项之一: 
+
+SharePoint Online: 同步应用将首先在 SharePoint Online 中查找用户的 OneDrive. 如果已为用户配置了同步应用程序的 SharePoint Online, 它将尝试为该用户在 SharePoint Server 2019 中配置 OneDrive for business 实例. 
+
+SharePoint Server 2019: 同步应用将首先在 SharePoint Server 2019 中查找用户的 OneDrive for Business. 如果已为用户配置了同步应用程序的 SharePoint Server 2019, 则将尝试为该用户在 SharePoint Online 中配置 OneDrive 实例. 
+
+如果禁用或未配置此设置, 则在 SharePoint Online 中, 同步应用将首先查找用户的 OneDrive.</string>
+    <string id="PrioritizeSPO">SharePoint Online</string>
+    <string id="PrioritizeSharePointOnPrem">SharePoint Server 2019</string>
+
+    <!-- Disable tutorial in the FRE -->
+    <string id="DisableFRETutorial">禁用在 OneDrive 安装程序结束时显示的教程</string>
+    <string id="DisableFRETutorial_help">此设置可阻止在 OneDrive 安装结束时在 Web 浏览器中启动教程。
+
+如果启用此设置，则用户在完成 OneDrive 安装后看不到教程。
+
+如果禁用或不配置此设置，则在 OneDrive 安装结束时将显示教程。</string>
+
+      <!-- Block KFM -->
+      <string id="BlockKnownFolderMove">阻止用户将 Windows 已知文件夹移动到 OneDrive</string>
+      <string id="BlockKnownFolderMove_help">此设置可以阻止用户将其文档、图片和桌面文件夹移动到任何 OneDrive for Business 帐户。
+注意: 已加入域的电脑上已阻止将已知文件夹移动到 OneDrive 个人帐户。
+
+如果启用了此设置，则不会通过“为重要文件夹设置防护”窗口提示用户，且“开始保护”命令将处于禁用状态。如果用户移动了已知文件夹，则这些文件夹中的文件将保留在 OneDrive 中。如果启用了“提示用户将 Windows 已知文件夹移动到 OneDrive”或“将 Windows 已知文件夹以无提示方式移动到 OneDrive”，则此设置不会生效。
+
+如果禁用或不配置此设置，用户可以选择移动已知文件夹。</string>
+
+    <!-- KFMOptInWithWizard -->
+    <string id="KFMOptInWithWizard">提示用户将 Windows 已知文件夹移动到 OneDrive </string>
+    <string id="KFMOptInWithWizard_help">此设置显示“IT 部门希望保护你的重要文件夹”窗口，提示用户将其文档、图片和桌面文件夹移动到 OneDrive。此功能无法在本地 SharePoint 上启用。
+
+如果启用了此设置并提供了租户 ID，要同步 OneDrive 的用户可在登录时看到“ IT 部门希望保护你的重要文件夹”窗口。如果他们关闭该窗口，则活动中心将显示提醒通知，直到用户移动完所有三个已知文件夹。如果用户已将已知文件夹重定向到其他 OneDrive 帐户，系统将提示他们将文件夹定向到组织的帐户(留下现有文件)。
+
+如果禁用或不配置此设置，则不会自动显示“ IT 部门希望保护你的重要文件夹”窗口。</string>
+
+    <!-- KFMOptInNoWizard -->
+    <string id="KFMOptInNoWizard">将 Windows 已知文件夹以无提示方式移动到 OneDrive</string>
+    <string id="KFMOptInNoWizard_help">此设置允许你将已知文件夹重定向到 OneDrive，无需任何用户交互。在 18.171.0823.0001 的同步应用内部版本中，此设置仅将空的已知文件夹重定向到 OneDrive(或已重定向到其他 OneDrive 帐户的已知文件夹)。在以后的版本中，它将重定向含有内容的已知文件夹并将内容移动到 OneDrive。建议将此设置与 "提示用户将 Windows 已知文件夹移动到 OneDrive" 结合使用。如果以无提示方式移动已知文件夹不成功，将提示用户更正错误并继续。
+
+如果启用此设置并提供租户 ID，则可以选择是否在重定向文件夹后向用户显示通知。
+
+可一次性移动所有文件夹或选择要移动的文件夹。 移动文件夹后，即使清除了文件夹复选框，此策略也不会再次对该文件夹产生影响。
+
+如果禁用或未配置此设置，则不会以无提示方式重定向用户的已知文件夹和/或将其移动到 OneDrive。
+
+    </string>
+    <string id="KFMOptInNoWizardToast">是</string>
+    <string id="KFMOptInNoWizardNoToast">否</string>
+
+     <!-- Block KFM Opt Out -->
+      <string id="KFMBlockOptOut">阻止用户将其 Windows 已知文件夹重定向到电脑</string>
+      <string id="KFMBlockOptOut_help">此设置会强制用户将文档、图片和桌面文件夹直接保留到 OneDrive。
+
+如果启用了此设置，则“IT 部门希望保护你的重要文件夹”窗口中的“停止保护”按钮将处于禁用状态，且如果尝试停止同步已知文件夹，则用户会收到错误消息。
+
+如果禁用或未配置此设置，则用户可以选择将已知文件夹重定向回电脑。</string>
+
+    <string id="AutoMountTeamSites">配置要自动同步的团队网站库</string>
+    <string id="AutoMountTeamSites_help">使用此设置，可指定要在用户下次登录 OneDrive 同步应用(OneDrive.exe)时自动同步的 SharePoint 团队网站库。用户登录后，可能需要最多 8 小时就会开始同步库。要使用该设置，必须启用 OneDrive 文件随选，该设置仅适用于使用运行 Windows 10 (1709) Fall Creators Update 或更高版本的计算机的用户。请勿针对同一库为超过 1,000 台设置启用此设置。要保证优秀的同步体验，请避免对大型库集启用此功能(有关最新指南，请参阅 https://docs.microsoft.com/zh-cn/onedrive/use-group-policy#AutoMountTeamSites)。无法为本地 SharePoint 网站启用此功能。
+ 
+如果启用此设置，则在用户下次登录时，OneDrive 同步应用自动将指定的库内容下载为仅联机文件。用户无法停止同步库。
+ 
+如果禁用此设置，则不会为新用户自动同步指定的团队网站库。现有用户可选择停止同步库，但不会自动停止。</string>
+
+    <!-- Disable Pause On Battery Saver  -->
+    <string id="DisablePauseOnBatterySaver">在设备打开省电模式时继续同步</string>
+    <string id="DisablePauseOnBatterySaver_help">此设置可关闭在设备打开省电模式时自动暂停的功能。
+
+如果启用此设置，当用户打开省电模式时，将会继续同步。OneDrive 不会自动暂停同步。
+
+如果禁用或不配置此设置，检测到省电模式时将自动暂停同步，并显示通知。用户可以在通知中单击“仍然同步”，选择不暂停同步。同步暂停后，用户可以在任务栏通知区域中单击 OneDrive 云图标，然后单击活动中心顶部的警报，以继续同步。</string>
+
+    <!-- Disable Pause On Metered Network -->
+    <string id="DisablePauseOnMeteredNetwork">在使用按流量计费的网络时继续同步</string>
+    <string id="DisablePauseOnMeteredNetwork_help">此设置可关闭在设备连接到按流量计费的网络时自动暂停的功能。
+
+如果启用此设置，当设备使用按流量计费的网络时，将会继续同步。OneDrive 不会自动暂停同步。
+
+如果禁用或不配置此设置，检测到按流量计费的网络时将自动暂停同步，并显示通知。用户可以在通知中单击“仍然同步”，选择不暂停同步。同步暂停后，用户可以在任务栏通知区域中单击 OneDrive 云图标，然后单击活动中心顶部的警报，以继续同步。</string>
+
+    <!-- Insert multi-tenant settings here -->
+    <!-- See http://go.microsoft.com/fwlink/p/?LinkId=797547 for configuration instructions -->
+
+    <string id="LocalMassDeleteFileDeleteThreshold">当用户在其本地计算机上删除多个 OneDrive 文件时提示用户</string>
+    <string id="LocalMassDeleteFileDeleteThreshold_help">此策略设置用户可从本地 OneDrive 文件夹删除的文件数的阈值, 在通知用户这些文件也将从云中删除. 
+ 
+如果启用此策略, 则当用户在其本地计算机上从 OneDrive 删除指定数量的文件时, 他们将看到通知. 将向用户提供继续删除云文件或还原本地文件的选项. 
+注意: 即使启用此策略, 如果用户在上一次通知中选中了 "始终删除文件" 复选框, 或者他们已清除 OneDrive 同步应用中的 "在云中删除多个文件时通知我" 复选框, 则用户将不会收到通知设置. 
+
+如果禁用此策略, 则当用户在其本地计算机上删除大量 OneDrive 文件时, 将不会收到通知. 
+
+如果未配置此策略, 则当用户在短时间内删除超过200个文件时, 将看到通知.</string>
+
+
+    <!-- Forced local mass delete prompt -->
+    <string id="ForcedLocalMassDeleteDetection">要求用户确认大型删除操作</string>
+    <string id="ForcedLocalMassDeleteDetection_help">此设置可让用户确认在删除大量已同步文件时, 是否要删除云中的文件。
+
+如果启用此设置, 则当用户删除大量已同步文件时, 将始终显示警告。如果用户在7天内未确认删除操作, 则不会删除这些文件。
+
+如果禁用或未配置此设置, 则用户可以选择隐藏警告, 并始终删除云中的文件。</string>
+
+    <!-- Block B2BSync aka Cross Tenant Sync -->
+    <string id="BlockExternalSync">防止用户同步从其他组织共享的库和文件夹</string>
+    <string id="BlockExternalSync_help">此设置可控制组织内部用户是否可同步已由其他组织中的用户共享的 OneDrive for Business 或 SharePoin 内容。这是一个名为“B2B 同步”的协作功能。
+
+如果启用此设置，用户将无法开始同步从外部组织共享的 OneDrive for Business 或 SharePoint 库/文件夹。正在同步的任何共享库或文件夹都将停止同步。
+
+如果禁用或不配置此设置，用户将能够同步从外部组织共享的 OneDrive for Business 和 SharePoint 库和文件夹。
+
+有关 B2B 同步的详细信息，请参阅: https://docs.microsoft.com/zh-cn/onedrive/b2b-sync</string>
+
+    <!-- Allow OneDrive to disable permission inheritance within read-only folders -->
+    <string id="PermitDisablePermissionInheritance">允许 OneDrive 在文件夹同步只读中禁用 Windows 权限继承</string>
+    <string id="PermitDisablePermissionInheritance_help">此设置允许 OneDrive 同步应用在用户电脑上的只读文件夹同步中删除所有继承的权限。
+
+如果启用此设置，则 OneDrive 同步应用可在只读文件夹中禁用权限继承以改进同步速度。
+
+如果禁用或未配置此设置，则 OneDrive 同步应用将在只读文件夹中保留权限继承。同步速度可能会大大降低。</string>
+
+    <!-- Automatically adjust the sync app upload rate based on bandwidth availability -->
+    <string id="EnableAutomaticUploadBandwidthManagement">为 OneDrive 启用自动上传带宽管理功能</string>
+    <string id="EnableAutomaticUploadBandwidthManagement_help">此设置使 OneDrive 同步应用 (OneDrive) 仅当未使用的带宽可用时才在后台上传数据. 它可防止同步应用干扰其他正在使用该网络的应用程序. 此设置由 Windows LEDBAT (低额外延迟后台传输) 协议提供支持. 当 LEDBAT 检测到表示其他 TCP 连接占用带宽的延迟时, 同步应用将减少其自己的消耗以避免干扰. 当网络延迟再次递减并释放带宽时, 同步应用将增加上载速率并使用未使用的带宽. 
+
+如果启用此设置, 则同步应用上传速率将根据带宽可用性设置为 "自动调整", 并且用户将无法更改. 
+
+如果禁用或未配置此设置, 则用户可以选择将上载速率限制为固定值 (KB/秒) , 或将其设置为 "自动调整". 
+
+作用
+如果启用或禁用此设置, 然后将其更改为 "未配置", 则最后一次配置将保持有效. 建议启用此设置, 而不是 "将同步应用上载速度限制为固定速率". 不应同时启用这两种设置. 如果在同一设备上同时启用了同步应用上传速度, 则此设置将替代 "将同步应用上传率限制为吞吐量的百分比".</string>
+
+    <!-- MinDiskSpaceLimitInMB -->
+    <!-- configurable limit where low disk space error will occur-->
+    <string id="MinDiskSpaceLimitInMB">用户磁盘空间不足时阻止文件下载</string>
+    <string id="MinDiskSpaceLimitInMB_help">此设置允许你指定最小数量的可用磁盘空间, 并阻止 OneDrive 同步应用 (OneDrive) 在用户不超过此数量的情况下载文件. 
+
+系统将提示用户提供选项以帮助释放空间.</string>
+
+    <!-- WarningMinDiskSpaceLimitInMB -->
+    <!-- configurable limit where user will be notified they are approaching low disk space -->
+    <string id="WarningMinDiskSpaceLimitInMB">向磁盘空间不足的用户发出警告</string>
+    <string id="WarningMinDiskSpaceLimitInMB_help">此设置允许你指定最小数量的可用磁盘空间, 并在 OneDrive 同步应用 (OneDrive) 下载导致其低于此数量的文件时警告用户. 
+
+系统将提示用户提供选项以帮助释放空间.</string>
+
+    <!-- EnableODIgnoreListFromGPO -->
+    <string id="EnableODIgnoreListFromGPO">排除上传特定类型的文件</string>
+    <string id="EnableODIgnoreListFromGPO_help">此设置允许你输入关键字以阻止 OneDrive sync 应用 ( # A0) 将某些文件上传到 OneDrive 或 SharePoint。可以输入完整的名称，例如 "setup.exe"，或使用星号 ( * ) 作为通配符来表示一系列字符。 
+
+如果启用此设置，则同步应用不会上载与指定关键字匹配的新文件。跳过的文件没有出现任何错误，文件仍保留在本地 OneDrive 文件夹中。启用此设置后，必须重新启动 OneDrive 同步应用才能使设置生效。
+
+如果禁用或未配置此设置，则同步应用将上载所有已同步文件夹中的所有受支持文件。</string>
+
+    </stringTable>
+    <presentationTable>
+      <presentation id="GPOSetUpdateRing_Pres">
+        <dropdownList refId="GPOSetUpdateRing_Dropdown" noSort="true" defaultItem="0">更新通道:</dropdownList>
+      </presentation>
+
+      <presentation id="AutomaticUploadBandwidthPercentage_Pres">
+        <text>选择上传文件时占用带宽的最大百分比。</text>
+        <text>有效值介于 10 - 99 之间。</text>
+        <decimalTextBox refId="BandwidthSpinBox" defaultValue="70" spinStep="1">带宽:</decimalTextBox>
+      </presentation>
+
+      <presentation id="UploadBandwidthLimit_Pres">
+        <text>选择上传文件时占用的最大带宽。</text>
+        <text>有效值为 1 到 100000。</text>
+        <decimalTextBox refId="UploadRateValue" defaultValue="125">带宽:</decimalTextBox>
+      </presentation>
+
+      <presentation id="DownloadBandwidthLimit_Pres">
+        <text>选择下载文件时占用的最大带宽。</text>
+        <text>有效值为 1 到 100000。</text>
+        <decimalTextBox refId="DownloadRateValue" defaultValue="125">带宽:</decimalTextBox>
+      </presentation>
+
+       <presentation id="DiskSpaceCheckThresholdMB_Pres">
+        <text>在系统提示用户选择要同步的文件夹前，指定租户 ID 和用户的 OneDrive 的最大大小。</text>
+        <text>在“值名称”字段中输入租户 ID。在“值”字段中输入大小。</text>
+        <text>有效值为 0 到 4294967295 MB(含)。</text>
+        <listBox refId="DiskSpaceCheckThresholdMBList">最大大小: </listBox>
+      </presentation>
+
+      <presentation id="DefaultRootDir_Pres">
+       <text>指定租户 ID 和默认路径。</text>
+        <text>在“值名称”字段中输入租户 ID。在“值”字段中输入路径。</text>
+        <listBox refId="DefaultRootDirList">路径: </listBox>
+      </presentation>
+
+      <presentation id="DisableCustomRoot_Pres">
+        <text>指定租户 ID 和设置的值。</text>
+        <text>在“值名称”字段中输入租户 ID。在“值”字段中，输入 1 启用设置，或输入 0 禁用设置。</text>
+        <listBox refId="DisableCustomRootList">更改位置设置: </listBox>
+      </presentation>
+
+      <presentation id="AllowTenantList_Pres">
+        <text>指定租户 ID</text>
+        <text>在“值”字段中，输入要添加到此列表的租户 ID。</text>
+        <text> </text>
+        <listBox refId="AllowTenantListBox">租户 ID: </listBox>
+      </presentation>
+
+      <presentation id="BlockTenantList_Pres">
+        <text>指定租户 ID</text>
+        <text>在“值”字段中，输入要添加到此列表的租户 ID。</text>
+        <text> </text>
+        <listBox refId="BlockTenantListBox">租户 ID: </listBox>
+       </presentation>
+
+      <presentation id="SharePointOnPremFrontDoorUrl_Pres">
+        <text>提供托管用户的 OneDrive for Business 的 SharePoint Server 的 URL，以及组织名称。</text>
+        <textBox refId="SharePointOnPremFrontDoorUrlBox">
+          <label>SharePoint Server 2019 URL:</label>
+        </textBox>
+        <textBox refId="SharePointOnPremTenantNameBox">
+          <label>组织名称:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="SharePointOnPremPrioritization_Pres">
+        <dropdownList refId="SharePointOnPremPrioritization_Dropdown" noSort="true" defaultItem="0">首先针对其进行身份验证:</dropdownList>
+      </presentation>
+
+      <presentation id="BlockKnownFolderMove_Pres">
+        <dropdownList refId="BlockKnownFolderMove_Dropdown" noSort="true" defaultItem="0">如果已知文件夹已移动到 OneDrive:</dropdownList>
+      </presentation>
+
+      <presentation id="KFMOptInWithWizard_Pres">
+        <textBox refId="KFMOptInWithWizard_TextBox">
+          <label>租户 ID:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="KFMOptInNoWizard_Pres">
+        <textBox refId="KFMOptInNoWizard_TextBox">
+          <label>租户 ID:</label>
+        </textBox>
+        <dropdownList refId="KFMOptInNoWizard_Dropdown" noSort="true" defaultItem="0">重定向文件夹之后，向用户显示通知:</dropdownList>
+        <text>文件夹选项:</text>
+        <checkBox refId="KFMOptInNoWizard_Desktop_Checkbox" defaultChecked="true">桌面</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Documents_Checkbox" defaultChecked="true">文档</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Pictures_Checkbox" defaultChecked="true">图片</checkBox>
+      </presentation>
+      <presentation id="AutoMountTeamSites_Pres">
+        <text>指定要同步的库:
+
+打开 Web 浏览器，以组织全局管理员或 SharePoint 管理员的身份登录 Office 365，并浏览到库进行同步。
+
+单击要自动同步的库上的“同步”按钮，然后单击“复制库 ID”。
+
+单击“显示”，然后输入易记名称用于在“值名称”字段中标识该库，再在“值”字段中输入库 ID。
+</text>
+        <listBox refId="AutoMountTeamSitesListBox">库:</listBox>
+      </presentation>
+
+      <presentation id="MinDiskSpaceLimitInMB_Pres">
+        <text>在“值”字段中，输入希望空出来的最低磁盘空间量。</text>
+        <text>有效值介于 0 MB 至 10240000 MB 之间</text>
+        <decimalTextBox refId="minDiskSpaceMB" defaultValue="200">最小可用磁盘空间:</decimalTextBox>
+      </presentation>
+
+      <presentation id="WarningMinDiskSpaceLimitInMB_Pres">
+        <text>在“值”字段中，输入低于此阈值将导致用户收到警告的可用磁盘空间量。如果同时使用此策略和“用户磁盘空间不足时阻止文件下载”，则此设置的值应大于用于阻止下载的值。</text>
+        <text>有效值介于 0 MB 至 10240000 MB 之间</text>
+        <decimalTextBox refId="warningMinDiskSpaceMB" defaultValue="500">最小可用磁盘空间:</decimalTextBox>
+      </presentation>
+
+      <presentation id="LocalMassDeleteFileDeleteThreshold_Pres">
+        <text>指定用户在需要确认操作之前一次可删除的最大文件数。</text>
+        <text>有效值为 1 到 100000。</text>
+        <decimalTextBox refId="LMDFileDeleteThresholdBox" defaultValue="200">文件数:</decimalTextBox>
+      </presentation>
+
+      <presentation id="EnableODIgnoreListFromGPO_Pres">
+        <text>若要指定关键字，请选择“显示”，然后在“值”字段中输入关键字。</text>
+        <text>例如，输入“*.pst”可阻止所有扩展名为 .pst 的文件。输入“expense*” 可阻止名称以“expense”开头的文件。输入“*sales*”可阻止名称中带有“sales”的所有文件。关键字不区分大小写。例如，输入“icons.JPEG”也会阻止“icons.jpeg”。</text>
+        <text> </text>
+        <listBox refId="EnableODIgnoreListFromGPOListBox">关键字: </listBox>
+      </presentation>
+
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

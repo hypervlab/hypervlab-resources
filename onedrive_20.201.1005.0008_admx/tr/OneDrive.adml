@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (c) 2016 Microsoft Corporation -->
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>OneDrive Grup İlkesi Ayarları</displayName>
+  <description>OneDrive eşitleme uygulamasına (OneDrive.exe) ve özellikle uygulamadaki kurumsal işlevselliğe yönelik çeşitli Grup İlkesi ayarları.</description>
+  <resources>
+    <stringTable>
+      <!-- general -->
+      <string id="OneDriveNGSCSettingCategory">OneDrive</string>
+
+      <!-- block syncing personal OneDrive -->
+      <string id="DisablePersonalSync">Kullanıcıların kişisel OneDrive hesaplarını eşitlemesini engelle</string>
+      <string id="DisablePersonalSync_help">Bu ayar, kullanıcıların kişisel OneDrive dosyalarını eşitlemek için Microsoft hesabı ile oturum açmasını engellemenizi sağlar.
+
+Bu ayarı etkinleştirirseniz, kullanıcıların kişisel OneDrive hesapları için bir eşitleme ilişkisi ayarlaması engellenir. Bu ayarı etkinleştirdiğinizde kişisel OneDrive hesaplarını zaten eşitleyen kullanıcılar eşitleme işlemine devam edemez (ve bu kullanıcılara eşitlemenin durdurulduğunu bildiren bir ileti gösterilir), ancak bilgisayarla eşitlenen tüm dosyalar bilgisayarda kalır.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar kişisel OneDrive hesaplarını eşitleyebilir.</string>
+
+      <!-- turn on GPOSetUpdateRing for app updates -->
+      <string id="GPOSetUpdateRing">Eşitleme uygulaması güncelleştirme halkasını ayarlayın</string>
+      <string id="GPOSetUpdateRing_help">OneDrive eşitleme uygulamasına (OneDrive.exe) yapılan güncelleştirmeler, ilk olarak Insider, daha sonra Yapım ve son olarak Ertelenmiş üyeler olmak üzere, üç halka halinde yayımlanır. Bu ayarlar kuruluşunuzdaki kullanıcılar için eşitleme uygulaması sürümünü belirtmenizi sağlar. Bu ayarları etkinleştirdiğinizde ve bir halka seçtiğinizde, kullanıcılar bunu değiştiremezler.
+
+Insider halkası kullanıcıları, OneDrive'a gelen yeni özellikleri önizlemelerine izin veren derlemeler alırlar.
+
+Yapım halkası kullanıcıları, kullanılabilir olan en son özellikleri alırlar.
+
+Ertelenmiş halka kullanıcıları en son yeni özellikler, hata düzeltmeleri ve performans iyileştirmeleri alır. Bu zil halka, güncelleştirmeleri iç ağ konumundan dağıtmanıza ve dağıtımın zamanlamasını denetlemenize olanak tanır (60 günlük bir pencerede).
+
+Bu ayarını devre dışı bırakırsanız veya yapılandırmazsanız, Yapım halkasında kullanıcılar OneDrive eşitleme uygulaması güncelleştirmelerini kullanılabilir olunca alırlar. Kullanıcılar Insider halkasında güncelleştirmeleri almak için Office veya Windows Insider programlarına katılabilir.</string>
+
+      <string id="Enterprise">Ertelenmiş</string>
+      <string id="Production">Üretim</string>
+      <string id="Insider">Insider üyeleri</string>
+
+      <!-- set default location of the OneDrive folder -->
+      <string id="DefaultRootDir">OneDrive klasörünün varsayılan konumunu ayarla</string>
+      <string id="DefaultRootDir_help">Bu ayar, kullanıcıların bilgisayarlarında OneDrive klasörünün varsayılan konumu olarak belirli bir yol ayarlamanızı sağlar. Varsayılan olarak yol %userprofile% altındadır.
+
+Bu ayarı etkinleştirirseniz, OneDrive - {organization name} klasörünün varsayılan konumu OneDrive.admx dosyasında belirttiğiniz yol olur. Kullanıcıların belirttiğiniz konumu değiştirmesini engellemek için "Kullanıcıların OneDrive klasörlerinin konumunu değiştirmesini engelle" ayarını etkinleştirin.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, OneDrive - {organization name} klasörünün varsayılan konumu %userprofile% altında olur.</string>
+
+      <!-- disable changing the default location of the OneDrive folder -->
+      <string id="DisableCustomRoot">Kullanıcıların kendi OneDrive klasörlerinin konumunu değiştirmesini engelle</string>
+      <string id="DisableCustomRoot_help">Bu ayar, OneDrive eşitleme uygulaması kurulumu sırasında kullanıcıların OneDrive - {organization name} klasörlerinin konumunu değiştirmesini engellemenize olanak tanır.
+
+Bu ayarı etkinleştirirseniz, OneDrive Kurulumunda "Konumu değiştir" bağlantısı gizlenir. OneDrive klasörü, varsayılan konumda veya "OneDrive klasörünün varsayılan konumunu ayarla" ayarını etkinleştirdiyseniz belirttiğiniz özel konumda oluşturulur.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar OneDrive Kurulumunda "Konumu değiştir" bağlantısına tıklayarak OneDrive klasörlerinin konumunu değiştirebilir.</string>
+
+      <!-- Enable Office Integration for coauthoring and in-app sharing -->
+      <string id="EnableAllOcsiClients">Office masaüstü uygulamalarında birlikte yazıp paylaşın</string>
+      <string id="EnableAllOcsiClients_help">Bu ayar, birden çok kullanıcının OneDrive'da depolanan bir Office dosyasını aynı anda düzenlemek için Office 365 ProPlus, Office 2019 veya Office 2016 masaüstü uygulamalarını kullanmasını sağlar. Ayrıca kullanıcıların Office masaüstü uygulamalarından dosya paylaşmasına da izin verir.
+
+Bu ayarı etkinleştirirseniz, Office masaüstü uygulamalarında birlikte yazma ve paylaşma özellikleri etkinleştirilir. Kullanıcılar OneDrive eşitleme uygulaması ayarlarını açtıktan sonra Office sekmesine tıklayıp "Açtığım Office dosyalarını eşitlemek için Office uygulamalarını kullan" onay kutusunu temizleyerek bu özellikleri devre dışı bırakabilir.
+
+Bu ayarı devre dışı bırakırsanız, Office masaüstü uygulamalarında birlikte yazma ve paylaşma özellikleri devre dışı bırakılır ve Office sekmesi, eşitleme uygulamasında gizlenir. "Office dosya çakışmaları" ayarı da devre dışı bırakılır ve bir dosyanın iki sürümü çakıştığında iki kopya da tutulur.</string>
+
+
+      <!-- Enable hold the file for handling Office conflicts -->
+      <string id="EnableHoldTheFile">Kullanıcıların Office dosya eşitleme çakışmalarını nasıl ele alacağını seçmesine izin verin</string>
+      <string id="EnableHoldTheFile_help">Bu ayar, eşitleme sırasında Office dosya sürümleri arasında çakışma olduğunda ne olacağını belirtir. Varsayılan olarak, kullanıcılar değişiklikleri birleştirmeye veya iki kopyayı da tutmaya karar verebilir. Kullanıcılar her zaman iki kopyayı da tutmak için OneDrive eşitleme uygulamasındaki ayarları da değiştirebilir. (Bu seçenek yalnızca Office 2016 veya sonraki sürümleri için kullanılabilir. Office'in önceki sürümlerinde iki kopya da her zaman tutulur.)
+
+Bu ayarı etkinleştirirseniz veya yapılandırmazsanız, kullanıcılar değişiklikleri birleştirmeye veya iki kopyayı da tutmaya karar verebilir. Kullanıcılar ayrıca OneDrive eşitleme uygulaması ayarlarında iki kopyayı da tutmayı seçebilir.
+
+Bu ayarı devre dışı bırakırsanız, dosya sürümleri çakıştığında dosyanın iki kopyası da tutulur. Kullanıcılar ayarı değiştiremez ve değişiklikleri birleştiremez.</string>
+
+      <!-- Enable Automatic Upload Bandwidth Limiting -->
+      <string id="AutomaticUploadBandwidthPercentage">Eşitleme uygulamasının karşıya yükleme hızını, aktarım hızının bir yüzdesiyle sınırla</string>
+      <string id="AutomaticUploadBandwidthPercentage_help">Bu ayar, bilgisayarın, OneDrive eşitleme uygulamasının (OneDrive.exe) dosyaları karşıya yüklemek için kullanabileceği karşıya yükleme hızı yüzdesini belirterek bir bilgisayardaki farklı karşıya yükleme görevlerinin performansını dengelemenize olanak tanır. Bunu bir yüzde olarak ayarlamak, eşitleme uygulamasının aktarım hızındaki artış ve azalmalara yanıt vermesini sağlar. Ne kadar düşük bir yüzde ayarlarsanız, dosyalar o kadar yavaş karşıya yüklenir. %50 veya üzeri bir değer öneririz. Eşitleme uygulaması düzenli aralıklarla bir dakika boyunca sınırlama olmadan karşıya yükler ve sonra aktarım hızı yavaşlayarak ayarladığınız karşıya yükleme yüzdesine iner. Bu sayede küçük dosyalar hızlı bir şekilde karşıya yüklenirken, büyük dosya yüklemelerinin bilgisayarın aktarım hızını meşgul etmesi engellenmiş olur.
+
+        Bu ayarı etkinleştirirseniz, bilgisayarlar OneDrive'a dosya yüklerken belirttiğiniz karşıya yükleme hızı yüzdesini kullanır ve kullanıcılar bu hızı değiştiremez.
+
+        Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar karşıya yükleme hızını sabit bir değerle (KB/saniye cinsinden) sınırlamayı seçebilir veya aktarım hızındaki artış ve azalışları yanıtlamak üzere karşıya yükleme hızının %70'ini kullanan "Otomatik olarak ayarla" seçeneğini belirleyebilir.
+
+        Önemli: Bu ayarı etkinleştirdikten veya devre dışı bıraktıktan sonra tekrar Yapılandırılmamış olarak değiştirirseniz, son yapılandırma uygulanmaya devam eder. Karşıya yükleme hızını sınırlamak için "Eşitleme uygulaması hızını sabit bir değere sınırla" yerine bu ayarı etkinleştirmenizi öneririz. İki ayarı aynı anda etkinleştirmemeniz gerekir.</string>
+      <!-- Enable Upload Bandwidth Limiting -->
+      <string id="UploadBandwidthLimit">Eşitleme uygulamasının karşıya yükleme hızını sabit bir hızla sınırla</string>
+      <string id="UploadBandwidthLimit_help">Bu ayar, OneDrive eşitleme uygulamasının (OneDrive.exe) dosyaları karşıya yükleyebileceği en yüksek hızı yapılandırmanızı sağlar. Bu hız, kilobayt/saniye cinsinden sabit bir değerdir. Hız ne kadar düşük olursa, bilgisayar dosyaları o kadar yavaş karşıya yükler. Ayarlanabilen en düşük hız 1 KB/sn ve en yüksek hız 100.000 KB/sn'dir. Kullanıcı arabirimi girilen hızı gösterse bile, 50 KB/sn'den düşük tüm değerler sınırı 50 KB/sn olarak ayarlar.
+
+Bu ayarı etkinleştirirseniz, bilgisayarlar belirttiğiniz en yüksek karşıya yükleme hızını kullanır ve kullanıcılar bunu OneDrive ayarlarında değiştiremez.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar karşıya yükleme hızını sabit bir değerle (KB/saniye cinsinden) sınırlamayı seçebilir veya aktarım hızındaki artış ve azalışlara karşılık olarak karşıya yükleme hızının %70'ini kullanacak olan "Otomatik olarak ayarla" seçeneğini belirleyebilir.
+
+Karşıya yükleme hızını sınırlamak için bu ayarı kullanmak yerine, "Eşitleme uygulamasının karşıya yükleme hızını aktarım hızının bir yüzdesine sınırla" ayarını etkinleştirerek değişen koşullara göre ayarlama yapan bir sınır belirlemenizi öneririz. İki ayarı aynı anda etkinleştirmemeniz gerekir.</string>
+
+      <!-- Enable Download Bandwidth Limiting -->
+      <string id="DownloadBandwidthLimit">Eşitleme uygulamasının indirme hızını sabit bir hızla sınırla</string>
+      <string id="DownloadBandwidthLimit_help">Bu ayar, OneDrive eşitleme uygulamasının (OneDrive.exe) dosyaları indirebileceği en yüksek hızı yapılandırmanızı sağlar. Bu hız kilobayt/saniye cinsinden sabit bir değerdir ve yalnızca eşitleme işlemlerinde uygulanır, güncelleştirmeleri indirmede geçerli değildir. Hız ne kadar düşük olursa, dosyalar o kadar yavaş iner. Ayarlanabilen en düşük hız 1 KB/sn ve en yüksek hız 100.000 KB/sn'dir. Kullanıcı arabirimi girilen hızı gösterse bile 50 KB/sn'den düşük girilen her değer sınırı 50 KB/sn olarak ayarlar.
+Bu ayarı etkinleştirirseniz, bilgisayarlar belirttiğiniz en yüksek indirme hızını kullanır ve kullanıcılar bu ayarı değiştiremez.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar OneDrive eşitleme uygulaması ayarlarında indirme hızını sınırlamayı seçebilir.</string>
+
+
+      <!-- prevent OneDrive sync app (OneDrive.exe) from generating network traffic (checking for updates, etc.) until the user signs in to OneDrive -->
+      <string id="PreventNetworkTrafficPreUserSignIn">Kullanıcılar oturum açana kadar eşitleme uygulamasının ağ trafiği oluşturmasını önle</string>
+      <string id="PreventNetworkTrafficPreUserSignIn_help">Bu ayar, kullanıcılar eşitleme uygulamasında oturum açana veya bilgisayara dosya eşitlemeye başlayana kadar OneDrive eşitleme uygulamasının (OneDrive.exe) ağ trafiği oluşturmasını engellemenizi sağlar.
+
+Bu ayarı etkinleştirirseniz, eşitleme uygulamasının otomatik olarak başlaması için kullanıcıların bilgisayarda OneDrive eşitleme uygulamasında oturum açması veya bilgisayarda OneDrive ya da SharePoint dosyalarını eşitlemeyi seçmesi gerekir.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar Windows'da oturum açtığında OneDrive eşitleme uygulaması da otomatik olarak başlatılır.
+
+Önemli: Bu ayarı etkinleştirdikten veya devre dışı bıraktıktan sonra yeniden Yapılandırılmamış olarak değiştirirseniz, son yapılandırma uygulanmaya devam eder. </string>
+
+      <!-- Silent Account Config -->
+      <string id="SilentAccountConfig">Kullanıcıların OneDrive eşitleme uygulaması oturumlarını Windows kimlik bilgileriyle arka planda aç</string>
+      <string id="SilentAccountConfig_help">Bu ayar, OneDrive eşitleme uygulamasında (OneDrive.exe) Windows kimlik bilgileriyle arka planda kullanıcı oturumu açmanızı sağlar.
+
+Bu ayarı etkinleştirdiğinizde bilgisayarda birincil Windows hesabıyla (bilgisayarı etki alanına eklemek için kullanılan hesap) oturum açmış kullanıcılar, hesaplarına ait kimlik bilgilerini girmeden eşitleme uygulamasını ayarlayabilir. Eşitlenecek klasörleri seçmek ve OneDrive klasörünün konumunu değiştirmek için OneDrive Kurulumu bu kullanıcılar için yine de görüntülenir. Kullanıcı, eski OneDrive İş eşitleme uygulamasını (Groove.exe) uygulamasını kullanıyorsa yeni eşitleme uygulaması, eşitleme işlemi yapan kullanıcının OneDrive'ını önceki uygulamadan devralır ve eşitleme ayarlarını korur. Bu ayar İsteğe Bağlı Dosyalar'ın etkin olmadığı bilgisayarlarda sık sık "Kullanıcının OneDrive'ının otomatik olarak indirebileceği öğe boyutu üst sınırını otomatik olarak ayarla" ve "OneDrive klasörü için varsayılan konumu ayarla" ayarıyla birlikte kullanılır
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız kullanıcıların eşitlemeyi ayarlamak için iş veya okul hesabıyla oturum açması gerekir.
+
+</string>
+
+      <!-- DiskSpaceCheckThresholdMB -->
+      <string id="DiskSpaceCheckThresholdMB">Bir kullanıcının otomatik olarak indirebileceği OneDrive boyutu üst sınırını ayarla</string>
+      <string id="DiskSpaceCheckThresholdMB_help">Bu ayar "Kullanıcıların OneDrive eşitleme uygulaması oturumlarını Windows kimlik bilgileriyle sessizce aç" ayarı ile birlikte kullanılır. Bu ayar, OneDrive'da belirtilen miktardan fazla içeriği bulunan kullanıcılardan OneDrive eşitleme uygulaması (OneDrive.exe) kurulumu sırasında eşitlenecek klasörleri seçmesini ister.
+
+Bu ayarı etkinleştirirseniz, OneDrive Kurulumu sırasında belirttiğiniz değerden daha fazla içeriğe sahip kullanıcılara Klasör Seçin iletişim kutusu varsayılan olarak gösterilir.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar eşitleme uygulamasını ayarlarken tüm dosyalar eşitlenmek üzere seçilir.</string>
+
+      <!-- Settings below control behavior of Files-On-Demand (Cloud Files) -->
+      <string id="FilesOnDemandEnabled">OneDrive İsteğe Bağlı Dosyalar'ı Kullan</string>
+      <string id="FilesOnDemandEnabled_help">Bu ayar, OneDrive İsteğe Bağlı Dosyalar'ın kuruluşunuz için etkin olup olmadığını denetlemenize izin verir.
+
+Bu ayarı etkinleştirirseniz, OneDrive İsteğe Bağlı Dosyalar varsayılan olarak etkinleştirilir.
+
+Bu ayarı devre dışı bırakırsanız, OneDrive İsteğe Bağlı Dosyalar açıkça devre dışı bırakılır ve kullanıcılar bunu açamaz.
+
+Bu ayarı yapılandırmazsanız, OneDrive İsteğe Bağlı Dosyalar kullanıcılar tarafından açılabilir veya kapatılabilir.</string>
+
+      <string id="DehydrateSyncedTeamSites">Eşitlenen ekip sitesi dosyalarını yalnızca çevrimiçi kullanılan dosyalara dönüştür</string>
+      <string id="DehydrateSyncedTeamSites_help">Bu ayar, OneDrive İsteğe Bağlı Dosyalar ile birlikte kullanılır. Birçok kullanıcı aynı ekip sitelerini eşitlediğinde, bu ayar, eşitlenen ekip sitesi dosyalarını yalnızca çevrimiçi kullanılan dosyalara dönüştürerek bant genişliğini korumanızı ve cihazlarda yer açmanızı sağlar.
+
+Bu ayarı etkinleştirirseniz, OneDrive İsteğe Bağlı Dosyalar etkin olmadan önce eşitlenen ekip sitesi dosyaları yalnızca çevrimiçi kullanılan dosyalara dönüştürülür. (Bu, tek seferlik bir eylemdir.)
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar ekip sitesi dosyalarını yalnızca çevrimiçi hale getirmedikçe bu dosyalar yerel olarak kullanılabilir olmaya devam eder.</string>
+
+    <!-- Restrict syncing with other organizations -->
+      <string id="AllowTenantList">OneDrive hesaplarının yalnızca belirli kuruluşlar için eşitlenmesine izin ver</string>
+      <string id="AllowTenantList_help">Bu ayar, bir izin verilen kiracı kimlikleri listesi belirterek, kullanıcıların dosyaları kolay bir şekilde başka kuruluşlara yüklemesini engellemenizi sağlar.
+
+Bu ayarı etkinleştirirseniz, kullanıcılar izin verilmeyen bir kuruluştaki hesabı eklemeyi denediğinde hata iletisi alır. Kullanıcı, hesabı zaten eklemişse dosyaların eşitlenmesi durdurulur.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız kullanıcılar herhangi bir kuruluştan hesap ekleyebilir.
+
+Bunun yerine belirli kuruluşları engellemek için "Belirli kuruluşlar için OneDrive hesaplarının eşitlenmesini engelle" ilkesini kullanın.
+
+Bu ayar, "Belirli kuruluşlar için OneDrive hesaplarının eşitlenmesini engelle" ilkesinden daha yüksek önceliğe sahiptir. İki ilkeyi aynı anda etkinleştirmeyin.</string>
+
+      <string id="BlockTenantList">Belirli kuruluşlar için OneDrive hesaplarının eşitlenmesini engelle</string>
+      <string id="BlockTenantList_help">Bu ayar, bir engellenen kiracı kimlikleri listesi belirterek, kullanıcıların dosyaları kolay bir şekilde başka bir kuruluşa yüklemesini engellemenizi sağlar.
+
+Bu ayarı etkinleştirirseniz, kullanıcılar engellenen bir kuruluştaki hesabı eklemeyi denediğinde hata iletisi alır. Kullanıcı, hesabı zaten eklemişse dosyaların eşitlenmesi durdurulur.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız kullanıcılar herhangi bir kuruluştan hesap ekleyebilir.
+
+Bunun yerine bir izin verilen kuruluşlar listesi belirtmek için "OneDrive hesaplarının yalnızca belirli kuruluşlar için eşitlenmesine izin ver" ilkesini kullanın.
+
+"OneDrive hesaplarının yalnızca belirli kuruluşlar için eşitlenmesine izin ver" ilkesi etkinse bu ayar ÇALIŞMAZ. İki ilkeyi aynı anda etkinleştirmeyin.</string>
+
+    <!-- SharePoint Server 2019 settings -->
+    <string id="SharePointOnPremFrontDoorUrl">SharePoint Server URL'sini ve kuruluş adını belirtin</string>
+    <string id="SharePointOnPremFrontDoorUrl_help">Bu ayar, kullanıcıların OneDrive eşitleme uygulamasını (OneDrive.exe) kullanarak SharePoint Server 2019'da dosyaları eşitlemesine izin vermenizi sağlar. URL, SharePoint Server'ın konumunu tanımlar ve eşitleme uygulamasının kimlik doğrulaması yaparak eşitlemeyi ayarlamasını sağlar. Kuruluş adı, Dosya Gezgini'nde oluşturulacak olan OneDrive ve SharePoint klasör adlarını belirtmenizi sağlar. Kuruluş adı isteğe bağlıdır. Kuruluş adını sağlamazsanız, eşitleme uygulaması ad olarak URL'nin ilk bölümünü kullanır. Örneğin, office.sharepoint.com URL'sinden "Office" kısmı alınır ve OneDrive klasör adı "OneDrive - Office" olur.
+
+Bu ayarı etkinleştirirseniz ve SharePoint Server URL'sini sağlarsanız, kullanıcılar SharePoint Server 2019'da dosyaları eşitleyebilir.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız ya da SharePoint Server URL'sini sağlamazsanız, kullanıcılar SharePoint Server 2019'da dosya eşitleyemez. </string>
+
+    <string id="SharePointOnPremPrioritization">Karma bir ortamda OneDrive konumunu belirtin</string>
+    <string id="SharePointOnPremPrioritization_help">Bu ayar, kimlik hem SharePoint Online'da hem de SharePoint Server 2019'da mevcutsa, OneDrive eşitleme uygulamasının (OneDrive.exe) iki kimlik sağlayıcısında da kimlik doğrulaması yapıp yapmaması gerektiğini belirler. Bu ayarı kullanmak için "SharePoint Server URL'sini ve kuruluş adını belirtin" ayarını da etkinleştirmeniz gerekir. Bu ayar yalnızca OneDrive İş eşitleme işlevini etkiler. Bu ayar, SharePoint Online veya SharePoint Server 2019'daki ekip sitelerini eşitleme işlemini etkilemez.
+
+Bu ayarı etkinleştirirseniz iki seçenek kullanabilirsiniz:
+
+SharePoint Online: Eşitleme uygulaması ilk olarak SharePoint Online'da kullanıcının OneDrive hesabını arar. Eşitleme uygulaması kullanıcı için SharePoint Online ile zaten yapılandırılmışsa, bu kullanıcı için SharePoint Server 2019'da bir OneDrive İş örneği yapılandırmaya çalışır.
+
+SharePoint Server 2019: Eşitleme uygulaması ilk olarak SharePoint Server 2019'da kullanıcının OneDrive İş hesabını arar. Eşitleme uygulaması kullanıcı için SharePoint Server 2019 ile zaten yapılandırılmışsa, bu kullanıcı için SharePoint Online'da bir OneDrive örneği yapılandırmaya çalışır.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, eşitleme uygulaması ilk olarak SharePoint Online'da kullanıcının OneDrive hesabını arar.</string>
+    <string id="PrioritizeSPO">SharePoint Online</string>
+    <string id="PrioritizeSharePointOnPrem">SharePoint Server 2019</string>
+
+    <!-- Disable tutorial in the FRE -->
+    <string id="DisableFRETutorial">OneDrive Kurulumu sonunda görüntülenen öğreticiyi devre dışı bırak</string>
+    <string id="DisableFRETutorial_help">Bu ayar, OneDrive Kurulumu sonunda bir web tarayıcısında öğreticinin başlamasını engellemenizi sağlar.
+
+Bu ayarı etkinleştirirseniz, kullanıcılar OneDrive Kurulumunu tamamlandıktan sonra öğreticiyi görmez.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, öğretici OneDrive Kurulumunun sonunda görünür.</string>
+
+      <!-- Block KFM -->
+      <string id="BlockKnownFolderMove">Kullanıcıların bilinen Windows klasörlerini OneDrive'a taşınmasını engelle</string>
+      <string id="BlockKnownFolderMove_help">Bu ayar, kullanıcıların Belgeler, Resimler ve Masaüstü klasörlerini herhangi bir OneDrive İş hesabına taşımasını önler.
+Not: Bilinen klasörlerin kişisel OneDrive hesaplarına taşınması, etki alanına katılan bilgisayarlarda zaten engellenir.
+
+Bu ayarı etkinleştirirseniz, "Önemli klasörler için korumayı ayarla" penceresi kullanıcılara gösterilmez ve "Korumayı başlat" komutu devre dışı bırakılır. Kullanıcı bilinen klasörleri zaten taşıdıysa, bu klasörlerdeki dosyalar OneDrive'da kalır. "Kullanıcıların bilinen Windows klasörlerini OneDrive'a taşımasını iste" veya "Bilinen Windows klasörlerini sessizce OneDrive'a taşı" seçeneğini etkinleştirirseniz, bu ayar uygulanmaz.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar bilinen klasörlerini taşımayı seçebilir.</string>
+
+    <!-- KFMOptInWithWizard -->
+    <string id="KFMOptInWithWizard">Kullanıcıların bilinen Windows klasörlerini OneDrive'a taşımasını iste </string>
+    <string id="KFMOptInWithWizard_help">Bu ayar, kullanıcılardan Belgeler, Resimler ve Masaüstü klasörlerini OneDrive'a taşımalarını isteyen "BT bölümünüz önemli klasörlerinizi korumanızı istiyor" penceresini görüntüler. Bu özellik şirket içindeki SharePoint için etkin değildir.
+
+Bu ayarı etkinleştirip kiracı kimliğinizi sağlarsanız, OneDrive hesaplarını eşitleyen kullanıcılar oturum açtıklarında "BT bölümünüz önemli klasörlerinizi korumanızı istiyor" penceresini görürler. Pencereyi kapatırlarsa, bilinen üç klasör taşınana kadar etkinlik merkezinde bir anımsatıcı bildirimi görünür. Bir kullanıcı bilinen klasörlerini farklı bir OneDrive hesabına yönlendirdiyse, klasörleri kuruluşunuzun hesabına yönlendirmesi istenir (mevcut dosyalar geride bırakılır).
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, "BT bölümünüz önemli klasörlerinizi korumanızı istiyor" penceresi otomatik olarak gösterilmez.</string>
+
+    <!-- KFMOptInNoWizard -->
+    <string id="KFMOptInNoWizard">Bilinen Windows klasörlerini sessizce OneDrive'a taşı</string>
+    <string id="KFMOptInNoWizard_help">Bu ayar, bilinen klasörleri kullanıcı etkileşimi olmadan OneDrive'a yönlendirmenizi sağlar. Sürümü 18.171.0823.0001'den eski olan eşitleme uygulamalarında bu ayar, yalnızca bilinen boş klasörleri (veya önceden farklı bir OneDrive hesabına yönlendirilmiş olan bilinen klasörleri) OneDrive'a yönlendirir. Sonraki sürümlerde bu ayar, içerik barındıran bilinen klasörleri yeniden yönlendirir ve içerikleri OneDrive'a taşır. Bu ayarı "Kullanıcılardan bilinen Windows klasörlerini OneDrive'a taşımasını iste" ayarı ile birlikte kullanmanızı öneririz. Bilinen klasörleri sessizce taşıma işlemi başarılı olmazsa, kullanıcılardan bu hatanın düzeltilmesi ve devam etmeleri istenir.
+
+Bu ayarı etkinleştirip kiracı kimliğinizi sağlarsanız, klasörleri yeniden yönlendirildikten sonra kullanıcılara bir bildirim gösterilip gösterilmeyeceğini seçebilirsiniz.
+
+Tüm klasörleri aynı anda taşıyabilir veya taşımak istediğiniz klasörleri seçebilirsiniz. Bir klasör taşındıktan sonra bu ilke, klasör için onay kutusunu temizleseniz bile o klasörü bir daha etkilemez. 
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılarınızın bilinen klasörleri OneDrive'a sessizce yönlendirilmez ve/veya taşınmaz.
+
+    </string>
+    <string id="KFMOptInNoWizardToast">Evet</string>
+    <string id="KFMOptInNoWizardNoToast">Hayır</string>
+
+     <!-- Block KFM Opt Out -->
+      <string id="KFMBlockOptOut">Kullanıcıların bilinen Windows klasörlerini kendi bilgisayarlarına yeniden yönlendirmesini engelle</string>
+      <string id="KFMBlockOptOut_help">Bu ayar, kullanıcıları Belgeler, Resimler ve Masaüstü klasörlerini OneDrive'a yönlendirmeye zorlar.
+
+Bu ayarı etkinleştirirseniz, "BT bölümünüz önemli klasörlerinizi korumanızı istiyor" penceresindeki "Korumayı durdur" düğmesi devre dışı bırakılır ve bilinen klasörlerden birinin eşitlemesini durdurmaya çalışan kullanıcılar bir hatayla karşılaşır.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar bilinen klasörlerini kendi bilgisayarlarına yeniden yönlendirmeyi seçebilir. </string>
+
+    <string id="AutoMountTeamSites">Ekip sitesi kitaplıklarını otomatik olarak eşitlenecek şekilde yapılandır</string>
+    <string id="AutoMountTeamSites_help">Bu ayar, kullanıcılar OneDrive eşitleme uygulamasında (OneDrive.exe) gelecek sefer oturum açtığında SharePoint ekip sitesi kitaplıklarını otomatik olarak eşitlenecek şekilde belirlemenize olanak tanır. Kullanıcı oturum açtıktan sonra kitaplığın eşitlenmeye başlaması 8 saate kadar sürebilir. Bu ayarı kullanmak için OneDrive İsteğe Bağlı Dosyalar'ı etkinleştirmeniz gerekir. Ayar yalnızca Windows 10 (1709) Fall Creators Update veya daha sonraki sürümlerin çalıştığı bilgisayarların kullanıcıları için uygulanır. Bu ayarı aynı kitaplık için 1.000'den fazla cihazda etkinleştirmeyin. İyi bir eşitleme deneyimi sağlamak için bu özelliği büyük kitaplık kümelerinde etkinleştirmeyin. (En güncel rehber için bkz. https://docs.microsoft.com/en-us/onedrive/use-group-policy#AutoMountTeamSites). Bu özellik şirket içi SharePoint siteleri için etkinleştirilmez.
+ 
+Bu ayarı etkinleştirdiğinizde, kullanıcı gelecek sefer oturum açtığında OneDrive eşitleme uygulaması belirlediğiniz kitaplıkların içeriklerini yalnızca çevrimiçi kullanılan dosya olarak otomatik indirir. Kullanıcı, kitaplıkların eşitlenmesini durduramaz. 
+ 
+Bu ayarı devre dışı bırakırsanız, belirlediğiniz ekip sitesi kitaplıkları yeni kullanıcılar için otomatik olarak eşitlenmez. Mevcut kullanıcılar kitaplıkların eşitlenmesini durdurabilir, ancak kitaplıkların otomatik olarak eşitlenmesi durdurulmaz.</string>
+
+    <!-- Disable Pause On Battery Saver  -->
+    <string id="DisablePauseOnBatterySaver">Cihazların pil tasarrufu modu açık olduğunda eşitlemeye devam et</string>
+    <string id="DisablePauseOnBatterySaver_help">Bu ayar, pil tasarrufu modunun açık olduğu cihazlar için otomatik duraklatma özelliğini kapatmanıza olanak tanır. 
+
+Bu ayarı etkinleştirirseniz, kullanıcılar pil tasarrufu modunu açtığında eşitleme devam eder. OneDrive eşitlemeyi otomatik olarak duraklatmaz.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, pil tasarrufu modu algılandığında eşitleme otomatik olarak duraklatılır ve bir bildirim görüntülenir. Kullanıcılar, bildirimde "Yine de Eşitle" seçeneğine tıklayarak eşitlemeyi duraklatmamayı seçebilir. Eşitleme duraklatıldığında, kullanıcılar görev çubuğundaki bildirim alanında bulunan OneDrive bulut simgesine tıklayıp etkinlik merkezinin üst kısmında yer alan uyarı seçeneğine tıklayarak eşitlemeyi sürdürebilir.</string>
+
+    <!-- Disable Pause On Metered Network -->
+    <string id="DisablePauseOnMeteredNetwork">Tarifeli ağlarda eşitlemeye devam et</string>
+    <string id="DisablePauseOnMeteredNetwork_help">Bu ayar, cihazlar tarifeli ağa bağlandığında otomatik duraklatma özelliğini kapatmanıza olanak tanır.
+
+Bu ayarı etkinleştirirseniz, cihazlar tarifeli bir ağda olduğunda eşitleme işlemi devam eder. OneDrive eşitlemeyi otomatik olarak duraklatmaz.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, tarifeli bir ağ algılandığında eşitleme otomatik olarak duraklatılır ve bir bildirim görüntülenir. Kullanıcılar, bildirimde "Yine de Eşitle" seçeneğine tıklayarak eşitlemeyi duraklatmamayı seçebilir. Eşitleme duraklatıldığında kullanıcılar, görev çubuğundaki bildirim alanında bulunan OneDrive bulut simgesine tıklayıp etkinlik merkezinin üst kısmında yer alan uyarı seçeneğine tıklayarak eşitlemeyi sürdürebilir.</string>
+
+    <!-- Insert multi-tenant settings here -->
+    <!-- See http://go.microsoft.com/fwlink/p/?LinkId=797547 for configuration instructions -->
+
+    <string id="LocalMassDeleteFileDeleteThreshold">Yerel bilgisayarlarında birden çok OneDrive dosyasını silen kullanıcılara sor</string>
+    <string id="LocalMassDeleteFileDeleteThreshold_help">Bu ilke, kullanıcının, dosyaların aynı zamanda buluttan da silineceğini belirten bildirim almadan yerel OneDrive klasöründen silebileceği dosya sayısı eşiğini belirler.
+ 
+Bu ilkeyi etkinleştirdiğinizde kullanıcı, yerel bilgisayarında belirtilen miktardan daha fazla sayıda dosya silerse bir bildirim görüntülenir. Kullanıcı bulut dosyalarını kaldırmaya başlayabilir veya yerel dosyaları geri yükleyebilir.
+Not: Bu ilkeyi etkinleştirseniz bile, kullanıcılar önceki bir bildirimde "Dosyaları her zaman kaldır" onay kutusunu işaretlediğinde veya OneDrive eşitleme uygulaması ayarlarında "Buluttan çok fazla dosya silindiğinde bana bildir" onay kutusunun işaretini kaldırdığında bildirim almaz.
+
+Bu ilkeyi devre dışı bıraktığınızda kullanıcılar yerel bilgisayarda çok sayıda OneDrive dosyası sildiğinde bildirim almaz.
+
+Bu ilkeyi yapılandırmazsanız, kullanıcılar kısa süre içinde 200'den fazla dosya sildiğinde bir bildirim görüntülenir.</string>
+
+
+    <!-- Forced local mass delete prompt -->
+    <string id="ForcedLocalMassDeleteDetection">Kullanıcıların büyük silme işlemlerini onaylamasını gerektir</string>
+    <string id="ForcedLocalMassDeleteDetection_help">Bu ayar kullanıcıların, çok sayıda eşitlenmiş dosyayı silerken buluttaki dosyaları silmek isteyip istemediğini onaylamasını sağlar.
+
+Bu ayarı etkinleştirirseniz, kullanıcılar çok sayıda eşitlenmiş dosyayı silerken her zaman bir uyarı görüntülenir. Kullanıcı silme işlemini 7 gün içinde onaylamazsa dosyalar silinmez.
+
+Bu ayarı devre dışı bırakır veya yapılandırmazsanız, kullanıcılar uyarıyı gizleyebilir ve buluttaki dosyaları her zaman silebilir.</string>
+
+    <!-- Block B2BSync aka Cross Tenant Sync -->
+    <string id="BlockExternalSync">Kullanıcıların diğer kuruluşlardan paylaşılan kitaplıkları ve klasörleri eşitlemesini engelleyin</string>
+    <string id="BlockExternalSync_help">Bu ayar, kuruluşunuzdaki kullanıcıların farklı bir kuruluştaki kullanıcılar tarafından paylaşılan OneDrive İş veya SharePoint içeriğini eşitlemesine izin verilip verilmediğini kontrol eder. Bu işbirliği özelliğine B2B Eşitleme adı verilir.
+
+Bu ayarı etkinleştirirseniz, kullanıcılar dış bir kuruluştan paylaşılan bir OneDrive İş veya SharePoint kitaplığını ya da klasörünü eşitlemeye başlayamaz. Eşitlenmekte olan paylaşılmış kitaplıklar veya klasörlerde eşitleme işlemi durdurulur.
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız, kullanıcılar dış kuruluşlardan paylaşılan OneDrive İş ve SharePoint kitaplıklarını ve klasörlerini eşitleyebilir. 
+
+B2B Eşitleme hakkında daha fazla bilgi için bkz: https://docs.microsoft.com/en-us/onedrive/b2b-sync</string>
+
+    <!-- Allow OneDrive to disable permission inheritance within read-only folders -->
+    <string id="PermitDisablePermissionInheritance">OneDrive'ın eşitlenen salt okunur klasörlerde Windows izinlerini devralmayı devre dışı bırakmasına izin verin</string>
+    <string id="PermitDisablePermissionInheritance_help">Bu ayar, OneDrive eşitleme uygulamasının, kullanıcının bilgisayarında eşitleme olan salt okunur klasörlerdeki tüm devralınan izinleri kaldırmasına olanak tanır.
+
+Bu ayarı etkinleştiriseniz, OneDrive eşitleme uygulaması eşitleme hızını artırmak için salt okunur klasörlerde izin mirasını devre dışı bırakır.
+
+Bu ayarı devre dışı bırakır sanız veya yapılandırmazsanız, OneDrive eşitleme uygulaması salt okunur klasörlerde izin devralmasını korur. Eşitleme hızı önemli ölçüde daha yavaş olabilir.</string>
+
+    <!-- Automatically adjust the sync app upload rate based on bandwidth availability -->
+    <string id="EnableAutomaticUploadBandwidthManagement">OneDrive için otomatik karşıya yükleme bant genişliği yönetimini etkinleştirin</string>
+    <string id="EnableAutomaticUploadBandwidthManagement_help">Bu ayar OneDrive eşitleme uygulamasının (OneDrive.exe), yalnızca kullanılmayan bant genişliği olduğunda verileri arka planda karşıya yüklemesine izin verir. Eşitleme uygulamasının, ağ bağlantısını kullanan diğer uygulamaları engellememesini sağlar. Bu ayar, Windows LEDBAT (Düşük Ekstra Gecikmeyle Arka Planda Aktarım) protokolü ile desteklenir. LEDBAT, gecikme artışı (bant genişliğini kullanan başka TCP bağlantıları olduğunu gösterir) algıladığında, eşitleme istemcisi diğer bağlantıları engellememek için kendi bant genişliği kullanımını azaltır. Ağ bağlantısındaki gecikme azaldığında bu, boşta bant genişliği olduğunu gösterir ve eşitleme uygulaması karşıya yükleme hızını artırır, kullanılmayan bant genişliğini kullanmaya başlar.
+
+Bu ayarı etkinleştirdiğinizde eşitleme uygulamasının karşıya yükleme hızı için, kullanılabilen bant genişliğine göre "Otomatik olarak ayarla" seçeneği belirlenir ve diğer kullanıcılar bunu değiştiremez.
+
+Bu ayarı devre dışı bırakır veya yapılandırmazsınız, kullanıcılar karşıya yükleme hızını sabit bir değerle (KB/saniye olarak) sınırlayabilir veya "Otomatik olarak ayarla" seçeneğini belirleyebilir.
+
+Önemli
+Bu ayarı etkinleştirdikten veya devre dışı bıraktıktan sonra Yapılandırılmadı olarak değiştirirseniz son yapılandırma etkili olmaya devam eder. "Eşitleme uygulamasını sabit bir hızla sınırla" seçeneğinin yerine bu ayarı etkinleştirmeniz önerilir. Aynı anda iki ayarı da etkinleştirmeyin. Aynı cihazda her iki ayar da etkinleştirilirse, bu ayar "Eşitleme uygulamasının karşıya yükleme hızını aktarım hızının bir yüzdesiyle sınırla" seçeneğini geçersiz kılar.</string>
+
+    <!-- MinDiskSpaceLimitInMB -->
+    <!-- configurable limit where low disk space error will occur-->
+    <string id="MinDiskSpaceLimitInMB">Kullanıcının disk alanı azaldığında dosya indirmesini engelle</string>
+    <string id="MinDiskSpaceLimitInMB_help">Bu ayar, en az miktarda kullanılabilir disk alanı belirtmenize ve kullanıcıların bu tutardan daha azı olduğunda OneDrive sync uygulamasının (OneDrive.exe) dosya indirmesini engellemenize olanak tanır.
+
+Kullanıcılara yer açmak için seçenekler istenir.</string>
+
+    <!-- WarningMinDiskSpaceLimitInMB -->
+    <!-- configurable limit where user will be notified they are approaching low disk space -->
+    <string id="WarningMinDiskSpaceLimitInMB">Disk alanı düşük olan kullanıcıları uyar</string>
+    <string id="WarningMinDiskSpaceLimitInMB_help">Bu ayar, kullanılabilir disk alanı alt sınırını belirlemenize ve OneDrive eşitleme uygulaması (OneDrive.exe), depolama alanının bu sınırın altında kalmasına neden olan bir dosya indirdiğinde kullanıcıyı uyarmanıza olanak sağlar.
+
+Kullanıcıların yer açmasına yardım etmek için seçenekler sunulur.</string>
+
+    <!-- EnableODIgnoreListFromGPO -->
+    <string id="EnableODIgnoreListFromGPO">Belirli dosya türlerinin yüklenmesini hariç tutma</string>
+    <string id="EnableODIgnoreListFromGPO_help">Bu ayar, OneDrive eşitleme uygulamasının (OneDrive.exe) belirli dosyaları OneDrive veya SharePoint'e yüklemesini önlemek için anahtar kelimeler girmenizi sağlar. "setup.exe" gibi tam adlar girebilir veya bir karakter serisini temsil etmek için joker karakter olarak yıldız işaretini (*) kullanabilirsiniz.  
+
+Bu ayarı etkinleştirirseniz eşitleme uygulaması, belirttiğiniz anahtar kelimelerle eşleşen yeni dosyaları yüklemez. Atlanan dosyalar için hata görünmez ve dosyalar yerel OneDrive klasöründe kalır. Bu ayarı etkinleştirdikten sonra OneDrive eşitleme uygulamasının yeniden başlatılması gerekir. 
+
+Bu ayarı devre dışı bırakırsanız veya yapılandırmazsanız eşitleme uygulaması, tüm eşitlenmiş klasörlere desteklenen tüm dosyaları yükler.</string>
+
+    </stringTable>
+    <presentationTable>
+      <presentation id="GPOSetUpdateRing_Pres">
+        <dropdownList refId="GPOSetUpdateRing_Dropdown" noSort="true" defaultItem="0">Güncelleştirme halkası:</dropdownList>
+      </presentation>
+
+      <presentation id="AutomaticUploadBandwidthPercentage_Pres">
+        <text>Karşıya dosya yüklenirken kullanılacak en yüksek bant genişliği yüzdesini seçin.</text>
+        <text>10 ile 99 arasındaki değerler geçerlidir.</text>
+        <decimalTextBox refId="BandwidthSpinBox" defaultValue="70" spinStep="1">Bant genişliği:</decimalTextBox>
+      </presentation>
+
+      <presentation id="UploadBandwidthLimit_Pres">
+        <text>Karşıya dosya yüklenirken kullanılacak en yüksek bant genişliği miktarını seçin.</text>
+        <text>1 ile 100000 arasındaki değerler geçerlidir.</text>
+        <decimalTextBox refId="UploadRateValue" defaultValue="125">Bant genişliği:</decimalTextBox>
+      </presentation>
+
+      <presentation id="DownloadBandwidthLimit_Pres">
+        <text>Dosya indirirken kullanılacak en yüksek bant genişliği miktarını seçin.</text>
+        <text>1 ile 100000 arasındaki değerler geçerlidir.</text>
+        <decimalTextBox refId="DownloadRateValue" defaultValue="125">Bant genişliği:</decimalTextBox>
+      </presentation>
+
+       <presentation id="DiskSpaceCheckThresholdMB_Pres">
+        <text>Kiracı kimliğini ve bir kullanıcının eşitlemek istediği klasörleri seçmesi istenmeden önceki en yüksek OneDrive boyutunu belirtin. </text>
+        <text>Değer adı alanına kiracı kimliğini girin. Değer alanına boyutu girin.</text>
+        <text>0 ile 4294967295 MB (dahil) arasındaki değerler geçerlidir.</text>
+        <listBox refId="DiskSpaceCheckThresholdMBList">Boyut üst sınırı: </listBox>
+      </presentation>
+
+      <presentation id="DefaultRootDir_Pres">
+       <text>Kiracı kimliğini ve varsayılan yolu belirtin. </text>
+        <text>Değer adı alanına kiracı kimliğini girin. Değer alanına yolu girin.</text>
+        <listBox refId="DefaultRootDirList">Yol: </listBox>
+      </presentation>
+
+      <presentation id="DisableCustomRoot_Pres">
+        <text>Kiracı kimliğini ve ayarın değerini belirtin. </text>
+        <text>Değer adı alanına kiracı kimliğini girin. Değer alanına, ayarı etkinleştirmek için 1 veya devre dışı bırakmak için 0 girin.</text>
+        <listBox refId="DisableCustomRootList">Konum ayarını değiştir: </listBox>
+      </presentation>
+
+      <presentation id="AllowTenantList_Pres">
+        <text>Kiracı kimliğini belirtin</text>
+        <text>Değer alanına, bu listeye eklemek istediğiniz kiracı kimliğini girin.</text>
+        <text> </text>
+        <listBox refId="AllowTenantListBox">Kiracı Kimliği: </listBox>
+      </presentation>
+
+      <presentation id="BlockTenantList_Pres">
+        <text>Kiracı kimliğini belirtin</text>
+        <text>Değer alanına, bu listeye eklemek istediğiniz kiracı kimliğini girin.</text>
+        <text> </text>
+        <listBox refId="BlockTenantListBox">Kiracı Kimliği: </listBox>
+       </presentation>
+
+      <presentation id="SharePointOnPremFrontDoorUrl_Pres">
+        <text>Kullanıcının OneDrive İş hesabını barındıran SharePoint Server URL'sini ve kuruluşun adını girin.</text>
+        <textBox refId="SharePointOnPremFrontDoorUrlBox">
+          <label>SharePoint Server 2019 URL'si:</label>
+        </textBox>
+        <textBox refId="SharePointOnPremTenantNameBox">
+          <label>Kuruluş adı:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="SharePointOnPremPrioritization_Pres">
+        <dropdownList refId="SharePointOnPremPrioritization_Dropdown" noSort="true" defaultItem="0">İlk olarak şurada kimlik doğrulaması yap:</dropdownList>
+      </presentation>
+
+      <presentation id="BlockKnownFolderMove_Pres">
+        <dropdownList refId="BlockKnownFolderMove_Dropdown" noSort="true" defaultItem="0">Bilinen klasörler zaten OneDrive'a taşındıysa:</dropdownList>
+      </presentation>
+
+      <presentation id="KFMOptInWithWizard_Pres">
+        <textBox refId="KFMOptInWithWizard_TextBox">
+          <label>Kiracı Kimliği:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="KFMOptInNoWizard_Pres">
+        <textBox refId="KFMOptInNoWizard_TextBox">
+          <label>Kiracı Kimliği:</label>
+        </textBox>
+        <dropdownList refId="KFMOptInNoWizard_Dropdown" noSort="true" defaultItem="0">Klasörler yeniden yönlendirildikten sonra kullanıcılara bildirim göster:</dropdownList>
+        <text>Klasör Seçenekleri:</text>
+        <checkBox refId="KFMOptInNoWizard_Desktop_Checkbox" defaultChecked="true">Masaüstü</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Documents_Checkbox" defaultChecked="true">Belgeler</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Pictures_Checkbox" defaultChecked="true">Resimler</checkBox>
+      </presentation>
+      <presentation id="AutoMountTeamSites_Pres">
+        <text>Eşitlenecek bir kitaplık belirtmek için:
+
+Bir web tarayıcısını açın, genel olarak Office 365 veya SharePoint Yönetim organizasyon ve kitaplığına Gözat eşitlemek için oturum açın.
+
+Otomatik olarak eşitlemek istediğiniz kitaplığı "Eşitleme" düğmesini tıklatın ve "Kitaplık kodu Kopyala"'ı tıklatın
+
+"Göster" öğesini tıklatın ve sonra kitaplık değer adı alanında tanımlayın ve sonra kitaplık kimliği değer alanına girmek için kolay bir ad girin.
+        </text>
+        <listBox refId="AutoMountTeamSitesListBox">Kitaplıklar:</listBox>
+      </presentation>
+
+      <presentation id="MinDiskSpaceLimitInMB_Pres">
+        <text>Değer alanına, boş kalmasını istediğiniz disk alanı alt sınırını girin.</text>
+        <text>Geçerli değerler 0 - 10240000 MB arasındadır</text>
+        <decimalTextBox refId="minDiskSpaceMB" defaultValue="200">Kullanılabilir disk alanı alt sınırı:</decimalTextBox>
+      </presentation>
+
+      <presentation id="WarningMinDiskSpaceLimitInMB_Pres">
+        <text>Değer alanına kullanılabilir disk alanını girin. Kullanıcı, disk alanı bu miktarın altına düştüğünde bir uyarı alır. Bu ilkeyi “Kullanıcının disk alanı azaldığında dosya indirmesini engelle"  seçeneği ile birlikte kullanıyorsanız, bu ayarın değeri, indirmeleri engelleme değerinden büyük olmalıdır.</text>
+        <text>Geçerli değerler 0 - 10240000 MB arasındadır</text>
+        <decimalTextBox refId="warningMinDiskSpaceMB" defaultValue="500">Kullanılabilir disk alanı alt sınırı:</decimalTextBox>
+      </presentation>
+
+      <presentation id="LocalMassDeleteFileDeleteThreshold_Pres">
+        <text>Kullanıcıların işlemi onaylaması gerekmeden tek seferde silebileceği dosya sayısı üst sınırını belirtin.</text>
+        <text>1 ile 100000 arasındaki değerler geçerlidir.</text>
+        <decimalTextBox refId="LMDFileDeleteThresholdBox" defaultValue="200">Dosya sayısı:</decimalTextBox>
+      </presentation>
+
+      <presentation id="EnableODIgnoreListFromGPO_Pres">
+        <text>Anahtar kelimeleri belirtmek için "Göster"i seçin, ardından Değer alanına anahtar kelimeleri girin.</text>
+        <text>Örneğin, .pst uzantılı tüm dosyaları engellemek için "*.pst" girin. Adları "gider" ile başlayan dosyaları engellemek için "gider*"  girin. Adlarında "satış" geçen tüm dosyaları engellemek için "*satış*" girin. Anahtar sözcükler büyük/küçük harfe duyarlı değildir. Örneğin, "simgeler.JPEG" girerseniz "simgeler.jpeg" de engellenecektir. </text>
+        <text> </text>
+        <listBox refId="EnableODIgnoreListFromGPOListBox">Anahtar sözcükler: </listBox>
+      </presentation>
+
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

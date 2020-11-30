@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (c) 2016 Microsoft Corporation -->
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Configurações de Política de Grupo do OneDrive</displayName>
+  <description>Várias configurações de política de grupo para o aplicativo de sincronização do OneDrive (OneDrive. exe), especialmente as específicas para a funcionalidade empresarial no aplicativo.</description>
+  <resources>
+    <stringTable>
+      <!-- general -->
+      <string id="OneDriveNGSCSettingCategory">OneDrive</string>
+
+      <!-- block syncing personal OneDrive -->
+      <string id="DisablePersonalSync">Impedir os usuários de sincronizar contas pessoais do OneDrive</string>
+      <string id="DisablePersonalSync_help">Esta configuração permite que você impeça os usuários de entrar com uma conta Microsoft para sincronizar arquivos pessoais do OneDrive.
+
+Se você habilitar essa configuração, os usuários não poderão configurar uma relação de sincronização para a conta pessoal do OneDrive. Os usuários que já estiverem sincronizando o OneDrive pessoal quando você habilitar esta configuração não poderão continuar a sincronização (e será exibida uma mensagem informando que a sincronização foi interrompida), mas todos os arquivos sincronizados com o computador permanecerão no computador.
+
+Se você desabilitar ou não definir essa configuração, os usuários poderão sincronizar as contas pessoais do OneDrive.</string>
+
+      <!-- turn on GPOSetUpdateRing for app updates -->
+      <string id="GPOSetUpdateRing">Definir o anel de atualização do aplicativo de sincronização</string>
+      <string id="GPOSetUpdateRing_help">As atualizações para o aplicativo de sincronização do OneDrive (OneDrive.exe) são liberadas para o público por meio de três anéis, primeiro aos Insiders, depois à Produção e, por fim, a Adiado. Esta configuração permite especificar a versão do aplicativo de sincronização para os usuários da sua organização. Quando você habilitar essa configuração e selecionar um anel, os usuários não poderão alterá-la.
+
+Os usuários do anel de Insiders receberão builds que permitem que eles visualizem novos recursos que chegam ao OneDrive.
+
+Os usuários do anel de Produção receberão os recursos mais recentes à medida que forem disponibilizados.
+
+Os usuários no anel de Adiado receberão novos recursos, correções de bugs e melhorias de desempenho por último. Este anel permite que você implante as atualizações de um local de rede interna e controle o intervalo da implantação (em uma janela de 60 dias).
+
+Se você desabilitar ou não definir esta configuração, os usuários receberão as atualizações do aplicativo de sincronização do OneDrive quando estiverem disponíveis no anel de Produção. Os usuários podem ingressar nos programas Insiders do Office ou do Windows para obter atualizações no anel dos Insiders.</string>
+
+      <string id="Enterprise">Adiado</string>
+      <string id="Production">Produção</string>
+      <string id="Insider">Insiders</string>
+
+      <!-- set default location of the OneDrive folder -->
+      <string id="DefaultRootDir">Definir o local padrão para a pasta do OneDrive</string>
+      <string id="DefaultRootDir_help">Esta configuração permite que você defina um caminho específico como o local padrão da pasta do OneDrive nos computadores dos usuários. Por padrão, o caminho está em %userprofile%.
+
+Se você habilitar essa configuração, o local padrão da pasta de {organization name} do OneDrive será o caminho especificado no arquivo OneDrive.admx. Para impedir que os usuários alterem o local que você especificou, habilite a configuração "Impedir os usuários de alterarem o local das pastas do OneDrive".
+
+Se você desabilitar ou não definir esta configuração, o local padrão da pasta de {organization name} do OneDrive será em %userprofile%.</string>
+
+      <!-- disable changing the default location of the OneDrive folder -->
+      <string id="DisableCustomRoot">Impedir que os usuários alterem o local da pasta do OneDrive</string>
+      <string id="DisableCustomRoot_help">Esta configuração permite que você impeça os usuários de alterar o local da pasta do OneDrive-{organization name} durante a configuração do aplicativo de sincronização do OneDrive.
+
+Se você habilitar esta configuração, o link "alterar local" ficará oculto no programa de instalação do OneDrive. A pasta do OneDrive será criada no local padrão ou no local personalizado que você especificou se tiver habilitado a configuração "definir local padrão para a pasta do OneDrive".
+
+Se você desabilitar ou não configurar esta opção, os usuários poderão clicar no link "alterar local" para alterar o local da pasta do OneDrive na configuração do OneDrive.</string>
+
+      <!-- Enable Office Integration for coauthoring and in-app sharing -->
+      <string id="EnableAllOcsiClients">Trabalhe em coautoria e compartilhe em aplicativos da área de trabalho do Office</string>
+      <string id="EnableAllOcsiClients_help">Esta configuração permite que vários usuários usem os aplicativos de área de trabalho do Office 365 Plus, do Office 2019 ou do Office 2016 para editar simultaneamente um arquivo do Office armazenado no OneDrive. Também permite que os usuários compartilhem arquivos dos aplicativos da área de trabalho do Office.
+
+Se você habilitar esta configuração, a coautoria e o compartilhamento no Office Desktop apps serão habilitados. Os usuários podem desabilitar esses recursos abrindo as configurações do aplicativo de sincronização do OneDrive, clicando na guia Office e desmarcando a caixa de seleção "usar aplicativos do Office para sincronizar arquivos do Office que eu abra".
+
+Se você desabilitar essa configuração, a coautoria e o compartilhamento no Office Desktop apps serão desabilitados e a guia Office ficará oculta no aplicativo de sincronização. A configuração "conflitos de arquivos do Office" também será desabilitada e, quando duas versões de um arquivo for conflitante, as duas cópias serão mantidas.</string>
+
+
+      <!-- Enable hold the file for handling Office conflicts -->
+      <string id="EnableHoldTheFile">Permitir que os usuários escolham como lidar com conflitos de sincronização de arquivos do Office</string>
+      <string id="EnableHoldTheFile_help">Esta configuração especifica o que acontece quando há um conflito entre as versões de arquivo do Office durante a sincronização. Por padrão, os usuários podem decidir se desejam mesclar alterações ou manter ambas as cópias. Os usuários também podem alterar as configurações no aplicativo de sincronização do OneDrive para sempre manter ambas as cópias. (Esta opção está disponível somente para o Office 2016 ou posterior. Com as versões anteriores do Office, ambas as cópias são sempre mantidas.)
+
+Se você habilitar esta configuração ou não definir esta configuração, os usuários poderão decidir se desejam mesclar alterações ou manter ambas as cópias. Os usuários também podem selecionar as configurações do aplicativo de sincronização do OneDrive para manter ambas as cópias.
+
+Se você desabilitar esta configuração, as duas cópias do arquivo serão mantidas quando as versões de um arquivo entrarem em conflito. Os usuários não poderão alterar a configuração e mesclar as alterações.</string>
+
+      <!-- Enable Automatic Upload Bandwidth Limiting -->
+      <string id="AutomaticUploadBandwidthPercentage">Limitar a taxa de carregamento do aplicativo de sincronização a uma porcentagem de taxa de transferência</string>
+      <string id="AutomaticUploadBandwidthPercentage_help">Esta configuração permite que você equilibre o desempenho de diferentes tarefas de carregamento em um computador, especificando a porcentagem da taxa de transferência de carregamento do computador que o aplicativo de sincronização do OneDrive (OneDrive.exe) pode usar para carregar arquivos. Definir isso como uma porcentagem permite que o aplicativo de sincronização responda a aumentos e diminuições na taxa de transferência. Quanto menor for a porcentagem definida, mais lento será o carregamento dos arquivos. Recomendamos um valor de 50% ou superior. O aplicativo de sincronização carregará periodicamente sem restrições por um minuto e, em seguida, diminuirá a porcentagem de carregamento que você definiu. Isso permite que os arquivos pequenos sejam carregados rapidamente, evitando que grandes carregamentos dominem a taxa de transferência de carregamento do computador.
+
+        Se você habilitar essa configuração, os computadores usarão a porcentagem de taxa de transferência do carregamento que você especificar ao carregar arquivos no OneDrive e os usuários não poderão alterá-la.
+
+        Se você desabilitar ou não definir esta configuração, os usuários poderão limitar a taxa de carregamento a um valor fixo (em KB/segundo) ou defini-la como "Ajustar automaticamente", que usará 70% de taxa de transferência de carregamento para responder a aumentos e diminuições na taxa de transferência.
+
+        Importante: se você habilitar ou desabilitar esta configuração e depois alterá-la novamente para Não Configurada, a última configuração permanecerá em vigor. É recomendável habilitar esta configuração em vez de "Limitar a velocidade de carregamento do aplicativo de sincronização a uma taxa fixa" para limitar a taxa de carregamento. Você não deve habilitar as duas configurações ao mesmo tempo.</string>
+      <!-- Enable Upload Bandwidth Limiting -->
+      <string id="UploadBandwidthLimit">Limitar a velocidade de carregamento do aplicativo de sincronização a uma taxa fixa</string>
+      <string id="UploadBandwidthLimit_help">Esta configuração permite que você defina a velocidade máxima na qual o aplicativo de sincronização do OneDrive (OneDrive.exe) pode carregar arquivos. Esta taxa é um valor fixo em quilobytes por segundo. Quanto menor for a taxa, mais devagar o computador carregará arquivos. A taxa mínima que pode ser definida é de 1 KB/s e a taxa máxima é de 100000 KB/s. Qualquer entrada com menos de 50 KB/s definirá o limite para 50 KB/s, mesmo se a interface do usuário mostrar a taxa inserida.
+
+Se você habilitar essa configuração, os computadores usarão a taxa máxima de carregamento que você especificar, e os usuários não poderão alterá-la nas configurações do OneDrive.
+
+Se você desabilitar ou não definir esta configuração, os usuários poderão limitar a taxa de carregamento a um valor fixo (em KB/segundo) ou defini-la como "Ajustar automaticamente", o que usará 70% de taxa de transferência de carregamento para responder a aumentos e diminuições na taxa de transferência.
+
+Em vez de usar esta configuração para limitar a taxa de carregamento, recomendamos habilitar "Limitar a taxa de carregamento do aplicativo de sincronização a uma porcentagem de taxa de transferência" para definir um limite que se ajuste às condições variáveis. Você não deve habilitar as duas configurações ao mesmo tempo.</string>
+
+      <!-- Enable Download Bandwidth Limiting -->
+      <string id="DownloadBandwidthLimit">Limitar a velocidade de download do aplicativo de sincronização a uma taxa fixa</string>
+      <string id="DownloadBandwidthLimit_help">Esta configuração permite que você defina a velocidade máxima em que o aplicativo de sincronização do OneDrive (OneDrive. exe) pode baixar arquivos. Essa taxa é um valor fixo em quilobytes por segundo e só se aplica à sincronização, não para baixar atualizações. Quanto menor a taxa, os arquivos mais lentos serão baixados. A taxa mínima que pode ser definida é 1 KB/s e a taxa máxima é de 100000 KB/s. Qualquer entrada que tenha menos de 50 KB/s definirá o limite para 50 KB/s, mesmo se a interface do usuário mostrar a taxa de entrada.
+Se você habilitar esta configuração, os computadores usarão a taxa de download máximo que você especificar e os usuários não poderão alterá-la.
+
+Se você desabilitar ou não definir essa configuração, os usuários poderão limitar a taxa de download nas configurações do aplicativo de sincronização do OneDrive.</string>
+
+
+      <!-- prevent OneDrive sync app (OneDrive.exe) from generating network traffic (checking for updates, etc.) until the user signs in to OneDrive -->
+      <string id="PreventNetworkTrafficPreUserSignIn">Impedir que o aplicativo de sincronização gere tráfego de rede até que os usuários entrem</string>
+      <string id="PreventNetworkTrafficPreUserSignIn_help">Esta configuração permite que você bloqueie o aplicativo de sincronização do OneDrive (OneDrive.exe) de gerar tráfego de rede (verificando se há atualizações etc.) até que os usuários entrem no aplicativo de sincronização ou comecem a sincronizar arquivos com o computador.
+
+Se você habilitar esta configuração, os usuários deverão entrar no aplicativo de sincronização do OneDrive no computador ou optar por sincronizar os arquivos do OneDrive ou do SharePoint no computador, para que o aplicativo de sincronização seja iniciado automaticamente.
+
+Se você desabilitar ou não definir esta configuração, o aplicativo de sincronização do OneDrive será iniciado automaticamente quando os usuários entrarem no Windows.
+
+Importante: se você habilitar ou desabilitar essa configuração e, em seguida, voltar a Não Configurado, a última configuração permanecerá em vigor. </string>
+
+      <!-- Silent Account Config -->
+      <string id="SilentAccountConfig">Conectar os usuários silenciosamente ao aplicativo de sincronização do OneDrive com as respectivas credenciais do Windows</string>
+      <string id="SilentAccountConfig_help">Esta configuração permite que você conecte os usuários silenciosamente ao aplicativo de sincronização do OneDrive (OneDrive.exe) com as respectivas credenciais do Windows.
+
+Se você habilitar esta configuração, os usuários que entrarem no computador com a conta principal do Windows (a conta usada para ingressar no computador para o domínio) poderão configurar o aplicativo de sincronização sem inserir as credenciais da conta. Os usuários ainda verão a Configuração do OneDrive para que eles possam selecionar pastas para sincronizar e alterar o local da pasta do OneDrive deles. Se um usuário estiver usando o aplicativo de sincronização anterior do OneDrive for Business (Groove.exe), o novo aplicativo de sincronização tentará assumir a sincronização do OneDrive do usuário do aplicativo anterior e preservar as configurações de sincronização do usuário. Esta configuração é frequentemente usada em conjunto com "Definir o tamanho máximo do OneDrive de um usuário que pode ser baixado automaticamente" em computadores que não têm Arquivos Sob Demanda e "Definir o local padrão para a pasta do OneDrive".
+
+Se você desabilitar ou não definir essa configuração, os usuários precisarão entrar com a conta corporativa ou de estudante para configurar a sincronização.
+
+</string>
+
+      <!-- DiskSpaceCheckThresholdMB -->
+      <string id="DiskSpaceCheckThresholdMB">Definir o tamanho máximo do OneDrive de um usuário que pode ser baixado automaticamente</string>
+      <string id="DiskSpaceCheckThresholdMB_help">Esta configuração é usada em conjunto com "Conectar os usuários silenciosamente ao aplicativo de sincronização do OneDrive com as respectivas credenciais do Windows". Esta configuração permite que você avise os usuários com quantidade de conteúdo no OneDrive maior que a especificada para escolher as pastas a serem sincronizadas durante a configuração do aplicativo de sincronização do OneDrive (OneDrive.exe).
+
+Se você habilitar esta configuração, os usuários com mais conteúdo do que o valor especificado por você verão a caixa de diálogo Escolher Pastas por padrão durante a Configuração do OneDrive.
+
+Se você desabilitar ou não definir esta configuração, quando os usuários configurarem o aplicativo de sincronização, todos os arquivos serão selecionados para sincronização.</string>
+
+      <!-- Settings below control behavior of Files-On-Demand (Cloud Files) -->
+      <string id="FilesOnDemandEnabled">Usar Arquivos do OneDrive Sob Demanda</string>
+      <string id="FilesOnDemandEnabled_help">Esta configuração permite controlar se os Arquivos do OneDrive Sob Demanda estão habilitados para sua organização.
+
+Se você habilitar esta configuração, os Arquivos do OneDrive Sob Demanda serão ativados por padrão.
+
+Se você desabilitar esta configuração, os Arquivos do OneDrive Sob Demanda serão desabilitados explicitamente e os usuários não poderão ativá-los.
+
+Se você não definir esta configuração, os usuários poderão ativar ou desativar os Arquivos do OneDrive Sob Demanda.</string>
+
+      <string id="DehydrateSyncedTeamSites">Converter arquivos do site de equipe sincronizados em arquivos somente online</string>
+      <string id="DehydrateSyncedTeamSites_help">Esta configuração é usada em conjunto com os Arquivos do OneDrive Sob Demanda. Quando muitos usuários sincronizam os mesmos sites de equipe, esta configuração permite conservar a largura de banda e liberar espaço em todos os dispositivos, fazendo com que os arquivos do site de equipe sincronizados sejam arquivos somente online.
+
+Se você habilitar essa configuração, os arquivos do site de equipe que estavam sincronizando antes dos Arquivos do OneDrive Sob Demanda serem habilitados, serão convertidos (como uma ação ocasional) em arquivos somente online.
+
+Se você desabilitar ou não definir esta configuração, os arquivos do site de equipe permanecerão localmente disponíveis, a menos que os usuários escolham fazer isso somente online.</string>
+
+    <!-- Restrict syncing with other organizations -->
+      <string id="AllowTenantList">Permitir a sincronização de contas do OneDrive somente para organizações específicas</string>
+      <string id="AllowTenantList_help">Esta configuração permite que você impeça os usuários de carregarem arquivos facilmente para outras organizações, especificando uma lista de IDs de locatário permitidas.
+
+Se habilitar essa configuração, os usuários receberão uma mensagem de erro se tentarem adicionar uma conta de uma organização que não é permitida. Se um usuário já tiver adicionado a conta, a sincronização dos arquivos será interrompida.
+
+Se desabilitar ou não definir essa configuração, os usuários poderão adicionar contas de qualquer organização.
+
+Para bloquear organizações específicas, use "Bloquear a sincronização de contas do OneDrive para organizações específicas".
+
+Esta configuração tem prioridade sobre "Bloquear a sincronização de contas do OneDrive para organizações específicas". Não habilite ambas as políticas ao mesmo tempo.</string>
+
+      <string id="BlockTenantList">Bloquear a sincronização de contas do OneDrive para organizações específicas</string>
+      <string id="BlockTenantList_help">Esta configuração permite que você impeça os usuários de carregarem arquivos facilmente para outra organização, especificando uma lista de IDs de locatário bloqueadas.
+
+Se habilitar essa configuração, os usuários receberão um erro se tentarem adicionar uma conta de uma organização que está bloqueada. Se um usuário já tiver adicionado a conta, a sincronização dos arquivos será interrompida.
+
+Se desabilitar ou não definir essa configuração, os usuários poderão adicionar contas de qualquer organização.
+
+Para especificar uma lista de organizações permitidas, use "Permitir a sincronização de contas do OneDrive somente para organizações específicas".
+
+Essa configuração NÃO funcionará se "Permitir a sincronização de contas do OneDrive somente para organizações específicas" estiver habilitada. Não habilite ambas as políticas ao mesmo tempo.</string>
+
+    <!-- SharePoint Server 2019 settings -->
+    <string id="SharePointOnPremFrontDoorUrl">Especifique o nome da organização e a URL do SharePoint Server</string>
+    <string id="SharePointOnPremFrontDoorUrl_help">Esta configuração permite que você habilite os usuários a usar o aplicativo de sincronização do OneDrive (OneDrive. exe) para sincronizar arquivos no SharePoint Server 2019. A URL define o local do servidor do SharePoint e permite que o aplicativo de sincronização autentique e configure a sincronização. O nome da organização permite que você especifique os nomes de pasta do OneDrive e do SharePoint que serão criados no explorador de arquivos. O nome da organização é opcional. Se você não fornecê-la, o aplicativo de sincronização usará o primeiro segmento da URL como o nome. Por exemplo, office.sharepoint.com se tornaria "Office" e o nome da pasta do OneDrive seria "OneDrive-Office".
+
+Se você habilitar essa configuração e fornecer a URL do SharePoint Server, os usuários poderão sincronizar arquivos no SharePoint Server 2019.
+
+Se você desabilitar ou não definir esta configuração, ou não fornecer a URL do SharePoint Server, os usuários não poderão sincronizar arquivos no SharePoint Server 2019. </string>
+
+    <string id="SharePointOnPremPrioritization">Especificar o local do OneDrive em um ambiente híbrido</string>
+    <string id="SharePointOnPremPrioritization_help">Esta configuração define se o aplicativo de sincronização do OneDrive (OneDrive.exe) deverá se autenticar no SharePoint Online ou no SharePoint Server 2019 se a identidade existir nos dois provedores de identidade. Para usar esta configuração, você também deve habilitar "Especificar nome da organização e URL do SharePoint Server". Esta configuração afeta somente a funcionalidade de sincronização do OneDrive for Business. Ela não afeta a sincronização de sites de equipe no SharePoint Online ou no SharePoint Server 2019.
+
+Se você habilitar essa configuração, poderá selecionar uma destas duas opções:
+
+SharePoint Online: o aplicativo de sincronização examinará primeiro o SharePoint Online para o OneDrive de um usuário. Se o aplicativo de sincronização já estiver configurado com o SharePoint Online para o usuário, ele tentará configurar uma instância do OneDrive for Business no SharePoint Server 2019 para esse usuário.
+
+SharePoint Server 2019: o cliente de sincronização examinará primeiro o SharePoint Server 2019 para o OneDrive for Business de um usuário. Se o aplicativo de sincronização já estiver configurado com o SharePoint Server 2019 para o usuário, ele tentará configurar uma instância do OneDrive no SharePoint Online para esse usuário.
+
+Se você desabilitar ou não definir esta configuração, o aplicativo de sincronização examinará primeiro o SharePoint Online do OneDrive do usuário.</string>
+    <string id="PrioritizeSPO">SharePoint Online</string>
+    <string id="PrioritizeSharePointOnPrem">SharePoint Server 2019</string>
+
+    <!-- Disable tutorial in the FRE -->
+    <string id="DisableFRETutorial">Desabilitar o tutorial que aparece no final da Configuração do OneDrive</string>
+    <string id="DisableFRETutorial_help">Esta configuração permite impedir que o tutorial seja iniciado em um navegador da Web no final da Configuração do OneDrive.
+
+Se você habilitar essa configuração, os usuários não verão o tutorial depois de concluírem a Configuração do OneDrive.
+
+Se você desabilitar ou não definir esta configuração, o tutorial será exibido no final da Configuração do OneDrive.</string>
+
+      <!-- Block KFM -->
+      <string id="BlockKnownFolderMove">Impedir que os usuários movam as pastas conhecidas do Windows para o OneDrive</string>
+      <string id="BlockKnownFolderMove_help">Essa configuração impede os usuários de mover as pastas Área de Trabalho, Imagens e Documentos para contas do OneDrive for Business.
+Observação: a movimentação de pastas conhecidas para contas pessoais do OneDrive já está bloqueada em computadores que fazem parte de um domínio.
+
+Se você habilitar essa configuração, os usuários não receberão a solicitação com a janela "Configurar a proteção de pastas importantes", e o comando "Iniciar Proteção" será desabilitado. Se o usuário já tiver movido as pastas conhecidas dele, os arquivos nessas pastas permanecerão no OneDrive. Essa configuração não terá efeito se você habilitar as opções "Solicitar aos usuários que movam as pastas conhecidas do Windows para o OneDrive" ou "Mover silenciosamente as pastas conhecidas do Windows para o OneDrive".
+
+Se você desabilitar ou não definir essa configuração, os usuários poderão optar por mover as pastas conhecidas.</string>
+
+    <!-- KFMOptInWithWizard -->
+    <string id="KFMOptInWithWizard">Solicitar aos usuários que movam pastas conhecidas do Windows para o OneDrive </string>
+    <string id="KFMOptInWithWizard_help">Essa configuração exibe a janela "Seu departamento de TI deseja proteger suas pastas importantes" que solicita aos usuários mover as pastas Área de Trabalho, Imagens e Documentos para o OneDrive. Esse recurso não está habilitado para o SharePoint no local.
+
+Se você habilitar essa configuração e fornecer a ID do locatário, os usuários que sincronizam o OneDrive verão a janela "Seu departamento de TI deseja proteger suas pastas importantes" ao se conectarem. Se eles fecharem a janela, nosso sistema exibirá um lembrete no centro de atividades, até que eles movam as três pastas conhecidas. Caso já tenham redirecionado as pastas conhecidas para outra conta do OneDrive, eles serão solicitados a direcioná-las para a conta da sua organização (deixando os arquivos existentes para trás).
+
+Se você desabilitar ou não configurar essa opção, a janela "Seu departamento de TI deseja proteger suas pastas importantes" não será exibida automaticamente.</string>
+
+    <!-- KFMOptInNoWizard -->
+    <string id="KFMOptInNoWizard">Mover silenciosamente pastas conhecidas do Windows para o OneDrive</string>
+    <string id="KFMOptInNoWizard_help">Essa configuração permite que você redirecione pastas conhecidas para o OneDrive sem nenhuma interação do usuário. Nos builds de aplicativos de sincronização anteriores ao 18.171.0823.0001, essa configuração se limita a redirecionar para o OneDrive as pastas conhecidas vazias (ou pastas conhecidas já redirecionadas para uma outra conta do OneDrive). Em builds posteriores, ela redireciona as pastas conhecidas com conteúdo e transfere o conteúdo para o OneDrive. É recomendável usar essa configuração juntamente com "Solicitar que os usuários transfiram pastas conhecidas do Windows para o OneDrive". Se a transferência silenciosa das pastas conhecidas não for bem-sucedida, os usuários serão solicitados a corrigir o erro e continuar.
+
+Se você habilitar essa configuração e fornecer sua ID de locatário, poderá optar por exibir uma notificação aos usuários após as respectivas pastas terem sido redirecionadas.
+
+Você pode transferir todas as pastas de uma vez ou selecionar as pastas que deseja transferir. Após a pasta ter sido transferida, essa política não afetará essa pasta novamente, mesmo se você desmarcar a caixa de seleção para a pasta em questão.
+
+ Se você desabilitar ou não definir essa configuração, as pastas conhecidas dos seus usuários não serão redirecionadas e/ou transferidas silenciosamente para o OneDrive.
+
+    </string>
+    <string id="KFMOptInNoWizardToast">Sim</string>
+    <string id="KFMOptInNoWizardNoToast">Não</string>
+
+     <!-- Block KFM Opt Out -->
+      <string id="KFMBlockOptOut">Impedir os usuários de redirecionar pastas conhecidas do Windows para os respectivos computadores</string>
+      <string id="KFMBlockOptOut_help">Essa configuração força os usuários a manter as pastas Área de Trabalho, Imagens e Documentos no OneDrive.
+
+Se você habilitar essa configuração, o botão "Parar proteção", na janela "Seu departamento de TI deseja proteger suas pastas importantes", será desabilitado, e os usuários receberão uma mensagem de erro quando tentarem interromper a sincronização de uma pasta conhecida.
+
+Se você desabilitar ou não definir essa configuração, os usuários poderão optar por redirecionar as pastas conhecidas para o computador deles. </string>
+
+    <string id="AutoMountTeamSites">Configurar as bibliotecas de site de equipe para sincronizarem automaticamente</string>
+    <string id="AutoMountTeamSites_help">Esta configuração permite que você especifique as bibliotecas de site de equipe do SharePoint para sincronizar automaticamente na próxima vez em que os usuários entrarem no aplicativo de sincronização do OneDrive (OneDrive.exe). Depois que os usuários entrarem, pode levar até oito horas para que a biblioteca comece a ser sincronizada. Para usar a configuração, é necessário habilitar os Arquivos do OneDrive sob Demanda e a configuração se aplica somente aos usuários em computadores com o Windows 10 (1709) Fall Creators Update ou posterior. Não habilite essa configuração para a mesma biblioteca para mais de 1.000 dispositivos. Para garantir uma boa experiência de sincronização, evite habilitar esse recurso em grandes conjuntos de bibliotecas (Para obter orientações mais atualizadas, confira https://docs.microsoft.com/en-us/onedrive/use-group-policy#AutoMountTeamSites). Este recurso não está habilitado para os sites locais do SharePoint.
+ 
+Se você habilitar essa configuração, o aplicativo de sincronização do OneDrive baixará automaticamente o conteúdo das bibliotecas especificadas como arquivos somente online na próxima vez em que o usuário entrar. O usuário não poderá interromper a sincronização das bibliotecas.
+ 
+Se você desabilitar essa configuração, as bibliotecas de site de equipe especificadas não serão sincronizadas automaticamente para novos usuários. Os usuários existentes podem optar por parar a sincronização das bibliotecas, mas a sincronização das bibliotecas não será interrompida automaticamente.</string>
+
+    <!-- Disable Pause On Battery Saver  -->
+    <string id="DisablePauseOnBatterySaver">Continuar sincronizando quando os dispositivos tiverem o modo de economia de bateria ativado</string>
+    <string id="DisablePauseOnBatterySaver_help">Esta configuração permite que você desative o recurso de pausa automática dos dispositivos com o modo de economia de bateria ativado.
+
+Se você habilitar esta configuração, a sincronização continuará quando os usuários ativarem o modo de economia de bateria. O OneDrive não pausará automaticamente a sincronização.
+
+Se você desabilitar ou não configurar esta configuração, a sincronização será pausada automaticamente quando o modo de economia de bateria for detectado e uma notificação será exibida. Os usuários poderão optar por não a pausar a sincronização, clicando em "Sincronizar Mesmo Assim" na notificação. Quando a sincronização for pausada, os usuários poderão continuar sincronizando, clicando no ícone de nuvem do OneDrive na área de notificação da barra de tarefas e, em seguida, clicando no botão no alerta na parte superior do centro de atividades.</string>
+
+    <!-- Disable Pause On Metered Network -->
+    <string id="DisablePauseOnMeteredNetwork">Continuar sincronizando em redes limitadas</string>
+    <string id="DisablePauseOnMeteredNetwork_help">Esta configuração permite que você desative o recurso de pausa automática quando os dispositivos forem conectados a redes limitadas.
+
+Se você habilitar esta configuração, a sincronização continuará quando os dispositivos estiverem em uma rede limitada. O OneDrive não pausará automaticamente a sincronização.
+
+Se você desabilitar ou não configurar esta configuração, a sincronização será pausada automaticamente quando uma rede limitada for detectada e uma notificação será exibida. Os usuários podem optar por não pausar a sincronização, clicando em "Sincronizar Mesmo Assim" na notificação. Quando a sincronização for pausada, os usuários poderão continuar sincronizando, clicando no ícone de nuvem do OneDrive na área de notificação da barra de tarefas e, em seguida, clicando no alerta na parte superior do centro de atividades.</string>
+
+    <!-- Insert multi-tenant settings here -->
+    <!-- See http://go.microsoft.com/fwlink/p/?LinkId=797547 for configuration instructions -->
+
+    <string id="LocalMassDeleteFileDeleteThreshold">Avisar os usuários quando eles excluírem vários arquivos do OneDrive no computador local</string>
+    <string id="LocalMassDeleteFileDeleteThreshold_help">Esta política define o limite de quantos arquivos um usuário pode excluir de uma pasta local do OneDrive antes de o usuário ser notificado de que os arquivos também serão excluídos da nuvem.
+ 
+Se você habilitar esta política, os usuários verão uma notificação se eles excluírem mais do que o número especificado de arquivos do OneDrive no computador local. O usuário terá a opção de continuar a remover os arquivos de nuvem ou restaurar os arquivos locais.
+Observação: mesmo que você habilite esta política, os usuários não receberão notificações se tiverem marcado a caixa de seleção "sempre remover arquivos" em uma notificação anterior, ou se tiverem desmarcado a caixa de seleção "notificar-me quando muitos arquivos forem excluídos na nuvem" no aplicativo de sincronização do OneDrive Configurações.
+
+Se você desabilitar esta política, os usuários não receberão uma notificação quando excluírem numerosos arquivos do OneDrive no computador local.
+
+Se você não configurar esta política, os usuários verão uma notificação quando excluírem mais de 200 arquivos em um curto período de tempo.</string>
+
+
+    <!-- Forced local mass delete prompt -->
+    <string id="ForcedLocalMassDeleteDetection">Exigir que os usuários confirmem grandes operações de exclusão</string>
+    <string id="ForcedLocalMassDeleteDetection_help">Esta configuração faz com que os usuários confirmem que desejam excluir arquivos na nuvem quando excluím um grande número de arquivos sincronizados.
+
+Se você habilitar esta configuração, um aviso sempre será exibido quando os usuários excluirem um grande número de arquivos sincronizados. Se um usuário não confirmar uma operação de exclusão dentro de 7 dias, os arquivos não serão excluídos.
+
+Se você desabilitar ou não definir esta configuração, os usuários poderão optar por ocultar o aviso e excluir arquivos na nuvem sempre.</string>
+
+    <!-- Block B2BSync aka Cross Tenant Sync -->
+    <string id="BlockExternalSync">Impedir que os usuários sincronizem bibliotecas e pastas compartilhadas de outras organizações</string>
+    <string id="BlockExternalSync_help">Esta configuração controla se os usuários da sua organização podem sincronizar o OneDrive for Business ou o conteúdo do SharePoint que foi compartilhado por usuários em uma organização diferente. Este é um recurso de colaboração chamado Sincronização B2B.
+
+Se você habilitar essa configuração, os usuários não poderão iniciar a sincronização de uma biblioteca ou pasta do OneDrive for Business ou do SharePoint que tenha sido compartilhada por uma organização externa. A sincronização das bibliotecas ou pastas compartilhadas que já estão sendo sincronizadas será interrompida.
+
+Se você desabilitar ou não configurar essa opção, os usuários poderão sincronizar as bibliotecas do OneDrive for Business e do SharePoint, e as pastas que foram compartilhadas de organizações externas.
+
+Para obter mais informações sobre a Sincronização B2B, confira: https://docs.microsoft.com/en-us/onedrive/b2b-sync</string>
+
+    <!-- Allow OneDrive to disable permission inheritance within read-only folders -->
+    <string id="PermitDisablePermissionInheritance">Permitir que o OneDrive desabilite a herança de permissão do Windows em pastas sincronizadas somente leitura</string>
+    <string id="PermitDisablePermissionInheritance_help">Esta configuração permite que o aplicativo de sincronização do OneDrive remova todas as permissões herdadas em pastas somente leitura que estão sendo sincronizadas no computador de um usuário.
+
+Se você habilitar esta configuração, o aplicativo de sincronização do OneDrive poderá desabilitar a herança de permissões em pastas somente leitura para melhorar a velocidade de sincronização.
+
+Se você desabilitar ou não definir esta configuração, o aplicativo de sincronização do OneDrive preservará a herança de permissão em pastas somente leitura. A velocidade de sincronização pode ser significativamente mais lenta.</string>
+
+    <!-- Automatically adjust the sync app upload rate based on bandwidth availability -->
+    <string id="EnableAutomaticUploadBandwidthManagement">Habilitar o gerenciamento automático de largura de banda de carregamento para o OneDrive</string>
+    <string id="EnableAutomaticUploadBandwidthManagement_help">Esta configuração permite que o aplicativo de sincronização do OneDrive (OneDrive.exe) carregue dados em segundo plano somente quando a largura de banda não utilizada está disponível. Isso impede que o aplicativo de sincronização interfira em outros aplicativos que estão usando a rede. Essa configuração é fornecida pelo protocolo Windows LEDBAT (Low Extra Delay Background Transport). Quando o LEDBAT detectar a latência maior que indica que outras conexões TCP estão consumindo largura de banda, o aplicativo de sincronização reduzirá o consumo próprio para evitar interferências. Quando a latência da rede diminuir novamente e a largura de banda for liberada, o aplicativo de sincronização aumentará a taxa de carregamento e consumirá a largura de banda não usada.
+
+Se você habilitar essa configuração, a taxa de carregamento do aplicativo de sincronização será definida como "Ajustar automaticamente" com base na disponibilidade da largura de banda, e os usuários não poderão alterá-la.
+
+Se você desabilitar ou não definir essa configuração, os usuários poderão limitar a taxa de carregamento a um valor fixo (em KB/segundo) ou defini-la como "Ajustar automaticamente".
+
+Importante
+Se você habilitar ou desabilitar essa configuração e, em seguida, voltar a defini-la como Não Configurada, a última configuração permanecerá em vigor. Recomendamos habilitar essa configuração em vez de "Limitar a velocidade de carregamento do aplicativo de sincronização a uma taxa fixa". Não habilite as duas configurações ao mesmo tempo. Essa configuração substituirá "Limitar a taxa de carregamento do aplicativo de sincronização a uma porcentagem de taxa de transferência" se ambas estiverem habilitadas no mesmo dispositivo.</string>
+
+    <!-- MinDiskSpaceLimitInMB -->
+    <!-- configurable limit where low disk space error will occur-->
+    <string id="MinDiskSpaceLimitInMB">Bloquear downloads de arquivo quando os usuários estiverem com pouco espaço em disco</string>
+    <string id="MinDiskSpaceLimitInMB_help">Esta configuração permite especificar uma quantidade mínima de espaço em disco disponível e bloquear o aplicativo de sincronização do OneDrive (OneDrive. exe) de baixar arquivos quando os usuários tiverem menos do que esse valor.
+
+Os usuários serão avisados com opções para ajudar a liberar espaço.</string>
+
+    <!-- WarningMinDiskSpaceLimitInMB -->
+    <!-- configurable limit where user will be notified they are approaching low disk space -->
+    <string id="WarningMinDiskSpaceLimitInMB">Avisar aos usuários que têm pouco espaço em disco</string>
+    <string id="WarningMinDiskSpaceLimitInMB_help">Esta configuração permite que você especifique uma quantidade mínima de espaço em disco disponível e avise os usuários quando o aplicativo de sincronização do OneDrive (OneDrive. exe) baixar um arquivo que faça com que ele tenha menos do que esse valor.
+
+Os usuários serão avisados com opções para ajudar a liberar espaço.</string>
+
+    <!-- EnableODIgnoreListFromGPO -->
+    <string id="EnableODIgnoreListFromGPO">Excluir tipos específicos de arquivos a serem carregados</string>
+    <string id="EnableODIgnoreListFromGPO_help">Esta configuração permite que você insira palavras-chave para impedir que o aplicativo de sincronização do OneDrive (OneDrive.exe) Carregue determinados arquivos no OneDrive ou no SharePoint. Você pode inserir nomes completos, como "setup.exe" ou usar o asterisco (*) como caractere curinga para representar uma série de caracteres.  
+
+Se você habilitar esta configuração, o aplicativo de sincronização não carregará novos arquivos que correspondam às palavras-chave que você especificou. Nenhum erro é exibido para os arquivos ignorados e os arquivos permanecem na pasta local do OneDrive. O aplicativo de sincronização do OneDrive deve ser reiniciado depois que essa configuração estiver habilitada para que a configuração entre em vigor. 
+
+Se você desabilitar ou não definir esta configuração, o aplicativo de sincronização carregará todos os arquivos com suporte em todas as pastas sincronizadas.</string>
+
+    </stringTable>
+    <presentationTable>
+      <presentation id="GPOSetUpdateRing_Pres">
+        <dropdownList refId="GPOSetUpdateRing_Dropdown" noSort="true" defaultItem="0">Anel de atualização:</dropdownList>
+      </presentation>
+
+      <presentation id="AutomaticUploadBandwidthPercentage_Pres">
+        <text>Selecione a porcentagem máxima de largura de banda a ser pega ao fazer upload de arquivos.</text>
+        <text>Os valores válidos são de 10 a 99.</text>
+        <decimalTextBox refId="BandwidthSpinBox" defaultValue="70" spinStep="1">Largura de banda:</decimalTextBox>
+      </presentation>
+
+      <presentation id="UploadBandwidthLimit_Pres">
+        <text>Selecione a quantidade máxima de largura de banda a ser pega ao fazer upload de arquivos.</text>
+        <text>Os valores válidos são de 1 a 100000.</text>
+        <decimalTextBox refId="UploadRateValue" defaultValue="125">Largura de banda:</decimalTextBox>
+      </presentation>
+
+      <presentation id="DownloadBandwidthLimit_Pres">
+        <text>Selecione a quantidade máxima de largura de banda a ser pega ao fazer download de arquivos.</text>
+        <text>Os valores válidos são de 1 a 100000.</text>
+        <decimalTextBox refId="DownloadRateValue" defaultValue="125">Largura de banda:</decimalTextBox>
+      </presentation>
+
+       <presentation id="DiskSpaceCheckThresholdMB_Pres">
+        <text>Especifique a ID do locatário e o tamanho máximo do OneDrive de um usuário antes que o usuário seja solicitado a escolher as pastas que deseja sincronizar. </text>
+        <text>No campo Nome do valor, insira a ID do locatário. No campo Valor, insira o tamanho.</text>
+        <text>Os valores válidos são de 0 a 4294967295 MB (inclusive).</text>
+        <listBox refId="DiskSpaceCheckThresholdMBList">Tamanho máximo: </listBox>
+      </presentation>
+
+      <presentation id="DefaultRootDir_Pres">
+       <text>Especifique a ID do locatário e o caminho padrão. </text>
+        <text>No campo Nome do valor, insira a ID do locatário. No campo Valor, insira o caminho.</text>
+        <listBox refId="DefaultRootDirList">Caminho: </listBox>
+      </presentation>
+
+      <presentation id="DisableCustomRoot_Pres">
+        <text>Especifique a ID do locatário e o valor da configuração. </text>
+        <text>No campo Nome do valor, insira a ID do locatário. No campo Valor, insira 1 para habilitar a configuração ou 0 para desabilitá-la.</text>
+        <listBox refId="DisableCustomRootList">Alterar configuração de local: </listBox>
+      </presentation>
+
+      <presentation id="AllowTenantList_Pres">
+        <text>Especificar a ID do locatário</text>
+        <text>No campo Valor, insira a ID do locatário que deseja adicionar à lista.</text>
+        <text> </text>
+        <listBox refId="AllowTenantListBox">ID do Locatário: </listBox>
+      </presentation>
+
+      <presentation id="BlockTenantList_Pres">
+        <text>Especificar a ID do locatário</text>
+        <text>No campo Valor, insira a ID do locatário que deseja adicionar à lista.</text>
+        <text> </text>
+        <listBox refId="BlockTenantListBox">ID do Locatário: </listBox>
+       </presentation>
+
+      <presentation id="SharePointOnPremFrontDoorUrl_Pres">
+        <text>Forneça uma URL para o SharePoint Server que hospede o OneDrive for Business do usuário e o nome da organização.</text>
+        <textBox refId="SharePointOnPremFrontDoorUrlBox">
+          <label>URL do SharePoint Server 2019:</label>
+        </textBox>
+        <textBox refId="SharePointOnPremTenantNameBox">
+          <label>Nome da organização:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="SharePointOnPremPrioritization_Pres">
+        <dropdownList refId="SharePointOnPremPrioritization_Dropdown" noSort="true" defaultItem="0">Autenticar primeiro em:</dropdownList>
+      </presentation>
+
+      <presentation id="BlockKnownFolderMove_Pres">
+        <dropdownList refId="BlockKnownFolderMove_Dropdown" noSort="true" defaultItem="0">Caso as pastas conhecidas já tenham sido movidas para o OneDrive:</dropdownList>
+      </presentation>
+
+      <presentation id="KFMOptInWithWizard_Pres">
+        <textBox refId="KFMOptInWithWizard_TextBox">
+          <label>ID do Locatário:</label>
+        </textBox>
+      </presentation>
+
+      <presentation id="KFMOptInNoWizard_Pres">
+        <textBox refId="KFMOptInNoWizard_TextBox">
+          <label>ID do Locatário:</label>
+        </textBox>
+        <dropdownList refId="KFMOptInNoWizard_Dropdown" noSort="true" defaultItem="0">Mostrar notificação aos usuários quando as pastas forem redirecionadas:</dropdownList>
+        <text>Opções da pasta:</text>
+        <checkBox refId="KFMOptInNoWizard_Desktop_Checkbox" defaultChecked="true">Área de Trabalho</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Documents_Checkbox" defaultChecked="true">Documentos</checkBox>
+        <checkBox refId="KFMOptInNoWizard_Pictures_Checkbox" defaultChecked="true">Imagens</checkBox>
+      </presentation>
+      <presentation id="AutoMountTeamSites_Pres">
+        <text>Para especificar uma biblioteca a ser sincronizada:
+
+Abra um navegador da Web, entre no Office 365 como administrador global ou do SharePoint de sua organização e navegue até a biblioteca para sincronizar.
+
+Clique no botão "Sincronizar" na biblioteca que você deseja sincronizar automaticamente e, em seguida, clique em "Copiar ID da biblioteca".
+
+Clique em "Mostrar" e insira um nome amigável para identificar a biblioteca no campo Nome do Valor e insira a ID da biblioteca no campo Valor.
+        </text>
+        <listBox refId="AutoMountTeamSitesListBox">Bibliotecas:</listBox>
+      </presentation>
+
+      <presentation id="MinDiskSpaceLimitInMB_Pres">
+        <text>No campo valor, insira a quantidade mínima de espaço em disco que você deseja deixar disponível.</text>
+        <text>Os valores válidos são de 0 a 10240000 MB</text>
+        <decimalTextBox refId="minDiskSpaceMB" defaultValue="200">Mínimo de espaço em disco disponível:</decimalTextBox>
+      </presentation>
+
+      <presentation id="WarningMinDiskSpaceLimitInMB_Pres">
+        <text>No campo valor, insira a quantidade de espaço em disco disponível abaixo da qual os usuários receberão um aviso. Se você usar esta política em conjunto com os downloads de arquivos de blocos quando os usuários estiverem com pouco espaço em disco, o valor desta configuração deverá ser maior do que o valor para o bloqueio de downloads.</text>
+        <text>Os valores válidos são de 0 a 10240000 MB</text>
+        <decimalTextBox refId="warningMinDiskSpaceMB" defaultValue="500">Mínimo de espaço em disco disponível:</decimalTextBox>
+      </presentation>
+
+      <presentation id="LocalMassDeleteFileDeleteThreshold_Pres">
+        <text>Especifique o número máximo de arquivos que os usuários podem excluir ao mesmo tempo antes de precisarem confirmar a operação.</text>
+        <text>Os valores válidos são de 1 a 100000.</text>
+        <decimalTextBox refId="LMDFileDeleteThresholdBox" defaultValue="200">Número de arquivos:</decimalTextBox>
+      </presentation>
+
+      <presentation id="EnableODIgnoreListFromGPO_Pres">
+        <text>Para especificar palavras-chave, selecione "Mostrar" e insira as palavras-chave no campo valor.</text>
+        <text>Por exemplo, insira ". pst" para bloquear todos os arquivos com a extensão .pst. Insira "despesas*"  para bloquear arquivos que têm nomes que começam com "despesas". Insira "*vendas*" para bloquear todos os arquivos que têm "vendas" em seu nome. As palavras-chave não diferenciam maiúsculas e minúsculas. Por exemplo, se inserir "ícones.JPEG", ele também bloqueará "ícones.jpeg".</text>
+        <text> </text>
+        <listBox refId="EnableODIgnoreListFromGPOListBox">Palavras-chave: </listBox>
+      </presentation>
+
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>
