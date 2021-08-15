@@ -46,7 +46,7 @@ Else {
 }
 
 # Configure Oh-My-Posh Theme
-#Get-PoshThemes
+Get-PoshThemes
 $PoshTheme = Read-Host -Prompt 'Please Enter Theme Name'
 
 # PowerShell 5.1
