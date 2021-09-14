@@ -1,212 +1,119 @@
+
 <#
 .NAME
     Automated Oh-My-Posh Deployment
 
 .AUTHOR
-    Simon Lee
-    @smoon_lee
+  user   :  Simon Lee
+  twitter:  @smoon_lee
     
 .CHANGELOG
   13.08.2021 - Script Release Version 1.0
-
+  14.09.2021 - Script Debugged for Profile Selection - Version 1.1
+  14.09.2021 - Fixed PackageProvider Silent Prompt - Version 1.1.1
 #>
 
-# Check Powershell Gallery Installation Policy 
-Write-Output 'Checking Powershell Gallery Installation Policy' `r
-If ((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted' ) {
-    Write-Warning 'InstallationPolicy is not Trusted!'
+# Script Version
+$Version = '1.1.1'
+
+# Script Title
+$host.ui.RawUI.WindowTitle = "Oh-My-Posh Setup v:$Version "
+
+# Check PowerShell Repository 
+If ((Get-PSRepository -Name PSGallery).InstallationPolicy -ne 'Trusted') {
+    Write-Warning -Message 'PSGallery Policy: Untrusted'
+    Write-Output 'Configuring to Trusted Policy'
+    Write-Output 'Installing Latest NuGet Package Provider'
+    Install-PackageProvider -Name PowershellGet -Force | Out-Null
     Install-PackageProvider -Name 'NuGet' -Force | Out-Null
-    Write-Output 'NuGet Package Providor Installed'
     Set-PSRepository -Name 'PSGallery' -InstallationPolicy 'Trusted' 
-    Write-Output 'InstallationPolicy Update - now Trusted'
-}
-Else {
-    Write-Warning 'InstallationPolicy is Trusted!'
+    Write-Warning -Message 'PSGallery Policy: Trusted'
 }
 
-# Checking Windows Fonts for 'Nerd Font'
-# https://ohmyposh.dev/docs/fonts
-If (!(Get-ItemProperty C:\Windows\Fonts\* | Where-Object  Name -Like *Nerd*)) {
-    Write-Warning 'No Nerd Fonts Found '
-    Start-Process "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ArgumentList 'https://www.nerdfonts.com/font-downloads'
-    # Wait
-    Write-Output -NoNewLine 'Press any key to continue...';
-    $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
-}
-
-# Installing Oh-My-Posh 
-If (!(Get-Module -ListAvailable -Name 'Oh-My-Posh')) {
-    Write-Warning 'Module Missing... Installing Oh-My-Posh'
-    Install-Module -Name 'Oh-My-Posh' ; Import-Module -Name 'Oh-My-Posh'
+# Install Oh-My-Posh Module
+Write-Output 'Checking Oh-My-Posh Module'
+If (!(Get-Module -ListAvailable -Name 'Oh-My-Posh' -ErrorAction SilentlyContinue)) {
+    Write-Warning -Message 'No Oh-My-Posh Module Detected!'
+    Write-Output "Installing Lastest Oh-My-Posh Module - v$((Find-Module -Name 'Oh-My-Posh').Version) "
+    Install-Module -Name 'Oh-My-Posh' ; Import-Module -Name 'Oh-My-Posh' 
 
 }
-Else {
-    Import-Module -Name 'Oh-My-Posh'
-    Write-Warning 'Module Imported!'
+ElseIf ((Get-Module -ListAvailable -Name 'Oh-My-Posh').Version -ne (Find-Module -Name 'Oh-My-Posh').Version) {
+    Write-Warning -Message "Oh-My-Posh Module Update available! - Installed:$((Get-Module -ListAvailable -Name 'Oh-My-Posh').Version) Avaible:$((Find-Module -Name 'Oh-My-Posh').Version)"
+    $PendingUpdate = Read-Host 'Do you wish to update? [Y/N]'
+    If ($PendingUpdate -eq 'Y') {
+        Uninstall-Module -Name 'Oh-My-Posh' ; Install-Module -Name 'Oh-My-Posh' 
+        Write-Output "Oh-My-Posh Module Updated! - v$((Get-Module -ListAvailable -Name 'Oh-My-Posh').Version)" `r
+    }
+    Else {
+        Write-Output 'Oh-My-Posh Module Update Skipped' `r
+    }
 }
 
-# Configure Oh-My-Posh Theme
+# Check for NerdFonts on Local System
+Write-Warning -Message 'Checking Local System for NerdFonts'
+Write-Output ''
+If (!(Get-ItemProperty -Path 'C:\Windows\Fonts\*' | Where-Object Name -Match 'Nerd Font')) {
+    Write-Warning -Message 'No Nerd Fonts Detected... Lanching Nerd Fonts Website'
+    Start-Process -FilePath 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' -ArgumentList 'https://www.nerdfonts.com/font-downloads'
+}
+
+# Checking for Nerd Font File Loop
+While (!(Get-ItemProperty -Path 'C:\Windows\Fonts\*' | Where-Object Name -Match 'Nerd Font')) {
+
+    Write-Output 'Checking for Nerd Font Files...'
+    Start-Sleep -Seconds 5
+}
+
+# Posh Theme Selection
 Get-PoshThemes
 $PoshTheme = Read-Host -Prompt 'Please Enter Theme Name'
 
-# PowerShell 5.1
-If ($host.Version -match 5.1) {
-    # C:\Users\$User\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+# Create PowerShell Profile based on Version
+# PowerShell 5.x 'C:\Users\$User\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1'
+# PowerShell 7.x 'C:\Users\$User\Documents\PowerShell\Microsoft.PowerShell_profile.ps1'
+# VSCode         'C:\Users\$User\Documents\Documents\PowerShell\Microsoft.VSCode_profile.ps1'
+
+If ($PSVersionTable.PSVersion -like '5.1*') {
+    Write-Output ''
+    Write-Warning 'PowerShell 5.x Detected'
     $PoshProfile = "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-    If (Test-Path $PoshProfile) {
-        Write-Warning -Message 'PowerShell Profile Detected!'
-        [int]$PoshThemeMenu = 0
-        while ( $PoshThemeMenu -lt 1 -or $PoshThemeMenu -gt 2) {
-            Write-Output '[1] Create Fresh Microsoft.PowerShell_profile.ps1 '
-            Write-Output '[2] Add to Microsoft.PowerShell_profile.ps1'
-            [int]$PoshThemeMenu = Read-Host 'Please choose an option'
-            switch ($PoshThemeMenu) {
-                1 { 
-                    # Clear Previous PowerShell Profile
-                    Write-Warning -Message 'Renaming Microsoft.PowerShell_profile.ps1 to Microsoft.PowerShell_profile.ps1.backup'
-                    Move-Item -Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Destination "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell\Microsoft.PowerShell_profile.ps1.backup" -Force
-                        
-                    # Create New PoweShell Profile
-                    New-Item -ItemType 'File' -Path $PoshProfile | Out-Null
 
-                    # Create Oh-My-Posh Profile
-                    "Import-Module -Name 'Oh-My-Posh'
-                     Set-PoshPrompt -Theme $PoshTheme
-                    " | Set-Content -Path $PoshProfile
-                    (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
-                    
-                    # Creating Symbolic Links 
-                    If (!( Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" )) {
-                        New-Item -ItemType 'Directory' -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" | Out-Null
-                    }
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null   
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" -Force | Out-Null                     
-                }
-                2 { 
-                    # Clear Previous PowerShell Profile
-                    Write-Warning -Message 'Renaming Microsoft.PowerShell_profile.ps1 to Microsoft.PowerShell_profile.ps1.backup'
-                    Copy-Item -Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Destination "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell\Microsoft.PowerShell_profile.ps1.backup" -Force
+    # Create Oh-My-Posh Profile
+    Write-Output 'Creating PowerShell Profile File'
+    "Import-Module -Name 'Oh-My-Posh'
+    Set-PoshPrompt -Theme $PoshTheme
+    " | Set-Content -Path $PoshProfile
+    (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
 
-                    # Add Oh-My-Posh to Profile
-                    "Import-Module -Name 'Oh-My-Posh'
-                     Set-PoshPrompt -Theme $PoshTheme
-                    " | Add-Content -Path $PoshProfile
-                    (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
-                    
-                    # Creating Symbolic Links 
-                    If (!( Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" )) {
-                        New-Item -ItemType 'Directory' -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" | Out-Null
-                    }
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null    
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" -Force | Out-Null 
+    # Create Symbolic Link for VSCode
+    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
+    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" -Force | Out-Null
 
-                }
-            }
-        } 
-    }
-    Else {
-        If (!(Test-Path $(Split-Path $PoshProfile))) {
+    # Verbose - Setup Complete
+    Write-Output 'Oh-My-Posh Configured and Profile Reloading...'
+    . $Profile
 
-            # Creating PowerShell Profile Root Folder and Microsoft.PowerShell_profile.ps1"
-            New-Item -ItemType 'Directory' -Path $(Split-Path $PoshProfile) | Out-Null
-            New-Item -ItemType 'File' -Path $PoshProfile | Out-Null
-
-            # Add Oh-My-Posh to Profile
-            "Import-Module -Name 'Oh-My-Posh'
-            Set-PoshPrompt -Theme $PoshTheme
-            " | Set-Content -Path $PoshProfile
-            (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
-            Write-Warning -Message 'Microsoft.PowerShell_profile.ps1 Created!'
-
-            # Creating Symbolic Links 
-            If (!( Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" )) {
-                New-Item -ItemType 'Directory' -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" | Out-Null
-            }
-            New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" | Out-Null    
-            New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" | Out-Null  
-        }     
-    }
 }
 
-# Powershell 7.x
-If ($host.Version -match 7) {
-    # C:\Users\$User\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+If ($PSVersionTable.PSVersion -like '7.1*') {
+    Write-Output ''
+    Write-Warning 'Powershell 7.x Detected'
     $PoshProfile = "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1"
-    If (Test-Path $PoshProfile) {
-        Write-Warning -Message 'PowerShell Profile Detected!'
-        [int]$PoshThemeMenu = 0
-        while ( $PoshThemeMenu -lt 1 -or $PoshThemeMenu -gt 2) {
-            Write-Output '[1] Create Fresh Microsoft.PowerShell_profile.ps1 '
-            Write-Output '[2] Add to Microsoft.PowerShell_profile.ps1'
-            [int]$PoshThemeMenu = Read-Host 'Please choose an option'
-            switch ($PoshThemeMenu) {
-                1 { 
-                    # Clear Previous PowerShell Profile
-                    Write-Warning -Message 'Renaming Microsoft.PowerShell_profile.ps1 to Microsoft.PowerShell_profile.ps1.backup'
-                    Move-Item -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" -Destination "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1.backup" -Force
-                        
-                    # Create New PoweShell Profile
-                    New-Item -ItemType 'File' -Path $PoshProfile | Out-Null
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" -Force | Out-Null                     
 
-                    # Create Oh-My-Posh Profile
-                    "Import-Module -Name 'Oh-My-Posh'
-                     Set-PoshPrompt -Theme $PoshTheme
-                    " | Set-Content -Path $PoshProfile
-                    (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
-                    
-                    # Creating Symbolic Links 
-                    If (!( Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell" )) {
-                        New-Item -ItemType 'Directory' -Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell" | Out-Null
-                    }
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null   
-                   
-                }
-                2 { 
-                    # Clear Previous PowerShell Profile
-                    Write-Warning -Message 'Renaming Microsoft.PowerShell_profile.ps1 to Microsoft.PowerShell_profile.ps1.backup'
-                    Copy-Item -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" -Destination "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1.backup" -Force
+    # Create Oh-My-Posh Profile
+    Write-Output  'Creating PowerShell Profile File'
+    "Import-Module -Name 'Oh-My-Posh'
+    Set-PoshPrompt -Theme $PoshTheme
+    " | Set-Content -Path $PoshProfile
+    (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
 
-                    # Add Oh-My-Posh to Profile
-                    "Import-Module -Name 'Oh-My-Posh'
-                     Set-PoshPrompt -Theme $PoshTheme
-                    " | Add-Content -Path $PoshProfile
-                    (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
-                    
-                    # Creating Symbolic Links 
-                    If (!( Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell" )) {
-                        New-Item -ItemType 'Directory' -Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell" | Out-Null
-                    }
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null    
-                    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" -Force | Out-Null 
+    # Create Symbolic Link for VSCode
+    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
+    New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" -Force | Out-Null
 
-                }
-            }
-        } 
-    }
-    Else {
-        If (!(Test-Path $(Split-Path $PoshProfile))) {
+    # Verbose - Setup Complete
+    Write-Output 'Oh-My-Posh Configured and Profile Reloading...'
+    . $Profile
 
-            # Creating PowerShell Profile Root Folder and Microsoft.PowerShell_profile.ps1"
-            New-Item -ItemType 'Directory' -Path $(Split-Path $PoshProfile) | Out-Null
-            New-Item -ItemType 'File' -Path $PoshProfile | Out-Null
-
-            # Add Oh-My-Posh to Profile
-            "Import-Module -Name 'Oh-My-Posh'
-            Set-PoshPrompt -Theme $PoshTheme
-            " | Set-Content -Path $PoshProfile
-            (Get-Content $PoshProfile).Trim() | Set-Content $PoshProfile
-            Write-Warning -Message 'Microsoft.PowerShell_profile.ps1 Created!'
-
-            # Creating Symbolic Links 
-            If (!( Test-Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" )) {
-                New-Item -ItemType 'Directory' -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell" | Out-Null
-            }
-            New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.PowerShell_profile.ps1" | Out-Null    
-            New-Item -ItemType SymbolicLink -Target $PoshProfile -Path "$([Environment]::GetFolderPath("MyDocuments"))\PowerShell\Microsoft.VSCode_profile.ps1" | Out-Null  
-        }     
-    }
 }
-
-# Reload Powershell Profile 
-. $Profile
